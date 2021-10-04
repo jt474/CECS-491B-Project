@@ -25,7 +25,7 @@ class LoginActivity : AppCompatActivity() {
 
     private companion object{
         private const val TAG = "LoginActivity"
-        private const val RC_GOOGLE_SIGN_IN = 4900
+        private const val RC_GOOGLE_SIGN_IN = 4800
     }
 
     private lateinit var auth: FirebaseAuth
@@ -36,8 +36,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         btnSignIn = findViewById(R.id.sign_in_button)
-
-
 
         // Configure Google Sign In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -52,10 +50,18 @@ class LoginActivity : AppCompatActivity() {
         btnSignIn.setOnClickListener {
             signIn()
         }
-        /*btnSignIn.setOnClickListener {
+        btnSignIn.setOnClickListener {
             val signInIntent = googleSignInClient.signInIntent
             startActivityForResult(signInIntent, RC_GOOGLE_SIGN_IN)
-        }*/
+        }
+
+        //Guest Log in button
+        val guestBtn: Button = findViewById<Button>(R.id.guestBtn)
+        guestBtn.setOnClickListener() {
+            val Intent = Intent(this, MainActivity::class.java)
+            startActivity(Intent)
+
+        }
     }
     ///Google sign in button
     private fun signIn() {
