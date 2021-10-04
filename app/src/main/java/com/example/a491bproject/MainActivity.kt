@@ -16,6 +16,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(ingredientsIntent)
 
         }
+
+        //Name of the menu on top left
         val actionBar = supportActionBar
 
         if(actionBar != null){
