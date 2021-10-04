@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         val actionBar = supportActionBar
 
         if(actionBar != null){
-            actionBar.title = "Main Menu"
+            actionBar.title = "Main Menu2"
         }
     }
 }
