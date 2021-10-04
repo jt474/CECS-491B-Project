@@ -8,6 +8,7 @@ class IngredientsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ingredients)
 
+        //Naming for menu
         val actionBar = supportActionBar
 
         if(actionBar != null){

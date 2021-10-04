@@ -10,12 +10,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Transitions from Main to Ingredients
         val ingredientsListBtn: Button = findViewById<Button>(R.id.ingredientsListBtn)
         ingredientsListBtn.setOnClickListener() {
             val ingredientsIntent = Intent(this, IngredientsActivity::class.java)
             startActivity(ingredientsIntent)
 
         }
+
+        // Naming for menu
         val actionBar = supportActionBar
 
         if(actionBar != null){

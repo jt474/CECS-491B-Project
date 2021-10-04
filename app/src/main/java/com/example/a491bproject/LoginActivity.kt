@@ -55,11 +55,11 @@ class LoginActivity : AppCompatActivity() {
             startActivityForResult(signInIntent, RC_GOOGLE_SIGN_IN)
         }
 
-        //Guest Log in button
+        //Guest Log in button and transitions from login to main menu
         val guestBtn: Button = findViewById<Button>(R.id.guestBtn)
         guestBtn.setOnClickListener() {
-            val Intent = Intent(this, MainActivity::class.java)
-            startActivity(Intent)
+            val guestIntent = Intent(this, MainActivity::class.java)
+            startActivity(guestIntent)
 
         }
     }
