@@ -17,7 +17,7 @@ class AddIngredientsActivity : AppCompatActivity() {
 
         //Naming for menu
         val actionBar = supportActionBar
-        if(actionBar != null) {
+        if (actionBar != null) {
             actionBar.title = "Ingredients Activity"
         }
 
@@ -33,18 +33,18 @@ class AddIngredientsActivity : AppCompatActivity() {
                 val user = User(ingredient.text.toString(), quantity.text.toString().toDouble())
                 db.insertData(user)
                 clearField()
-            }
-            else {
+            } else {
                 Toast.makeText(context, "Input Ingredient and Quantity", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
     private fun clearField() {
-        findViewById<EditText>(R.id.editTextIngredient).setText("")
+        findViewById<EditText>(R.id.editTextIngredient).text.clear()
         findViewById<EditText>(R.id.editTextQuantity).setText("")
     }
 
-    class User(ingredientInput: String, quantityInput: Double){
+    class User(ingredientInput: String, quantityInput: Double) {
         val ingredient = ingredientInput
         val quantity = quantityInput
     }
