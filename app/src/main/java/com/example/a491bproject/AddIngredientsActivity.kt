@@ -26,23 +26,23 @@ class AddIngredientsActivity : AppCompatActivity() {
         val context = this
         val db = DataBaseHandler(context)
         val button = findViewById<TextView>(R.id.buttonAddIngredient)
-        button.setOnClickListener {
-            if (ingredient.text.toString().isNotEmpty() &&
-                quantity.text.toString().isNotEmpty()
-            ) {
-                val user = User(ingredient.text.toString(), quantity.text.toString().toDouble())
-                db.insertData(user)
-                clearField()
-            } else {
-                Toast.makeText(context, "Input Ingredient and Quantity", Toast.LENGTH_SHORT).show()
-            }
-        }
+//        button.setOnClickListener {
+//            if (ingredient.text.toString().isNotEmpty() &&
+//                quantity.text.toString().isNotEmpty()
+//            ) {
+//                val user = User(ingredient.text.toString(), quantity.text.toString().toDouble())
+//                db.insertData(user)
+//                clearField()
+//            } else {
+//                Toast.makeText(context, "Input Ingredient and Quantity", Toast.LENGTH_SHORT).show()
+//            }
+//        }
     }
 
-    private fun clearField() {
-        findViewById<EditText>(R.id.editTextIngredient).text.clear()
-        findViewById<EditText>(R.id.editTextQuantity).setText("")
-    }
+//    private fun clearField() {
+//        findViewById<EditText>(R.id.editTextIngredient).text.clear()
+//        findViewById<EditText>(R.id.editTextQuantity).setText("")
+//    }
 
     class User(ingredientInput: String, quantityInput: Double) {
         val ingredient = ingredientInput
