@@ -22,7 +22,7 @@
             android:inputType="text"
             android:minHeight="100dp"
             android:padding="8dp"
-            android:text="Ingredient"
+            android:hint="Ingredient"
             tools:ignore="LabelFor" />
 
         <EditText
@@ -35,7 +35,7 @@
             android:inputType="number"
             android:minHeight="100dp"
             android:padding="8dp"
-            android:text="Quantity (oz)"
+            android:hint="Quantity (oz)"
             android:textColor="@android:color/background_dark" />
 
     </LinearLayout>
