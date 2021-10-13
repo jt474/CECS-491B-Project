@@ -20,7 +20,7 @@ class IngredientsActivity : AppCompatActivity() {
 
         val button = findViewById<TextView>(R.id.buttonAddIngredient)
         button.setOnClickListener {
-            val db = DataBaseHandler(this)
+//            val db = DataBaseHandler(this)
             val ingredient: TextView = findViewById(R.id.editTextIngredient)
             val quantity: TextView = findViewById(R.id.editTextQuantity)
             if (ingredient.text.toString().isNotEmpty() &&
@@ -30,7 +30,7 @@ class IngredientsActivity : AppCompatActivity() {
                     ingredient.text.toString(),
                     quantity.text.toString().toDouble()
                 )
-                db.insertData(user)
+//                db.insertData(user)
                 clearField()
             } else {
                 Toast.makeText(this, "Input Ingredient and Quantity", Toast.LENGTH_SHORT).show()
