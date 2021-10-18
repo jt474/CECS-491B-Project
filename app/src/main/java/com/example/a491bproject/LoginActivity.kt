@@ -62,6 +62,12 @@ class LoginActivity : AppCompatActivity() {
             startActivity(guestIntent)
 
         }
+
+        val register: Button = findViewById<Button>(R.id.registerBtn)
+        register.setOnClickListener(){
+            val registerIntent = Intent(this,RegisterActivity::class.java)
+            startActivity(registerIntent)
+        }
     }
     ///Google sign in button
     private fun signIn() {
