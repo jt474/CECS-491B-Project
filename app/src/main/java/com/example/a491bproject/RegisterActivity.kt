@@ -21,8 +21,8 @@ class RegisterActivity : AppCompatActivity() {
         val passwordText = findViewById<EditText>(R.id.editTextPassword)
 
         //Navigates to Login Menu
-        val register: Button = findViewById<Button>(R.id.loginRegisterBtn)
-        register.setOnClickListener(){
+        val login: Button = findViewById<Button>(R.id.loginRegisterBtn)
+        login.setOnClickListener(){
             val loginIntent = Intent(this,LoginActivity::class.java)
             startActivity(loginIntent)
         }
