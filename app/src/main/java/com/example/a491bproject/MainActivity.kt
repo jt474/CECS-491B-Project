@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,6 +17,15 @@ class MainActivity : AppCompatActivity() {
             val ingredientsIntent = Intent(this, IngredientsActivity::class.java)
             startActivity(ingredientsIntent)
 
+        }
+
+        //Signout
+        val logoutBtn: Button = findViewById<Button>(R.id.logoutBtn)
+        logoutBtn.setOnClickListener{
+            FirebaseAuth.getInstance().signOut()
+
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
 
         // Naming for menu
