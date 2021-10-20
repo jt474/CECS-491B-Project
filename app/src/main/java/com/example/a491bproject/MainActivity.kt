@@ -10,10 +10,7 @@ import android.widget.ListView
 import android.widget.TextView
 import com.example.a491bproject.api.ApiInterface
 import com.example.a491bproject.models.IngredientInfo
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
+import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
 const val BASE_URL = "https://api.spoonacular.com/"
@@ -60,7 +57,6 @@ class MainActivity : AppCompatActivity() {
 
                 val myStringBuilder = StringBuilder()
 
-//                myStringBuilder.append(responseBody.name)
 
                 for (ingredientInfo in responseBody.nutrition.nutrients) {
                     myStringBuilder.append(ingredientInfo)
@@ -70,8 +66,6 @@ class MainActivity : AppCompatActivity() {
                 val textView2 = findViewById<TextView>(R.id.textView2)
                 Log.i("MainActivity", "API call: $myStringBuilder")
                 textView2.text = myStringBuilder
-//                textView2.text = "myStringBuilder"
-
             }
 
             override fun onFailure(call: Call<IngredientInfo>, t: Throwable) {
