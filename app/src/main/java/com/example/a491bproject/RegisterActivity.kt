@@ -1,5 +1,6 @@
 package com.example.a491bproject
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -19,6 +20,14 @@ class RegisterActivity : AppCompatActivity() {
         val emailText = findViewById<EditText>(R.id.editTextEmailAddress)
         val passwordText = findViewById<EditText>(R.id.editTextPassword)
 
+        //Navigates to Login Menu
+        val register: Button = findViewById<Button>(R.id.loginRegisterBtn)
+        register.setOnClickListener(){
+            val loginIntent = Intent(this,LoginActivity::class.java)
+            startActivity(loginIntent)
+        }
+
+        //When User clicks Register it should make an account
         registerBtn.setOnClickListener {
             val email: String = emailText.text.toString()
             val password: String = passwordText.text.toString()
