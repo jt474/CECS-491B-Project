@@ -1,4 +1,4 @@
-package com.example.a491bproject
+package com.example.a491bproject.models
 
 data class IngredientInfo(
     val aisle: String,

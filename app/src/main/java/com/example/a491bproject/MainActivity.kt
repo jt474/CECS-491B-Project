@@ -6,16 +6,23 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
+import android.widget.TextView
+import com.example.a491bproject.api.ApiInterface
+import com.example.a491bproject.models.IngredientInfo
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+//const val BASE_URL = "https://api.spoonacular.com/"
+
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //getMyIngredientInfo()
 
         //Transitions from Main to Ingredients
         val ingredientsListBtn: Button = findViewById<Button>(R.id.ingredientsListBtn)
@@ -33,34 +40,38 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        // Spoontacular call
-        var rf = Retrofit.Builder()
-            .baseUrl(RetrofitInterface.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create()).build()
-
-        var API = rf.create(RetrofitInterface::class.java)
-        var call = API.info
-
-        call?.enqueue(object: Callback<List<IngredientInfo?>?> {
-            override fun onResponse(
-                call: Call<List<IngredientInfo?>?>,
-                response: Response<List<IngredientInfo?>?>
-            ) {
-                var infolist : List<IngredientInfo>? = response.body() as List<IngredientInfo>
-                var info = arrayOfNulls<String>(infolist!!.size)
-
-                for (i in infolist!!.indices)
-                    info[i] = infolist!![i]!!.original
-
-                var adapter = ArrayAdapter<String>(applicationContext, android.R.layout.simple_dropdown_item_1line, info)
-                findViewById<ListView>(R.id.listview)?.adapter = adapter
-
-            }
-
-            override fun onFailure(call: Call<List<IngredientInfo?>?>, t: Throwable) {
-            }
-
-        })
-
     }
+
+//    private fun getMyIngredientInfo() {
+//        val retrofitBuilder = Retrofit.Builder()
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .baseUrl(BASE_URL)
+//            .build()
+//            .create(ApiInterface::class.java)
+//
+//        val retrofitData = retrofitBuilder.getIngredientInfo()
+//
+//        retrofitData.enqueue(object : Callback<List<IngredientInfo>?> {
+//            override fun onResponse(
+//                call: Call<List<IngredientInfo>?>,
+//                response: Response<List<IngredientInfo>?>
+//            ) {
+//                val responseBody = response.body()!!
+//
+//                val myStringBuilder = StringBuilder()
+//
+//                for (ingredientInfo in responseBody) {
+//                    myStringBuilder.append(ingredientInfo.nutrition.nutrients)
+//                    myStringBuilder.append("\n")
+//                }
+//
+//                val textView = findViewById<TextView>(R.id.textView)
+//                textView.text = myStringBuilder
+//            }
+//
+//            override fun onFailure(call: Call<List<IngredientInfo>?>, t: Throwable) {
+//
+//            }
+//        })
+//    }
 }
