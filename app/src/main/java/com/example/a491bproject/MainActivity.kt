@@ -3,16 +3,14 @@ package com.example.a491bproject
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
 import android.widget.TextView
 import com.example.a491bproject.api.ApiInterface
 import com.example.a491bproject.models.IngredientInfo
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
+import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
 //const val BASE_URL = "https://api.spoonacular.com/"
@@ -22,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //getMyIngredientInfo()
+//        getMyIngredientInfo()
 
         //Transitions from Main to Ingredients
         val ingredientsListBtn: Button = findViewById<Button>(R.id.ingredientsListBtn)
@@ -51,17 +49,17 @@ class MainActivity : AppCompatActivity() {
 //
 //        val retrofitData = retrofitBuilder.getIngredientInfo()
 //
-//        retrofitData.enqueue(object : Callback<List<IngredientInfo>?> {
+//        retrofitData.enqueue(object: Callback<IngredientInfo> {
 //            override fun onResponse(
-//                call: Call<List<IngredientInfo>?>,
-//                response: Response<List<IngredientInfo>?>
+//                call: Call<IngredientInfo>,
+//                response: Response<IngredientInfo>
 //            ) {
 //                val responseBody = response.body()!!
 //
 //                val myStringBuilder = StringBuilder()
 //
-//                for (ingredientInfo in responseBody) {
-//                    myStringBuilder.append(ingredientInfo.nutrition.nutrients)
+//                for (ingredientInfo in responseBody.nutrition.nutrients) {
+//                    myStringBuilder.append(ingredientInfo)
 //                    myStringBuilder.append("\n")
 //                }
 //
@@ -69,8 +67,8 @@ class MainActivity : AppCompatActivity() {
 //                textView.text = myStringBuilder
 //            }
 //
-//            override fun onFailure(call: Call<List<IngredientInfo>?>, t: Throwable) {
-//
+//            override fun onFailure(call: Call<IngredientInfo>, t: Throwable) {
+//                Log.d("MainActivity", "onFailure: $t")
 //            }
 //        })
 //    }
