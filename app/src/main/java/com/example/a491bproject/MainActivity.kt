@@ -25,12 +25,12 @@ class MainActivity : AppCompatActivity() {
         getMyIngredientInfo()
 
         //Transitions from Main to Ingredients
-//        val ingredientsListBtn: Button = findViewById<Button>(R.id.ingredientsListBtn)
-//        ingredientsListBtn.setOnClickListener() {
-//            val ingredientsIntent = Intent(this, IngredientsActivity::class.java)
-//            startActivity(ingredientsIntent)
-//
-//        }
+        val ingredientsListBtn: Button = findViewById<Button>(R.id.ingredientsListBtn)
+        ingredientsListBtn.setOnClickListener() {
+            val ingredientsIntent = Intent(this, IngredientsActivity::class.java)
+            startActivity(ingredientsIntent)
+
+        }
 
         // Naming for menu
         val actionBar = supportActionBar
