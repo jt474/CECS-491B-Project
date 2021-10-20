@@ -15,14 +15,14 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-//const val BASE_URL = "https://api.spoonacular.com/"
+const val BASE_URL = "https://api.spoonacular.com/"
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //getMyIngredientInfo()
+        getMyIngredientInfo()
 
         //Transitions from Main to Ingredients
         val ingredientsListBtn: Button = findViewById<Button>(R.id.ingredientsListBtn)
@@ -42,36 +42,36 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-//    private fun getMyIngredientInfo() {
-//        val retrofitBuilder = Retrofit.Builder()
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .baseUrl(BASE_URL)
-//            .build()
-//            .create(ApiInterface::class.java)
-//
-//        val retrofitData = retrofitBuilder.getIngredientInfo()
-//
-//        retrofitData.enqueue(object : Callback<List<IngredientInfo>?> {
-//            override fun onResponse(
-//                call: Call<List<IngredientInfo>?>,
-//                response: Response<List<IngredientInfo>?>
-//            ) {
-//                val responseBody = response.body()!!
-//
-//                val myStringBuilder = StringBuilder()
-//
-//                for (ingredientInfo in responseBody) {
-//                    myStringBuilder.append(ingredientInfo.nutrition.nutrients)
-//                    myStringBuilder.append("\n")
-//                }
-//
-//                val textView = findViewById<TextView>(R.id.textView)
-//                textView.text = myStringBuilder
-//            }
-//
-//            override fun onFailure(call: Call<List<IngredientInfo>?>, t: Throwable) {
-//
-//            }
-//        })
-//    }
+    private fun getMyIngredientInfo() {
+        val retrofitBuilder = Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(BASE_URL)
+            .build()
+            .create(ApiInterface::class.java)
+
+        val retrofitData = retrofitBuilder.getIngredientInfo()
+
+        retrofitData.enqueue(object : Callback<List<IngredientInfo>?> {
+            override fun onResponse(
+                call: Call<List<IngredientInfo>?>,
+                response: Response<List<IngredientInfo>?>
+            ) {
+                val responseBody = response.body()!!
+
+                val myStringBuilder = StringBuilder()
+
+                for (ingredientInfo in responseBody) {
+                    myStringBuilder.append(ingredientInfo.nutrition.nutrients)
+                    myStringBuilder.append("\n")
+                }
+
+                val textView2 = findViewById<TextView>(R.id.textView2)
+                textView2.text = myStringBuilder
+            }
+
+            override fun onFailure(call: Call<List<IngredientInfo>?>, t: Throwable) {
+
+            }
+        })
+    }
 }
