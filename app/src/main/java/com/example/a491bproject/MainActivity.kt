@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         getMyIngredientInfo()
 
         //Transitions from Main to Ingredients
@@ -49,7 +48,7 @@ class MainActivity : AppCompatActivity() {
 
         val retrofitData = retrofitBuilder.getIngredientInfo()
 
-        retrofitData.enqueue(object: Callback<IngredientInfo> {
+        retrofitData.enqueue(object : Callback<IngredientInfo> {
             override fun onResponse(
                 call: Call<IngredientInfo>,
                 response: Response<IngredientInfo>
@@ -58,13 +57,15 @@ class MainActivity : AppCompatActivity() {
 
                 val myStringBuilder = StringBuilder()
 
+
                 for (ingredientInfo in responseBody.nutrition.nutrients) {
                     myStringBuilder.append(ingredientInfo)
                     myStringBuilder.append("\n")
                 }
 
-                val textView = findViewById<TextView>(R.id.text)
-                textView.text = myStringBuilder
+                val textView2 = findViewById<TextView>(R.id.textView2)
+                Log.i("MainActivity", "API call: $myStringBuilder")
+                textView2.text = myStringBuilder
             }
 
             override fun onFailure(call: Call<IngredientInfo>, t: Throwable) {
