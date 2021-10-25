@@ -63,6 +63,7 @@ class LoginActivity : AppCompatActivity() {
 
         }
 
+        //Navigates to Register Screen
         val register: Button = findViewById<Button>(R.id.registerBtn)
         register.setOnClickListener(){
             val registerIntent = Intent(this,RegisterActivity::class.java)
