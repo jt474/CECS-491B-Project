@@ -3,14 +3,18 @@ package com.example.a491bproject
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
@@ -29,13 +33,73 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private lateinit var auth: FirebaseAuth
-    private lateinit var btnSignIn: SignInButton
     private lateinit var googleSignInClient: GoogleSignInClient
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        btnSignIn = findViewById(R.id.sign_in_button)
+        val btnSignIn = findViewById<com.google.android.gms.common.SignInButton>(R.id.sign_in_button)
+
+        val loginEmailText =  findViewById<EditText>(R.id.editTextTextEmailAddress)
+        val loginPasswordText = findViewById<EditText>(R.id.editTextTextPassword)
+
+        // Login button configuration
+        val loginBtn: Button = findViewById<Button>(R.id.loginBtn)
+        //When User clicks Login it should log user in
+        loginBtn.setOnClickListener {
+            //Checks if fields are empty
+            when{
+                TextUtils.isEmpty(loginEmailText.text.toString()) -> {
+                    Toast.makeText(this@LoginActivity,
+                        "Enter email",
+                        Toast.LENGTH_SHORT
+
+                    ).show()
+                }
+                TextUtils.isEmpty(loginPasswordText.text.toString()) -> {
+                    Toast.makeText(this@LoginActivity,
+                        "Enter password",
+                        Toast.LENGTH_SHORT
+
+                    ).show()
+                }
+                else -> {
+                    val email: String = loginEmailText.text.toString()
+                    val password: String = loginPasswordText.text.toString()
+
+                    //Sign in firebase instance with email and password
+                    FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener { task ->
+
+                            if (task.isSuccessful) {
+
+                                Toast.makeText(
+                                    this@LoginActivity,
+                                    "Successfully Logged in",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                //User is now logged in
+
+                                //Navigates account to main and clear previous intents
+                                val registeredIntent = Intent(this@LoginActivity, MainActivity::class.java)
+                                registeredIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                startActivity(registeredIntent)
+                                finish()
+                            }
+                            //When Login fails print error
+                            else {
+                                Toast.makeText(
+                                    this@LoginActivity,
+                                    task.exception!!.message.toString(),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                }
+            }
+
+        }
 
         // Configure Google Sign In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -63,6 +127,7 @@ class LoginActivity : AppCompatActivity() {
 
         }
 
+        //Navigates to Register Screen
         val register: Button = findViewById<Button>(R.id.registerBtn)
         register.setOnClickListener(){
             val registerIntent = Intent(this,RegisterActivity::class.java)

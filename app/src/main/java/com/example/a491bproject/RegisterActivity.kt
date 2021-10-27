@@ -3,6 +3,7 @@ package com.example.a491bproject
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -29,28 +30,61 @@ class RegisterActivity : AppCompatActivity() {
 
         //When User clicks Register it should make an account
         registerBtn.setOnClickListener {
-            val email: String = emailText.text.toString()
-            val password: String = passwordText.text.toString()
-
-            //Create firebase instance and create using email and password
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener(
-                OnCompleteListener < AuthResult > { task ->
-
-                    if (task.isSuccessful) {
-
-                        //Firebase user registered
-                        val firebaseUser: FirebaseUser = task.result!!.user!!
-
-                        Toast.makeText(this@RegisterActivity,
-                            "You have Registered",
+            //Checks if fields are empty
+            when{
+                TextUtils.isEmpty(emailText.text.toString()) -> {
+                    Toast.makeText(this@RegisterActivity,
+                        "Enter email",
                         Toast.LENGTH_SHORT
-                        ).show()
 
-                        //New user should be made at this point
-
-                    }
+                            ).show()
                 }
-            )
+                TextUtils.isEmpty(passwordText.text.toString()) -> {
+                    Toast.makeText(this@RegisterActivity,
+                        "Enter password",
+                        Toast.LENGTH_SHORT
+
+                    ).show()
+                }
+                else -> {
+                    val email: String = emailText.text.toString()
+                    val password: String = passwordText.text.toString()
+
+                    //Create firebase instance and create using email and password
+                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener(
+                        OnCompleteListener < AuthResult > { task ->
+
+                            if (task.isSuccessful) {
+
+                                //Firebase user registered
+                                val firebaseUser: FirebaseUser = task.result!!.user!!
+
+                                Toast.makeText(
+                                    this@RegisterActivity,
+                                    "You have Registered",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                //New user should be made at this point
+
+                                //Navigates newly made account to main and clear previous intents
+                                val registeredIntent = Intent(this@RegisterActivity, MainActivity::class.java)
+                                registeredIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                intent.putExtra("userID", firebaseUser.uid)
+                                startActivity(registeredIntent)
+                                finish()
+                            }
+                            //When Register fails print error
+                            else {
+                                Toast.makeText(
+                                    this@RegisterActivity,
+                                    task.exception!!.message.toString(),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                    )
+                }
+            }
         }
     }
 }
