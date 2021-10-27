@@ -41,17 +41,18 @@ class IngredientsActivity : AppCompatActivity() {
 //                db.insertData(user)
 
                 /* Write to an internal text file */
-                val ingredientsFile : FileOutputStream
+//                val ingredientsFile : FileOutputStream
                 val contents = ingredient.text.toString() + " , " + quantity.text.toString()
                 Toast.makeText(this, "Adding $contents", Toast.LENGTH_SHORT).show()
-                Log.d("IngredientActivity", "contents: $contents")
-                try {
-                    Log.d("IngredientsActivity", "attempt to create a text file")
-                    ingredientsFile = openFileOutput("ingredients.txt", Context.MODE_PRIVATE)
-                    ingredientsFile.write(contents.toByteArray())
-                } catch (e : FileNotFoundException) {
-                    e.printStackTrace()
-                }
+//                Log.d("IngredientActivity", "contents: $contents")
+//                try {
+//                    Log.d("IngredientsActivity", "attempt to create a text file")
+//                    ingredientsFile = openFileOutput("ingredients.txt", Context.MODE_PRIVATE)
+//                    ingredientsFile.write(contents.toByteArray())
+//                } catch (e : FileNotFoundException) {
+//                    e.printStackTrace()
+//                }
+                MyIngredients.addIngredient(Ingredient(ingredient.text.toString(), quantity.text.toString()))
                 clearField()
             } else {
                 Toast.makeText(this, "Input Ingredient and Quantity", Toast.LENGTH_SHORT).show()

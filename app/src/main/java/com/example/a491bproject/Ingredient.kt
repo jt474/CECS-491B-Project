@@ -1,3 +1,3 @@
 package com.example.a491bproject
 
-class Ingredient (name: String, quantity: String = "1", unit: String = "")
+data class Ingredient (var name: String, var quantity: String = "1")
