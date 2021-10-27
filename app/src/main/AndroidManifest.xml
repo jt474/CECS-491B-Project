@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.491BProject">
         <activity
+            android:name=".MyIngredientsActivity"
+            android:exported="false" />
+        <activity
             android:name=".RegisterActivity"
             android:exported="true" />
         <activity

@@ -1,6 +1,7 @@
 package com.example.a491bproject
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -66,7 +67,9 @@ class IngredientsActivity : AppCompatActivity() {
 
     private fun viewIngredients() {
         findViewById<Button>(R.id.button_view_ingredients).setOnClickListener {
-            Toast.makeText(this, "I hope this work lol", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "I hope this work lol", Toast.LENGTH_SHORT).show()
+            val myIngredientsIntent = Intent(this, MyIngredientsActivity::class.java)
+            startActivity(myIngredientsIntent)
         }
     }
 }
