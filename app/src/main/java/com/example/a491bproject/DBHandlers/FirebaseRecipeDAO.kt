@@ -2,6 +2,7 @@ package com.example.a491bproject.DBHandlers
 
 import android.widget.Toast
 import com.example.a491bproject.MainActivity
+import com.example.a491bproject.models.IngredientModel
 import com.example.a491bproject.models.RecipeModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -30,16 +31,12 @@ class FirebaseRecipeDAO(val auth: FirebaseAuth): RecipeDAO {
         val recipePushID = recipePush.key!! //is null if the reference was to a root... but that shouldn't happen.
 
         val recipeMap = buildRecipeMap(model, recipePushID)
-        val ingredientMap = buildIngredientsMap(model.ingredients)
 
         var recipeNodeMap: HashMap<String, Any> = hashMapOf(
             "$recipeParentStr/$recipePushID" to recipeMap
         )
-        var ingredientNodeMap: HashMap<String, Any> = hashMapOf(
-            "$recipeParentStr/$recipePushID/Ingredients" to ingredientMap
-        )
+
         updateChildren(recipeNodeMap)
-        updateChildren(ingredientNodeMap)
         return 1 //Hack. turns out that with so many children being added... i cann't approach this the sql way.
     }
 
@@ -65,12 +62,13 @@ class FirebaseRecipeDAO(val auth: FirebaseAuth): RecipeDAO {
         return map
     }
 
-    fun buildIngredientsMap(ingredients: List<String>): Map<String, String>{
-        val map = hashMapOf<String, String>()
-        for(item in ingredients){
-            map[ingredients.indexOf(item).toString()] to item
+    fun buildRecipeIngredients(ingredients: List<IngredientModel>, recipeId:String): Int{
+        //"$recipeParentStr/$recipePushID/Ingredients"
+        for(ingredient in ingredients){
+            dbRef.child(recipeParentStr).child(recipeId).child("Ingredients").child(ingredient.name).child("amount").setValue(ingredient.amount)
+            dbRef.child(recipeParentStr).child(recipeId).child("Ingredients").child(ingredient.name).child("unit").setValue(ingredient.unit)
         }
-        return map
+        return 1; //Hack
     }
 
     fun updateChildren(nodeMap:HashMap<String,Any>){

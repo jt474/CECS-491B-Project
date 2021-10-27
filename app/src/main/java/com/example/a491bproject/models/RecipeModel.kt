@@ -1,6 +1,6 @@
 package com.example.a491bproject.models
 
-data class RecipeModel(val id: String = "", val authorID: String, val title: String, val ingredients: List<String>, val instructions: List<InstructionModel>){
+data class RecipeModel(val authorID: String, val title: String, val ingredients: List<IngredientModel>, val instructions: List<InstructionModel>, val id: String = ""){
     //id is the unique identifier of a recipe
     //title is the title of a recipe.
     //ingredients is a list of ingredient names
