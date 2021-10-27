@@ -30,6 +30,7 @@ class RegisterActivity : AppCompatActivity() {
 
         //When User clicks Register it should make an account
         registerBtn.setOnClickListener {
+            //Checks if fields are empty
             when{
                 TextUtils.isEmpty(emailText.text.toString()) -> {
                     Toast.makeText(this@RegisterActivity,
@@ -72,7 +73,7 @@ class RegisterActivity : AppCompatActivity() {
                                 startActivity(registeredIntent)
                                 finish()
                             }
-                            //When Register fails
+                            //When Register fails print error
                             else {
                                 Toast.makeText(
                                     this@RegisterActivity,
@@ -84,7 +85,6 @@ class RegisterActivity : AppCompatActivity() {
                     )
                 }
             }
-
         }
     }
 }
