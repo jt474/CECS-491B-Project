@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
         android:text="My Ingredients"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -25,6 +26,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="Back"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_my_ingredients"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,4 +39,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
