@@ -20,6 +20,13 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        val ingredientsInfoBtn: Button = findViewById<Button>(R.id.ingredientsInfoBtn)
+        ingredientsInfoBtn.setOnClickListener() {
+            val ingredientsInfoIntent = Intent(this, IngredientsInformation::class.java)
+            startActivity(ingredientsInfoIntent)
+
+        }
+
         //Signout
         val logoutBtn: Button = findViewById<Button>(R.id.logoutBtn)
         logoutBtn.setOnClickListener{
