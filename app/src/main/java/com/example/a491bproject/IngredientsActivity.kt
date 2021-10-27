@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -55,6 +56,7 @@ class IngredientsActivity : AppCompatActivity() {
                 Toast.makeText(this, "Input Ingredient and Quantity", Toast.LENGTH_SHORT).show()
             }
         }
+        viewIngredients()
     }
 
     private fun clearField() {
@@ -62,5 +64,9 @@ class IngredientsActivity : AppCompatActivity() {
         findViewById<EditText>(R.id.editTextQuantity).setText("")
     }
 
-    public fun viewIngredients(v: View) {}
+    private fun viewIngredients() {
+        findViewById<Button>(R.id.button_view_ingredients).setOnClickListener {
+            Toast.makeText(this, "I hope this work lol", Toast.LENGTH_SHORT).show()
+        }
+    }
 }
