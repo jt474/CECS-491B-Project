@@ -1,5 +1,7 @@
 package com.example.a491bproject
 
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -12,6 +14,8 @@ import org.junit.Assert.*
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
+
+        val dbRef = FirebaseDatabase.getInstance().reference;
         assertEquals(4, 2 + 2)
     }
 }
