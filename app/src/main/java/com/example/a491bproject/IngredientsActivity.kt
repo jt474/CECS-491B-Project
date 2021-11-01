@@ -92,11 +92,22 @@ class IngredientsActivity : AppCompatActivity() {
             }
         }
 
-        val button3 = findViewById<TextView>(R.id.buttonViewIngredient)
-        button3.setOnClickListener{
-            val db = DataBaseHandler(this)
-            db.viewIngredient()
-        }
+        //var ingredientList:ArrayList<IngredientsActivity.User> = ArrayList<IngredientsActivity.User>()
+        //ingredientList = db.viewIngredient()
+        val db = DataBaseHandler(this)
+        val separator = "-"
+        //val ingredientString = db.viewIngredient().joinToString(separator)
+        val textView = findViewById<TextView>(R.id.textView4)
+        //textView.text = db.viewIngredient().toString()
+
+//        val button3 = findViewById<TextView>(R.id.buttonViewIngredient)
+//        button3.setOnClickListener{
+//            val db = DataBaseHandler(this)
+//            var ingredientList:ArrayList<IngredientsActivity.User> = ArrayList<IngredientsActivity.User>()
+//            ingredientList = db.viewIngredient()
+//            val textView = findViewById<TextView>(R.id.textView4)
+//            textView.text = "Hello!"
+//        }
     }
 
     class User(ingredientInput: String, quantityInput: Double) {
