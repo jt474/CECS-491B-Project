@@ -69,7 +69,7 @@ class RegisterActivity : AppCompatActivity() {
                                 //Navigates newly made account to main and clear previous intents
                                 val registeredIntent = Intent(this@RegisterActivity, MainActivity::class.java)
                                 registeredIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                intent.putExtra("userID", firebaseUser.uid)
+                                registeredIntent.putExtra("emailID", email)
                                 startActivity(registeredIntent)
                                 finish()
                             }

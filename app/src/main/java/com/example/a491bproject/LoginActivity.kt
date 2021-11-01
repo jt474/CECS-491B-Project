@@ -82,9 +82,10 @@ class LoginActivity : AppCompatActivity() {
                                 //User is now logged in
 
                                 //Navigates account to main and clear previous intents
-                                val registeredIntent = Intent(this@LoginActivity, MainActivity::class.java)
-                                registeredIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                startActivity(registeredIntent)
+                                val loginIntent = Intent(this@LoginActivity, MainActivity::class.java)
+                                loginIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                loginIntent.putExtra("emailID", email)
+                                startActivity(loginIntent)
                                 finish()
                             }
                             //When Login fails print error

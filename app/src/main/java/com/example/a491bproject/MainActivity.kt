@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 
@@ -11,6 +12,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val emailId = intent.getStringExtra("emailID")
 
         //Transitions from Main to Ingredients
         val ingredientsListBtn: Button = findViewById<Button>(R.id.ingredientsListBtn)
@@ -38,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         val settingsBtn: Button = findViewById<Button>(R.id.settingsBtn)
         settingsBtn.setOnClickListener{
             val settingsIntent = Intent(this, SettingActivity::class.java)
+            settingsIntent.putExtra("emailID", emailId)
             startActivity(settingsIntent)
         }
 
