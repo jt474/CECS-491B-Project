@@ -27,13 +27,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/logoutBtn"
+        android:id="@+id/settingsBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Logout"
+        android:text="Settings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ingredientsListBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/ingredientsInfoBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

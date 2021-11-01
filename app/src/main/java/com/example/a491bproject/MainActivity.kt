@@ -27,13 +27,11 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        //Signout
-        val logoutBtn: Button = findViewById<Button>(R.id.logoutBtn)
-        logoutBtn.setOnClickListener{
-            FirebaseAuth.getInstance().signOut()
-
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
+        //Navigate to settings
+        val settingsBtn: Button = findViewById<Button>(R.id.settingsBtn)
+        settingsBtn.setOnClickListener{
+            val settingsIntent = Intent(this, SettingActivity::class.java)
+            startActivity(settingsIntent)
         }
 
         // Naming for menu
