@@ -27,12 +27,20 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        //Navigate to Create Recipe
+        val createRecipeBtn: Button = findViewById<Button>(R.id.createRecipeBtn)
+        createRecipeBtn.setOnClickListener{
+            val createRecipeIntent = Intent(this, CreateRecipeActivity::class.java)
+            startActivity(createRecipeIntent)
+        }
+
         //Navigate to settings
         val settingsBtn: Button = findViewById<Button>(R.id.settingsBtn)
         settingsBtn.setOnClickListener{
             val settingsIntent = Intent(this, SettingActivity::class.java)
             startActivity(settingsIntent)
         }
+
 
         // Naming for menu
         val actionBar = supportActionBar
