@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AddIngredientsActivity">
+    tools:context=".IngredientsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,14 +38,6 @@
             android:hint="Quantity (oz)"
             android:textColor="@android:color/background_dark" />
 
-    </LinearLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:minHeight="100dp">
-
         <Button
             android:id="@+id/buttonAddIngredient"
             android:layout_width="wrap_content"
@@ -53,5 +45,39 @@
             android:layout_gravity="center"
             android:text="Add Ingredient"
             android:visibility="visible" />
-    </ScrollView>
+
+        <Button
+            android:id="@+id/buttonUpdateIngredient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/buttonAddIngredient"
+            android:layout_gravity="center"
+            android:text="Update Ingredient"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/buttonViewIngredient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/buttonUpdateIngredient"
+            android:layout_gravity="center"
+            android:text="View Ingredients"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="@color/white"-->
+<!--        android:minHeight="100dp">-->
+
+<!--        <Button-->
+<!--            android:id="@+id/buttonAddIngredient"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:text="Add Ingredient"-->
+<!--            android:visibility="visible" />-->
+<!--    </ScrollView>-->
 </LinearLayout>
