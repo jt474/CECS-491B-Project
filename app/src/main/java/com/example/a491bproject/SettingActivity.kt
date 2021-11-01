@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseAuth
 
 class SettingActivity : AppCompatActivity() {
@@ -12,9 +13,20 @@ class SettingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
 
-        val emailId = intent.getStringExtra("emailID")
+
+        //User created email display
+/*        val emailId = intent.getStringExtra("emailID")
         val settingEmail: TextView = findViewById<TextView>(R.id.settingEmail)
-        settingEmail.text = "Email : $emailId"
+        settingEmail.text = "Email : $emailId"*/
+
+        //Email display
+        var auth: FirebaseAuth = FirebaseAuth.getInstance()
+        val user = auth.currentUser
+        val email = user?.email.toString();
+        val settingEmail: TextView = findViewById<TextView>(R.id.settingEmail)
+        settingEmail.text = "Email : $email"
+
+
 
 
         //Signout
