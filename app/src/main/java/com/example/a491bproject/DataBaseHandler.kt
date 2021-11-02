@@ -50,12 +50,12 @@ class DataBaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
             return ArrayList()
         }
         var userIngredient: String
-        var userQuantity: Double
+        var userQuantity: Int
         if (cursor.moveToFirst()) {
             do {
                 userIngredient = cursor.getString(cursor.getColumnIndex("ingredient"))
-                userQuantity = cursor.getDouble(cursor.getColumnIndex("quantity"))
-                val ingredient= IngredientsActivity.User(userIngredient, userQuantity,)
+                userQuantity = cursor.getInt(cursor.getColumnIndex("quantity"))
+                val ingredient= IngredientsActivity.User(userIngredient, userQuantity)
                 ingredientList.add(ingredient)
             } while (cursor.moveToNext())
         }

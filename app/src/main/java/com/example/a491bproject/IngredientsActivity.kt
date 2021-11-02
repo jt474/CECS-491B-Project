@@ -60,7 +60,7 @@ class IngredientsActivity : AppCompatActivity() {
             ) {
                 val user = IngredientsActivity.User(
                     ingredient.text.toString(),
-                    quantity.text.toString().toDouble()
+                    quantity.text.toString().toInt()
                 )
                 db.addIngredient(user)
                 val contents = ingredient.text.toString() + " , " + quantity.text.toString()
@@ -81,7 +81,7 @@ class IngredientsActivity : AppCompatActivity() {
             ) {
                 val user = IngredientsActivity.User(
                     ingredient.text.toString(),
-                    quantity.text.toString().toDouble()
+                    quantity.text.toString().toInt()
                 )
                 db.updateIngredient(user)
                 val contents = ingredient.text.toString() + " , " + quantity.text.toString()
@@ -110,7 +110,7 @@ class IngredientsActivity : AppCompatActivity() {
 //        }
     }
 
-    class User(ingredientInput: String, quantityInput: Double) {
+    class User(ingredientInput: String, quantityInput: Int) {
         val ingredient = ingredientInput
         val quantity = quantityInput
     }
