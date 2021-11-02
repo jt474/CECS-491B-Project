@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteException
+import android.widget.TextView
 
 class DataBaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,null,DATABASE_VERSION) {
     companion object {
@@ -18,31 +19,39 @@ class DataBaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
     }
     override fun onCreate(db: SQLiteDatabase?) {
         val CREATE_CONTACTS_TABLE = ("CREATE TABLE " + TABLE_CONTACTS + "("
-                + KEY_INGREDIENT + " INTEGER PRIMARY KEY," + KEY_QUANTITY + " TEXT," + ")")
+                + KEY_INGREDIENT + " STRING, " + KEY_QUANTITY + " INTEGER" + ")")
         db?.execSQL(CREATE_CONTACTS_TABLE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db!!.execSQL("DROP TABLE IF EXISTS " + TABLE_CONTACTS)
+        db!!.execSQL("DROP TABLE IF EXISTS $TABLE_CONTACTS")
         onCreate(db)
     }
 
-    fun addIngredient(user: IngredientsActivity.User): Long {
+    fun addIngredient(quantity: String, ingredient: String) {
         val db = this.writableDatabase
         val contentValues = ContentValues()
-        contentValues.put(KEY_INGREDIENT, user.ingredient)
-        contentValues.put(KEY_QUANTITY, user.quantity)
-        val success = db.insert(TABLE_CONTACTS, null, contentValues)
+        contentValues.put(KEY_QUANTITY, quantity)
+        contentValues.put(KEY_INGREDIENT, ingredient)
+        db.insert(TABLE_CONTACTS, null, contentValues)
         db.close()
-        return success
+    }
+
+    fun updateIngredient(ingredient: String, quantity: String) {
+        val db = this.writableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(KEY_INGREDIENT, ingredient)
+        contentValues.put(KEY_QUANTITY, quantity)
+        db.update(TABLE_CONTACTS, contentValues, "ingredient=$ingredient",null)
+        db.close()
     }
 
     @SuppressLint("Range")
-    fun viewIngredient(): ArrayList<IngredientsActivity.User> {
-        val ingredientList:ArrayList<IngredientsActivity.User> = ArrayList<IngredientsActivity.User>()
+    fun viewIngredient(): ArrayList<String> {
+        val ingredientList:ArrayList<String> = ArrayList<String>()
         val selectQuery = "SELECT  * FROM $TABLE_CONTACTS"
         val db = this.readableDatabase
-        var cursor: Cursor? = null
+        var cursor: Cursor?
         try{
             cursor = db.rawQuery(selectQuery, null)
         }catch (e: SQLiteException) {
@@ -50,35 +59,22 @@ class DataBaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
             return ArrayList()
         }
         var userIngredient: String
-        var userQuantity: Int
+        var userQuantity: String
         if (cursor.moveToFirst()) {
             do {
                 userIngredient = cursor.getString(cursor.getColumnIndex("ingredient"))
-                userQuantity = cursor.getInt(cursor.getColumnIndex("quantity"))
-                val ingredient= IngredientsActivity.User(userIngredient, userQuantity)
+                userQuantity = cursor.getString(cursor.getColumnIndex("quantity"))
+                val ingredient= "$userIngredient , $userQuantity"
                 ingredientList.add(ingredient)
             } while (cursor.moveToNext())
         }
         return ingredientList
     }
 
-    fun updateIngredient(user: IngredientsActivity.User):Int{
+    fun deleteIngredient(ingredient: String) {
         val db = this.writableDatabase
-        val contentValues = ContentValues()
-        contentValues.put(KEY_INGREDIENT, user.ingredient)
-        contentValues.put(KEY_QUANTITY, user.quantity)
-        val success = db.update(TABLE_CONTACTS, contentValues,"quantity="+user.quantity,null)
+        db!!.delete(TABLE_CONTACTS,  KEY_INGREDIENT + "=?", arrayOf(ingredient))
         db.close()
-        return success
-    }
-
-    fun deleteIngredient(user: IngredientsActivity.User):Int{
-        val db = this.writableDatabase
-        val contentValues = ContentValues()
-        contentValues.put(KEY_INGREDIENT, user.ingredient)
-        val success = db.delete(TABLE_CONTACTS,"ingredient="+user.ingredient,null)
-        db.close()
-        return success
     }
 }
 

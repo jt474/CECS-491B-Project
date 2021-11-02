@@ -55,17 +55,23 @@ class IngredientsActivity : AppCompatActivity() {
             val db = DataBaseHandler(this)
             val ingredient: TextView = findViewById(R.id.editTextIngredient)
             val quantity: TextView = findViewById(R.id.editTextQuantity)
-            if (ingredient.text.toString().isNotEmpty() &&
-                quantity.text.toString().isNotEmpty()
+            val ingredientString = ingredient.text.toString()
+            val quantityString = quantity.text.toString()
+            if (ingredient.text.toString() != "" &&
+                quantity.text.toString() != ""
             ) {
-                val user = IngredientsActivity.User(
-                    ingredient.text.toString(),
-                    quantity.text.toString().toInt()
-                )
-                db.addIngredient(user)
-                val contents = ingredient.text.toString() + " , " + quantity.text.toString()
+//                val user = IngredientsActivity.User(
+//                    ingredient.text.toString(),
+//                    quantity.text.toString().toInt()
+//                )
+                db.addIngredient(ingredientString, quantityString)
+                val contents = "$ingredient , $quantity"
                 Toast.makeText(this, "Adding $contents", Toast.LENGTH_SHORT).show()
                 clearField()
+                val textView = findViewById<TextView>(R.id.textView4)
+                val separator = "\n"
+                textView.text = db.viewIngredient().joinToString(separator)
+                //textView.text = "Success"
             } else {
                 Toast.makeText(this, "Input Ingredient and Quantity", Toast.LENGTH_SHORT).show()
             }
@@ -76,44 +82,64 @@ class IngredientsActivity : AppCompatActivity() {
             val db = DataBaseHandler(this)
             val ingredient: TextView = findViewById(R.id.editTextIngredient)
             val quantity: TextView = findViewById(R.id.editTextQuantity)
-            if (ingredient.text.toString().isNotEmpty() &&
-                quantity.text.toString().isNotEmpty()
+            val ingredientString = ingredient.text.toString()
+            val quantityString = quantity.text.toString()
+            if (ingredient.text.toString() != "" &&
+                quantity.text.toString() != ""
             ) {
-                val user = IngredientsActivity.User(
-                    ingredient.text.toString(),
-                    quantity.text.toString().toInt()
-                )
-                db.updateIngredient(user)
-                val contents = ingredient.text.toString() + " , " + quantity.text.toString()
+//                val user = IngredientsActivity.User(
+//                    ingredient.text.toString(),
+//                    quantity.text.toString().toInt()
+//                )
+                db.updateIngredient(ingredientString, quantityString)
+                val contents = "$ingredient , $quantity"
                 Toast.makeText(this, "Updating $contents", Toast.LENGTH_SHORT).show()
                 clearField()
+                val textView = findViewById<TextView>(R.id.textView4)
+                val separator = "\n"
+                textView.text = db.viewIngredient().joinToString(separator)
             } else {
                 Toast.makeText(this, "Input Ingredient and Quantity", Toast.LENGTH_SHORT).show()
             }
         }
 
-        //var ingredientList:ArrayList<IngredientsActivity.User> = ArrayList<IngredientsActivity.User>()
-        //ingredientList = db.viewIngredient()
-        val db = DataBaseHandler(this)
-        val separator = "-"
-        //val ingredientString = db.viewIngredient().joinToString(separator)
-        val textView = findViewById<TextView>(R.id.textView4)
-        //textView.text = db.viewIngredient().toString()
+        val button3 = findViewById<TextView>(R.id.buttonDeleteIngredient)
+        button3.setOnClickListener{
+            val db = DataBaseHandler(this)
+            val ingredient: TextView = findViewById(R.id.editTextIngredient)
+            val quantity: TextView = findViewById(R.id.editTextQuantity)
+            val ingredientString = ingredient.text.toString()
+            if (ingredient.text.toString() != ""
+            ) {
+//                val user = IngredientsActivity.User(
+//                    ingredient.text.toString(),
+//                    quantity.text.toString().toInt()
+//                )
+                db.deleteIngredient(ingredientString)
+                val contents = "$ingredient"
+                Toast.makeText(this, "Deleting $contents", Toast.LENGTH_SHORT).show()
+                clearField()
+                val textView = findViewById<TextView>(R.id.textView4)
+                val separator = "\n"
+                textView.text = db.viewIngredient().joinToString(separator)
+            } else {
+                Toast.makeText(this, "Input Ingredient and Quantity", Toast.LENGTH_SHORT).show()
+            }
+        }
 
-//        val button3 = findViewById<TextView>(R.id.buttonViewIngredient)
-//        button3.setOnClickListener{
-//            val db = DataBaseHandler(this)
-//            var ingredientList:ArrayList<IngredientsActivity.User> = ArrayList<IngredientsActivity.User>()
-//            ingredientList = db.viewIngredient()
-//            val textView = findViewById<TextView>(R.id.textView4)
-//            textView.text = "Hello!"
-//        }
+        val button4 = findViewById<TextView>(R.id.buttonViewIngredient)
+        button4.setOnClickListener{
+            val db = DataBaseHandler(this)
+            val textView = findViewById<TextView>(R.id.textView4)
+            val separator = "\n"
+            textView.text = db.viewIngredient().joinToString(separator)
+        }
     }
 
-    class User(ingredientInput: String, quantityInput: Int) {
-        val ingredient = ingredientInput
-        val quantity = quantityInput
-    }
+//    class User(ingredientInput: String, quantityInput: Int) {
+//        val ingredient = ingredientInput
+//        val quantity = quantityInput
+//    }
 
     private fun clearField() {
         findViewById<EditText>(R.id.editTextIngredient).text.clear()
