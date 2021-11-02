@@ -53,12 +53,12 @@ class SearchRecipeMenu : AppCompatActivity() {
                 for (recipes in responseBody.results) {
                     myStringBuilder.append(recipes.title)
                     myStringBuilder.append("\n")
-                    myStringBuilder.append(recipes.calories)
-                    myStringBuilder.append("\n")
-                    myStringBuilder.append(recipes.carbs)
-                    myStringBuilder.append("\n")
-                    myStringBuilder.append(recipes.fat)
-                    myStringBuilder.append("\n")
+//                    myStringBuilder.append(recipes.calories)
+//                    myStringBuilder.append("\n")
+//                    myStringBuilder.append(recipes.carbs)
+//                    myStringBuilder.append("\n")
+//                    myStringBuilder.append(recipes.fat)
+//                    myStringBuilder.append("\n")
                 }
 
                 val textView3 = findViewById<TextView>(R.id.tv_recipes)
