@@ -14,6 +14,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val emailId = intent.getStringExtra("emailID")
+        //Navigate to Search Recipe Menu
+        val searchRecipeBtn: Button = findViewById<Button>(R.id.searchRecipeBtn)
+        searchRecipeBtn.setOnClickListener() {
+            val searchRecipeIntent = Intent(this, SearchRecipeMenu::class.java)
+            startActivity(searchRecipeIntent)
+
+        }
 
         //Transitions from Main to Ingredients
         val ingredientsListBtn: Button = findViewById<Button>(R.id.ingredientsListBtn)
@@ -23,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        //Navigate to Ingredient Information
         val ingredientsInfoBtn: Button = findViewById<Button>(R.id.ingredientsInfoBtn)
         ingredientsInfoBtn.setOnClickListener() {
             val ingredientsInfoIntent = Intent(this, IngredientsInformation::class.java)
