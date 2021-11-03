@@ -53,7 +53,8 @@ class SearchRecipeMenu : AppCompatActivity() {
                 for (recipes in responseBody.results) {
                     myStringBuilder.append(recipes.title)
                     myStringBuilder.append("\n")
-//                    myStringBuilder.append(recipes.calories)
+                    myStringBuilder.append(recipes.calories)
+//                    myStringBuilder.append(recipes.nutrition.nutrients[0].amount)
 //                    myStringBuilder.append("\n")
 //                    myStringBuilder.append(recipes.carbs)
 //                    myStringBuilder.append("\n")
