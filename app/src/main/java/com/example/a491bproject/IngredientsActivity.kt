@@ -1,9 +1,12 @@
 package com.example.a491bproject
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -38,26 +41,36 @@ class IngredientsActivity : AppCompatActivity() {
 //                db.insertData(user)
 
                 /* Write to an internal text file */
-                val ingredientsFile : FileOutputStream
+//                val ingredientsFile : FileOutputStream
                 val contents = ingredient.text.toString() + " , " + quantity.text.toString()
                 Toast.makeText(this, "Adding $contents", Toast.LENGTH_SHORT).show()
-                Log.d("IngredientActivity", "contents: $contents")
-                try {
-                    Log.d("IngredientsActivity", "attempt to create a text file")
-                    ingredientsFile = openFileOutput("ingredients.txt", Context.MODE_PRIVATE)
-                    ingredientsFile.write(contents.toByteArray())
-                } catch (e : FileNotFoundException) {
-                    e.printStackTrace()
-                }
+//                Log.d("IngredientActivity", "contents: $contents")
+//                try {
+//                    Log.d("IngredientsActivity", "attempt to create a text file")
+//                    ingredientsFile = openFileOutput("ingredients.txt", Context.MODE_PRIVATE)
+//                    ingredientsFile.write(contents.toByteArray())
+//                } catch (e : FileNotFoundException) {
+//                    e.printStackTrace()
+//                }
+                MyIngredients.addIngredient(Ingredient(ingredient.text.toString(), quantity.text.toString()))
                 clearField()
             } else {
                 Toast.makeText(this, "Input Ingredient and Quantity", Toast.LENGTH_SHORT).show()
             }
         }
+        viewIngredients()
     }
 
     private fun clearField() {
         findViewById<EditText>(R.id.editTextIngredient).text.clear()
         findViewById<EditText>(R.id.editTextQuantity).setText("")
+    }
+
+    private fun viewIngredients() {
+        findViewById<Button>(R.id.button_view_ingredients).setOnClickListener {
+//            Toast.makeText(this, "I hope this work lol", Toast.LENGTH_SHORT).show()
+            val myIngredientsIntent = Intent(this, MyIngredientsActivity::class.java)
+            startActivity(myIngredientsIntent)
+        }
     }
 }
