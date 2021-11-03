@@ -134,6 +134,15 @@ class IngredientsActivity : AppCompatActivity() {
             val separator = "\n"
             textView.text = db.viewIngredient().joinToString(separator)
         }
+
+        val button5 = findViewById<TextView>(R.id.buttonClearIngredient)
+        button5.setOnClickListener{
+            val db = DataBaseHandler(this)
+            db.clearIngredient()
+            val textView = findViewById<TextView>(R.id.textView4)
+            val separator = "\n"
+            textView.text = db.viewIngredient().joinToString(separator)
+        }
     }
 
 //    class User(ingredientInput: String, quantityInput: Int) {

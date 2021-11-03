@@ -19,7 +19,7 @@ class DataBaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
     }
     override fun onCreate(db: SQLiteDatabase?) {
         val CREATE_CONTACTS_TABLE = ("CREATE TABLE " + TABLE_CONTACTS + "("
-                + KEY_INGREDIENT + " STRING, " + KEY_QUANTITY + " INTEGER" + ")")
+                + KEY_INGREDIENT + " STRING, " + KEY_QUANTITY + " STRING" + ")")
         db?.execSQL(CREATE_CONTACTS_TABLE)
     }
 
@@ -43,6 +43,12 @@ class DataBaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         contentValues.put(KEY_INGREDIENT, ingredient)
         contentValues.put(KEY_QUANTITY, quantity)
         db.update(TABLE_CONTACTS, contentValues, "ingredient=$ingredient",null)
+        db.close()
+    }
+
+    fun clearIngredient() {
+        val db = this.writableDatabase
+        db.delete(TABLE_CONTACTS, null, null)
         db.close()
     }
 
