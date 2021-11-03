@@ -1,9 +1,9 @@
 package com.example.a491bproject.DBHandlers
 
-import com.example.a491bproject.models.RecipeModel
+import com.example.a491bproject.models.RecipeFirebaseModel
 import com.example.a491bproject.models.SearchRecipeModel
 
 interface RecipeSearchDAO {
-    fun searchbyID(): RecipeModel
+    fun searchbyID(): RecipeFirebaseModel
     fun searchbyIngredients(): List<SearchRecipeModel>
 }
