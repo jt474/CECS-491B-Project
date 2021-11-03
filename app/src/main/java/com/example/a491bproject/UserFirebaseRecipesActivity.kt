@@ -1,13 +1,19 @@
 package com.example.a491bproject
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Button
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.a491bproject.databinding.ActivityUserFirebaseRecipesBinding
+import com.example.a491bproject.adapters.UserRecipesAdapter as UserRecipesAdapter
+import com.example.a491bproject.models.UserRecipesModel as UserRecipesModel
 
 class UserFirebaseRecipesActivity : AppCompatActivity() {
 
@@ -16,25 +22,39 @@ class UserFirebaseRecipesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_user_firebase_recipes)
 
         binding = ActivityUserFirebaseRecipesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
+       var testRecipesList = mutableListOf<UserRecipesModel>(
+           UserRecipesModel("Apple Pie",false),
+           UserRecipesModel("Misery",false),
+           UserRecipesModel("Llamas",false),
+           UserRecipesModel("Rough",false),
+           UserRecipesModel("Apple Pie",false))
 
-        val navController = findNavController(R.id.nav_host_fragment_content_user_firebase_recipes)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        val adapter = UserRecipesAdapter(testRecipesList)
+        val recyclerView = findViewById<RecyclerView>(R.id.rvUserRecipes)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+
+        findViewById<Button>(R.id.btnUserRecipesDelete).setOnClickListener {
+            testRecipesList.forEachIndexed { index, userRecipesModel ->
+                if(userRecipesModel.isChecked){
+                    testRecipesList.removeAt(index)
+                    Log.d("Remove","List has $testRecipesList")
+                }
+            }
+            adapter.notifyDataSetChanged()
         }
+
+
+
+
+
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_user_firebase_recipes)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
-    }
+
 }

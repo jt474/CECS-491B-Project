@@ -4,13 +4,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CheckBox
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a491bproject.R
 import com.example.a491bproject.models.UserRecipesModel
+import org.w3c.dom.Text
 
-class UserRecipesAdapter(var recipes: List<UserRecipesModel>):
+class UserRecipesAdapter(var recipes: MutableList<UserRecipesModel>):
     RecyclerView.Adapter<UserRecipesAdapter.UserRecipesViewHolder>() {
+
     inner class UserRecipesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+
 
     }
 
@@ -20,12 +25,18 @@ class UserRecipesAdapter(var recipes: List<UserRecipesModel>):
     }
 
     override fun onBindViewHolder(holder: UserRecipesViewHolder, position: Int) {
-        holder.itemView.apply{
+        holder.itemView.findViewById<TextView>(R.id.tvUserRecipeTitle).text = recipes[position].title
+        holder.itemView.findViewById<CheckBox>(R.id.cbUserRecipes).isChecked = recipes[position].isChecked
 
-        }
     }
 
     override fun getItemCount(): Int {
         return recipes.size
+    }
+
+    fun deleteItem(position:Int){
+        recipes.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position,recipes.size)
     }
 }

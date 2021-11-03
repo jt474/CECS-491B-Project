@@ -13,7 +13,14 @@
             android:name=".UserFirebaseRecipesActivity"
             android:exported="true"
             android:label="@string/title_activity_user_firebase_recipes"
-            android:theme="@style/Theme.491BProject.NoActionBar" />
+            android:theme="@style/Theme.491BProject.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".RecipeFirebaseInfoActivity"
             android:exported="true" />
@@ -48,11 +55,7 @@
         <activity
             android:name=".LoginActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
