@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
@@ -82,9 +83,10 @@ class LoginActivity : AppCompatActivity() {
                                 //User is now logged in
 
                                 //Navigates account to main and clear previous intents
-                                val registeredIntent = Intent(this@LoginActivity, MainActivity::class.java)
-                                registeredIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                startActivity(registeredIntent)
+                                val loginIntent = Intent(this@LoginActivity, MainActivity::class.java)
+                                loginIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                //loginIntent.putExtra("emailID", email)
+                                startActivity(loginIntent)
                                 finish()
                             }
                             //When Login fails print error
@@ -148,7 +150,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun updateUI(user: FirebaseUser?) {
-        //Move to main Activity
         if (user == null){
             Log.w(TAG, "User is null, not going to move")
             return
@@ -174,7 +175,6 @@ class LoginActivity : AppCompatActivity() {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e)
             }
-
         }
     }
 

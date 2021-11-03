@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "272160782836",
+    "firebase_url": "https://cecs-491b-project-default-rtdb.firebaseio.com",
     "project_id": "cecs-491b-project",
     "storage_bucket": "cecs-491b-project.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "272160782836-dfba30kla5ki9ojlpckaaggqdlhb0c8d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.a491bproject",
+            "certificate_hash": "24f4b0399d30d0ad0626bb5e31fb1f788d3ccd77"
+          }
+        },
         {
           "client_id": "272160782836-gt7iv74nfkq73l3bh0ml5p8730k8u2ks.apps.googleusercontent.com",
           "client_type": 1,
