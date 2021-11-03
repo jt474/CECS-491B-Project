@@ -6,8 +6,13 @@
         <entry key="..\:/Users/Jacen/Documents/GitHub/CECS-491B-Project/app/src/main/res/layout/activity_create_recipe_steps.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/Jacen/Documents/GitHub/CECS-491B-Project/app/src/main/res/layout/activity_ingredients.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/Jacen/Documents/GitHub/CECS-491B-Project/app/src/main/res/layout/activity_ingredients_information.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/Jacen/Documents/GitHub/CECS-491B-Project/app/src/main/res/layout/activity_login.xml" value="0.17119565217391305" />
         <entry key="..\:/Users/Jacen/Documents/GitHub/CECS-491B-Project/app/src/main/res/layout/activity_recipe_basic_info.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/Jacen/Documents/GitHub/CECS-491B-Project/app/src/main/res/layout/activity_recipe_firebase_info.xml" value="0.2" />
         <entry key="..\:/Users/Jacen/Documents/GitHub/CECS-491B-Project/app/src/main/res/layout/content_scrolling.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/Jacen/Documents/GitHub/CECS-491B-Project/app/src/main/res/layout/fragment_recipe_ingredients.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/Jacen/Documents/GitHub/CECS-491B-Project/app/src/main/res/layout/fragment_recipe_instructions.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/Jacen/Documents/GitHub/CECS-491B-Project/app/src/main/res/layout/fragment_recipe_nutrition.xml" value="0.13518518518518519" />
         <entry key="..\:/Users/johnn/AndroidStudioProjects/491BProject/app/src/main/res/layout/activity_ingredients.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/johnn/AndroidStudioProjects/491BProject/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Users/johnn/AndroidStudioProjects/491BProject/app/src/main/res/layout/activity_main.xml" value="0.20520833333333333" />
