@@ -24,8 +24,8 @@ class UserFirebaseRecipesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_firebase_recipes)
 
-        binding = ActivityUserFirebaseRecipesBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+       // binding = ActivityUserFirebaseRecipesBinding.inflate(layoutInflater)
+       // setContentView(binding.root)
 
        var testRecipesList = mutableListOf<UserRecipesModel>(
            UserRecipesModel("Apple Pie",false),
@@ -38,20 +38,6 @@ class UserFirebaseRecipesActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.rvUserRecipes)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
-
-
-        findViewById<Button>(R.id.btnUserRecipesDelete).setOnClickListener {
-            testRecipesList.forEachIndexed { index, userRecipesModel ->
-                if(userRecipesModel.isChecked){
-                    testRecipesList.removeAt(index)
-                    Log.d("Remove","List has $testRecipesList")
-                }
-            }
-            adapter.notifyDataSetChanged()
-        }
-
-
-
 
 
     }
