@@ -91,7 +91,8 @@ class IngredientsActivity : AppCompatActivity() {
 //                    ingredient.text.toString(),
 //                    quantity.text.toString().toInt()
 //                )
-                db.updateIngredient(ingredientString, quantityString)
+                db.deleteIngredient(ingredientString)
+                db.addIngredient(ingredientString, quantityString)
                 val contents = "$ingredient , $quantity"
                 Toast.makeText(this, "Updating $contents", Toast.LENGTH_SHORT).show()
                 clearField()

@@ -37,13 +37,9 @@ class DataBaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         db.close()
     }
 
-    fun updateIngredient(ingredient: String, quantity: String) {
-        val db = this.writableDatabase
-        val contentValues = ContentValues()
-        contentValues.put(KEY_INGREDIENT, ingredient)
-        contentValues.put(KEY_QUANTITY, quantity)
-        db.update(TABLE_CONTACTS, contentValues, "ingredient=$ingredient",null)
-        db.close()
+    fun updateIngredient(quantity: String, ingredient: String) {
+//        val db = this.writableDatabase
+//        db.deleteIngredient(ingredient)
     }
 
     fun clearIngredient() {
@@ -79,14 +75,10 @@ class DataBaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
 
     fun deleteIngredient(ingredient: String) {
         val db = this.writableDatabase
-        db!!.delete(TABLE_CONTACTS,  KEY_INGREDIENT + "=?", arrayOf(ingredient))
+        db!!.delete(TABLE_CONTACTS, "$KEY_QUANTITY=?", arrayOf(ingredient))
         db.close()
     }
 }
-
-
-
-
 
 //import android.content.ContentValues
 //import android.content.Context
