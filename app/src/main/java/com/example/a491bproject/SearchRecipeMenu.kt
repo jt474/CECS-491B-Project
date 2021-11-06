@@ -40,26 +40,25 @@ class SearchRecipeMenu : AppCompatActivity() {
 
         val retrofitData = retrofitBuilder.getRecipe(input, 2, key)
 
-        retrofitData.enqueue(object : Callback<Recipes> {
+        retrofitData.enqueue(object : Callback<List<Recipes>> {
             override fun onResponse(
-                call: Call<Recipes>,
-                response: Response<Recipes>
+                call: Call<List<Recipes>>,
+                response: Response<List<Recipes>>
             ) {
                 val responseBody = response.body()!!
 
                 val myStringBuilder = StringBuilder()
 
 
-                for (recipes in responseBody.results) {
+                for (recipes in responseBody) {
                     myStringBuilder.append(recipes.title)
                     myStringBuilder.append("\n")
                     myStringBuilder.append(recipes.calories)
-//                    myStringBuilder.append(recipes.nutrition.nutrients[0].amount)
-//                    myStringBuilder.append("\n")
-//                    myStringBuilder.append(recipes.carbs)
-//                    myStringBuilder.append("\n")
-//                    myStringBuilder.append(recipes.fat)
-//                    myStringBuilder.append("\n")
+                    myStringBuilder.append("\n")
+                    myStringBuilder.append(recipes.carbs)
+                    myStringBuilder.append("\n")
+                    myStringBuilder.append(recipes.fat)
+                    myStringBuilder.append("\n")
                 }
 
                 val textView3 = findViewById<TextView>(R.id.tv_recipes)
@@ -67,7 +66,7 @@ class SearchRecipeMenu : AppCompatActivity() {
                 textView3.text = myStringBuilder
             }
 
-            override fun onFailure(call: Call<Recipes>, t: Throwable) {
+            override fun onFailure(call: Call<List<Recipes>>, t: Throwable) {
                 Log.d("MainActivity", "onFailure: $t")
             }
         })
