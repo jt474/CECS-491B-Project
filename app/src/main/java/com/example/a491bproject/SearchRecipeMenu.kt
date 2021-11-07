@@ -6,6 +6,8 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.a491bproject.api.ApiInterface
 import com.example.a491bproject.models.Recipes
 import retrofit2.Call
@@ -15,12 +17,21 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class SearchRecipeMenu : AppCompatActivity() {
+
+    lateinit var recipesListAdapter: RecipesListAdapter
+    lateinit var linearLayoutManager: LinearLayoutManager
+    lateinit var recyclerViewRecipes: RecyclerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_recipe_menu)
 
         val search = findViewById<Button>(R.id.btn_recipe_search)
         val userInput = findViewById<EditText>(R.id.et_recipe_input)
+        recyclerViewRecipes = findViewById<RecyclerView>(R.id.recycler_view_recipes)
+        recyclerViewRecipes.setHasFixedSize(true)
+        linearLayoutManager = LinearLayoutManager(this)
+        recyclerViewRecipes.layoutManager = linearLayoutManager
         search.setOnClickListener() {
             val input = userInput.text.toString()
             getRecipes(input)
@@ -45,25 +56,9 @@ class SearchRecipeMenu : AppCompatActivity() {
                 response: Response<Recipes>
             ) {
                 val responseBody = response.body()!!
-
-                val myStringBuilder = StringBuilder()
-
-
-                for (recipes in responseBody.results) {
-                    myStringBuilder.append(recipes.title)
-                    myStringBuilder.append("\n")
-                    myStringBuilder.append(recipes.calories)
-//                    myStringBuilder.append(recipes.nutrition.nutrients[0].amount)
-//                    myStringBuilder.append("\n")
-//                    myStringBuilder.append(recipes.carbs)
-//                    myStringBuilder.append("\n")
-//                    myStringBuilder.append(recipes.fat)
-//                    myStringBuilder.append("\n")
-                }
-
-//                val textView3 = findViewById<TextView>(R.id.tv_recipes)
-//                Log.i("MainActivity", "API call: $myStringBuilder")
-//                textView3.text = myStringBuilder
+                recipesListAdapter = RecipesListAdapter(baseContext, responseBody)
+                recipesListAdapter.notifyDataSetChanged()
+                recyclerViewRecipes.adapter = recipesListAdapter
             }
 
             override fun onFailure(call: Call<Recipes>, t: Throwable) {
