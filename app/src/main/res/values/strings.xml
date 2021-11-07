@@ -16,4 +16,8 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
+    <!-- Recipe Search Activity -->
+    <string name="hint_recipe_input">enter name of a recipe</string>
+    <string name="btn_recipe_search">SEARCH</string>
 </resources>

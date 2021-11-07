@@ -7,7 +7,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.example.a491bproject.api.ApiInterface
-import com.example.a491bproject.models.IngredientInfo
 import com.example.a491bproject.models.Recipes
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,8 +19,8 @@ class SearchRecipeMenu : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_recipe_menu)
 
-        val search = findViewById<Button>(R.id.searchRecipe)
-        val userInput = findViewById<EditText>(R.id.recipeInput)
+        val search = findViewById<Button>(R.id.btn_recipe_search)
+        val userInput = findViewById<EditText>(R.id.et_recipe_input)
         search.setOnClickListener() {
             val input = userInput.text.toString()
             getRecipes(input)
@@ -62,9 +61,9 @@ class SearchRecipeMenu : AppCompatActivity() {
 //                    myStringBuilder.append("\n")
                 }
 
-                val textView3 = findViewById<TextView>(R.id.tv_recipes)
-                Log.i("MainActivity", "API call: $myStringBuilder")
-                textView3.text = myStringBuilder
+//                val textView3 = findViewById<TextView>(R.id.tv_recipes)
+//                Log.i("MainActivity", "API call: $myStringBuilder")
+//                textView3.text = myStringBuilder
             }
 
             override fun onFailure(call: Call<Recipes>, t: Throwable) {
