@@ -5,12 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.a491bproject.Adapters.RecipeAdapter
 import com.example.a491bproject.api.ApiInterface
-import com.example.a491bproject.models.IngredientInfo
 import com.example.a491bproject.models.Recipes
 import retrofit2.Call
 import retrofit2.Callback
@@ -58,7 +56,7 @@ class SearchRecipeMenu : AppCompatActivity() {
             ) {
                 val responseBody = response.body()!!
 
-                val myAdapter = MyAdapter(baseContext, responseBody)
+                val myAdapter = RecipeAdapter(baseContext, responseBody)
                 recyclerView.adapter = myAdapter
 
             }

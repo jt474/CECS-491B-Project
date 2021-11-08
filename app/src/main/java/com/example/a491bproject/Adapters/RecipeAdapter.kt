@@ -1,4 +1,4 @@
-package com.example.a491bproject
+package com.example.a491bproject.Adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.a491bproject.R
 import com.example.a491bproject.models.Recipes
 
-class MyAdapter (val context: Context, val recipe: List<Recipes>): RecyclerView.Adapter<MyAdapter.ViewHolder>() {
+class RecipeAdapter (val context: Context, val recipe: List<Recipes>): RecyclerView.Adapter<RecipeAdapter.ViewHolder>() {
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         var calories: TextView
         var carbs: TextView

@@ -9,12 +9,14 @@
         <entry key="..\:/Users/johnn/Documents/GitHub/CECS-491B-Project/app/src/main/res/layout/activity_login.xml" value="0.2957427536231884" />
         <entry key="..\:/Users/johnn/Documents/GitHub/CECS-491B-Project/app/src/main/res/layout/activity_main.xml" value="0.2957427536231884" />
         <entry key="..\:/Users/johnn/Documents/GitHub/CECS-491B-Project/app/src/main/res/layout/activity_register.xml" value="0.36666666666666664" />
+        <entry key="app/src/main/res/drawable/edit_text_ingredient_border.xml" value="0.41354166666666664" />
         <entry key="app/src/main/res/layout/activity_ingredients.xml" value="0.33789260385005065" />
         <entry key="app/src/main/res/layout/activity_ingredients_information.xml" value="0.24444444444444444" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.33789260385005065" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.4137055837563452" />
         <entry key="app/src/main/res/layout/activity_search_recipe_menu.xml" value="0.2599009900990099" />
         <entry key="app/src/main/res/layout/row_items.xml" value="0.2267818574514039" />
+        <entry key="app/src/main/res/layout/row_items1.xml" value="0.665625" />
       </map>
     </option>
   </component>
