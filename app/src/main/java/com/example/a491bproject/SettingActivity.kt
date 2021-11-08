@@ -19,7 +19,7 @@ class SettingActivity : AppCompatActivity() {
         val settingEmail: TextView = findViewById<TextView>(R.id.settingEmail)
         settingEmail.text = "Email : $emailId"*/
 
-        //Email display
+        //Email display by getting current user from firebase auth
         var auth: FirebaseAuth = FirebaseAuth.getInstance()
         val user = auth.currentUser
         val email = user?.email.toString();
