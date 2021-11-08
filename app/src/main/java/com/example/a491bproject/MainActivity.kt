@@ -34,6 +34,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(createRecipeIntent)
         }
 
+        //Navigate to User Recipes
+        val userRecipesBtn: Button = findViewById<Button>(R.id.userRecipesBtn)
+        createRecipeBtn.setOnClickListener{
+            val userRecipesIntent = Intent(this, UserFirebaseRecipesActivity::class.java)
+            startActivity(userRecipesIntent)
+        }
+
         //Navigate to settings
         val settingsBtn: Button = findViewById<Button>(R.id.settingsBtn)
         settingsBtn.setOnClickListener{

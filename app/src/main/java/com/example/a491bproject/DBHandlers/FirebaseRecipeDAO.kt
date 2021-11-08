@@ -2,11 +2,11 @@ package com.example.a491bproject.DBHandlers
 
 import com.example.a491bproject.models.IngredientModel
 import com.example.a491bproject.models.RecipeFirebaseModel
+import com.example.a491bproject.models.UserRecipesModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
+import com.google.firebase.database.ktx.getValue
 
 
 class FirebaseRecipeDAO(val auth: FirebaseAuth): RecipeDAO {
@@ -22,6 +22,36 @@ class FirebaseRecipeDAO(val auth: FirebaseAuth): RecipeDAO {
 
     }
 
+    override fun getUserRecipes(): MutableList<UserRecipesModel> {
+        val list = mutableListOf<UserRecipesModel>()
+        val getUserRecipeQuery = dbRef.child("Recipes")
+        getUserRecipeQuery.orderByChild("authorID").equalTo(userID).addChildEventListener(object: ChildEventListener{
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                if(snapshot.exists()){
+                    val model = snapshot.getValue<UserRecipesModel>()
+                    if(model != null) list.add(model)
+                }
+            }
+
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+        return list
+    }
 
     override fun insertRecipe(firebaseModel:RecipeFirebaseModel): Int {
         val recipePush:DatabaseReference = dbRef.child(recipeParentStr).push()
@@ -40,6 +70,8 @@ class FirebaseRecipeDAO(val auth: FirebaseAuth): RecipeDAO {
     override fun getRecipe(id: String): RecipeFirebaseModel {
         TODO("Not yet implemented")
     }
+
+
 
     override fun updateRecipe(id: String): Int {
         TODO("Not yet implemented")
@@ -81,8 +113,5 @@ class FirebaseRecipeDAO(val auth: FirebaseAuth): RecipeDAO {
 
 
 
-}
-
-fun main(args: Array<String>) {
 }
 

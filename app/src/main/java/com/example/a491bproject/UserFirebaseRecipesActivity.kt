@@ -11,14 +11,18 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.a491bproject.DBHandlers.FirebaseRecipeDAO
+import com.example.a491bproject.DBHandlers.RecipeDAO
 import com.example.a491bproject.databinding.ActivityUserFirebaseRecipesBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.example.a491bproject.adapters.UserRecipesAdapter as UserRecipesAdapter
 import com.example.a491bproject.models.UserRecipesModel as UserRecipesModel
 
 class UserFirebaseRecipesActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityUserFirebaseRecipesBinding
+
+    private lateinit var auth: FirebaseAuth
+    private lateinit var dbHandler: RecipeDAO
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,18 +31,20 @@ class UserFirebaseRecipesActivity : AppCompatActivity() {
        // binding = ActivityUserFirebaseRecipesBinding.inflate(layoutInflater)
        // setContentView(binding.root)
 
-       var testRecipesList = mutableListOf<UserRecipesModel>(
+        auth = FirebaseAuth.getInstance()
+        dbHandler = FirebaseRecipeDAO(auth)
+        var testRecipesList = dbHandler.getUserRecipes()
+       /*var testRecipesList = mutableListOf<UserRecipesModel>(
            UserRecipesModel("Apple Pie",false),
            UserRecipesModel("Misery",false),
            UserRecipesModel("Llamas",false),
            UserRecipesModel("Rough",false),
-           UserRecipesModel("Apple Pie",false))
+           UserRecipesModel("Apple Pie",false)) */
 
         val adapter = UserRecipesAdapter(testRecipesList)
         val recyclerView = findViewById<RecyclerView>(R.id.rvUserRecipes)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
-
 
     }
 

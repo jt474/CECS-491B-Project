@@ -44,7 +44,7 @@ class UserRecipesAdapter( val recipes: MutableList<UserRecipesModel>):
             val deletedRecipe = recipes[position]
             val alert = AlertDialog.Builder(holder.context)
             alert.setTitle("Delete entry");
-            alert.setMessage("Are you sure you want to delete \"$model.title\"?");
+            alert.setMessage("Are you sure you want to delete? If not click anywhere else. \"$model.title\"?");
             alert.setPositiveButton(android.R.string.ok, DialogInterface.OnClickListener() {
                 dialogInterface, i ->  deleteItem(position)
             })
