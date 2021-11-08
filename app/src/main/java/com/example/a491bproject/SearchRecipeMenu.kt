@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a491bproject.api.ApiInterface
@@ -48,7 +47,7 @@ class SearchRecipeMenu : AppCompatActivity() {
             .build()
             .create(ApiInterface::class.java)
 
-        val retrofitData = retrofitBuilder.getRecipe(input, 2, key)
+        val retrofitData = retrofitBuilder.searchRecipes(input, 2, key)
 
         retrofitData.enqueue(object : Callback<Recipes> {
             override fun onResponse(
