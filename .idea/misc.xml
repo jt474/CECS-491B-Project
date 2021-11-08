@@ -13,7 +13,8 @@
         <entry key="app/src/main/res/layout/activity_ingredients_information.xml" value="0.24444444444444444" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.33789260385005065" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.4137055837563452" />
-        <entry key="app/src/main/res/layout/activity_search_recipe_menu.xml" value="0.6947916666666667" />
+        <entry key="app/src/main/res/layout/activity_search_recipe_menu.xml" value="0.2599009900990099" />
+        <entry key="app/src/main/res/layout/row_items.xml" value="0.2267818574514039" />
       </map>
     </option>
   </component>

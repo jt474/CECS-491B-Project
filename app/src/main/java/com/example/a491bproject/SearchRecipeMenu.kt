@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.a491bproject.api.ApiInterface
 import com.example.a491bproject.models.IngredientInfo
 import com.example.a491bproject.models.Recipes
@@ -20,17 +23,25 @@ class SearchRecipeMenu : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_recipe_menu)
 
+//        I had to comment this out and move it into the getRecipes fuction...
+//        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+//        recyclerView.setHasFixedSize(true)
+//        recyclerView.layoutManager = LinearLayoutManager(this)
+
         val search = findViewById<Button>(R.id.searchRecipe)
         val userInput = findViewById<EditText>(R.id.recipeInput)
         search.setOnClickListener() {
-            val input = userInput.text.toString()
-            getRecipes(input)
+            //val input = userInput.text.toString()
+            getRecipes()
         }
     }
 
-    private fun getRecipes(input: String) {
+    private fun getRecipes() {
         val url = "https://api.spoonacular.com/recipes/"
         val key = "74e154cbd9f64883b37d580e8f04a74f"
+
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
@@ -38,7 +49,7 @@ class SearchRecipeMenu : AppCompatActivity() {
             .build()
             .create(ApiInterface::class.java)
 
-        val retrofitData = retrofitBuilder.getRecipe(input, 2, key)
+        val retrofitData = retrofitBuilder.getRecipe(2, key)
 
         retrofitData.enqueue(object : Callback<List<Recipes>> {
             override fun onResponse(
@@ -47,23 +58,9 @@ class SearchRecipeMenu : AppCompatActivity() {
             ) {
                 val responseBody = response.body()!!
 
-                val myStringBuilder = StringBuilder()
+                val myAdapter = MyAdapter(baseContext, responseBody)
+                recyclerView.adapter = myAdapter
 
-
-                for (recipes in responseBody) {
-                    myStringBuilder.append(recipes.title)
-                    myStringBuilder.append("\n")
-                    myStringBuilder.append(recipes.calories)
-                    myStringBuilder.append("\n")
-                    myStringBuilder.append(recipes.carbs)
-                    myStringBuilder.append("\n")
-                    myStringBuilder.append(recipes.fat)
-                    myStringBuilder.append("\n")
-                }
-
-                val textView3 = findViewById<TextView>(R.id.tv_recipes)
-                Log.i("MainActivity", "API call: $myStringBuilder")
-                textView3.text = myStringBuilder
             }
 
             override fun onFailure(call: Call<List<Recipes>>, t: Throwable) {
