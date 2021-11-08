@@ -47,7 +47,7 @@ class SearchRecipeMenu : AppCompatActivity() {
             .build()
             .create(ApiInterface::class.java)
 
-        val retrofitData = retrofitBuilder.searchRecipes(input, 2, key)
+        val retrofitData = retrofitBuilder.searchRecipes(input, 20, key)
 
         retrofitData.enqueue(object : Callback<Recipes> {
             override fun onResponse(
