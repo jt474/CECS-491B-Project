@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
@@ -39,7 +40,6 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        val btnSignIn = findViewById<com.google.android.gms.common.SignInButton>(R.id.sign_in_button)
 
         val loginEmailText =  findViewById<EditText>(R.id.editTextTextEmailAddress)
         val loginPasswordText = findViewById<EditText>(R.id.editTextTextPassword)
@@ -73,19 +73,52 @@ class LoginActivity : AppCompatActivity() {
                         .addOnCompleteListener { task ->
 
                             if (task.isSuccessful) {
+                                val user = auth.currentUser
+                                if (user != null) {
+                                    if(user.isEmailVerified){
+                                        Toast.makeText(
+                                            this@LoginActivity,
+                                            "Successfully Logged in",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        //Navigates account to main and clear previous intents
+                                        val loginIntent = Intent(this@LoginActivity, MainActivity::class.java)
+                                        loginIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                        //loginIntent.putExtra("emailID", email)
+                                        startActivity(loginIntent)
+                                        finish()
+                                    }
+                                    else{
+                                        Toast.makeText(
+                                            this@LoginActivity,
+                                            "Verify Email Address",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        val loginIntent2 = Intent(this@LoginActivity, VerifyActivity::class.java)
+                                        loginIntent2.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                        //loginIntent.putExtra("emailID", email)
+                                        startActivity(loginIntent2)
+                                        FirebaseAuth.getInstance().signOut()
+                                        finish()
 
-                                Toast.makeText(
-                                    this@LoginActivity,
-                                    "Successfully Logged in",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                    }
+                                }
+                                else{
+                                    Toast.makeText(
+                                        this@LoginActivity,
+                                        "Not Valid User",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+
                                 //User is now logged in
 
-                                //Navigates account to main and clear previous intents
-                                val registeredIntent = Intent(this@LoginActivity, MainActivity::class.java)
-                                registeredIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                startActivity(registeredIntent)
-                                finish()
+ /*                               //Navigates account to main and clear previous intents
+                                val loginIntent = Intent(this@LoginActivity, MainActivity::class.java)
+                                loginIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                //loginIntent.putExtra("emailID", email)
+                                startActivity(loginIntent)
+                                finish()*/
                             }
                             //When Login fails print error
                             else {
@@ -110,6 +143,7 @@ class LoginActivity : AppCompatActivity() {
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
         auth = FirebaseAuth.getInstance()
+        val btnSignIn = findViewById<com.google.android.gms.common.SignInButton>(R.id.signButton)
 
         btnSignIn.setOnClickListener {
             signIn()
@@ -148,7 +182,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun updateUI(user: FirebaseUser?) {
-        //Move to main Activity
         if (user == null){
             Log.w(TAG, "User is null, not going to move")
             return
@@ -174,7 +207,6 @@ class LoginActivity : AppCompatActivity() {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e)
             }
-
         }
     }
 

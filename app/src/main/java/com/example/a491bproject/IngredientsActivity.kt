@@ -155,4 +155,12 @@ class IngredientsActivity : AppCompatActivity() {
         findViewById<EditText>(R.id.editTextIngredient).text.clear()
         findViewById<EditText>(R.id.editTextQuantity).text.clear()
     }
+
+    private fun viewIngredients() {
+        findViewById<Button>(R.id.button_view_ingredients).setOnClickListener {
+//            Toast.makeText(this, "I hope this work lol", Toast.LENGTH_SHORT).show()
+            val myIngredientsIntent = Intent(this, MyIngredientsActivity::class.java)
+            startActivity(myIngredientsIntent)
+        }
+    }
 }

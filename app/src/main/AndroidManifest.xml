@@ -14,7 +14,34 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.491BProject">
         <activity
+            android:name=".ChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".VerifyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ReviewCreateRecipe"
+            android:exported="false" />
+        <activity
+            android:name=".SearchRecipeMenu"
+            android:exported="false" />
+        <activity
+            android:name=".CreateRecipeSteps"
+            android:exported="false" />
+        <activity
+            android:name=".CreateRecipeIngredients"
+            android:exported="false" />
+        <activity
+            android:name=".CreateRecipeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SettingActivity"
+            android:exported="false" />
+        <activity
             android:name=".IngredientsInformation"
+            android:exported="false" />
+        <activity
+            android:name=".MyIngredientsActivity"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
