@@ -8,41 +8,31 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.a491bproject.Adapters.RecipeByIngredientsAdapter
 import com.example.a491bproject.api.ApiInterface
-import com.example.a491bproject.models.Recipes
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
+import com.example.a491bproject.models.RecipeByIngredients
+import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
-class SearchRecipeMenu : AppCompatActivity() {
+class SearchRecipeByIngredient : AppCompatActivity() {
 
-    lateinit var recipesListAdapter: RecipesListAdapter
+    lateinit var recipesListAdapter: RecipeByIngredientsAdapter
     lateinit var linearLayoutManager: LinearLayoutManager
     lateinit var recyclerViewRecipes: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search_recipe_menu)
+        setContentView(R.layout.activity_search_recipe_by_ingredient)
 
-        val search = findViewById<Button>(R.id.btn_recipe_search)
-        val userInput = findViewById<EditText>(R.id.et_recipe_input)
-        recyclerViewRecipes = findViewById<RecyclerView>(R.id.recycler_view_recipes)
+        val search = findViewById<Button>(R.id.btn_ingredient_search)
+        val userInput = findViewById<EditText>(R.id.et_recipe_ingredient_input)
+        recyclerViewRecipes = findViewById<RecyclerView>(R.id.recycler_view_recipes_ingredients)
         recyclerViewRecipes.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(this)
         recyclerViewRecipes.layoutManager = linearLayoutManager
         search.setOnClickListener() {
             val input = userInput.text.toString()
             getRecipes(input)
-        }
-
-        //Navigate to Search By Ingredient
-        val searchRecipeBtn: Button = findViewById<Button>(R.id.btn_recipe_ingredient_search)
-        searchRecipeBtn.setOnClickListener() {
-            val searchRecipeIntent = Intent(this, SearchRecipeByIngredient::class.java)
-            startActivity(searchRecipeIntent)
-
         }
     }
 
@@ -56,20 +46,20 @@ class SearchRecipeMenu : AppCompatActivity() {
             .build()
             .create(ApiInterface::class.java)
 
-        val retrofitData = retrofitBuilder.searchRecipes(input, 20, key)
+        val retrofitData = retrofitBuilder.searchRecipesByIngredients(input, 20, key)
 
-        retrofitData.enqueue(object : Callback<Recipes> {
+        retrofitData.enqueue(object : Callback<RecipeByIngredients> {
             override fun onResponse(
-                call: Call<Recipes>,
-                response: Response<Recipes>
+                call: Call<RecipeByIngredients>,
+                response: Response<RecipeByIngredients>
             ) {
                 val responseBody = response.body()!!
-                recipesListAdapter = RecipesListAdapter(baseContext, responseBody)
+                recipesListAdapter = RecipeByIngredientsAdapter(baseContext, responseBody)
                 recipesListAdapter.notifyDataSetChanged()
                 recyclerViewRecipes.adapter = recipesListAdapter
             }
 
-            override fun onFailure(call: Call<Recipes>, t: Throwable) {
+            override fun onFailure(call: Call<RecipeByIngredients>, t: Throwable) {
                 Log.d("MainActivity", "onFailure: $t")
             }
         })
