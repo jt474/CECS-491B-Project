@@ -26,7 +26,13 @@ class SettingActivity : AppCompatActivity() {
         val settingEmail: TextView = findViewById<TextView>(R.id.settingEmail)
         settingEmail.text = "Email : $email"
 
-
+        //Change Password
+        val changePassBtn: Button = findViewById<Button>(R.id.changePassBtn)
+        changePassBtn.setOnClickListener{
+            val changePassIntent = Intent(this@SettingActivity, ChangePasswordActivity::class.java)
+            startActivity(changePassIntent)
+            finish()
+        }
 
 
         //Signout
