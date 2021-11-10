@@ -48,10 +48,10 @@ class SearchRecipeByIngredient : AppCompatActivity() {
 
         val retrofitData = retrofitBuilder.searchRecipesByIngredients(input, 20, key)
 
-        retrofitData.enqueue(object : Callback<RecipeByIngredients> {
+        retrofitData.enqueue(object : Callback<ArrayList<RecipeByIngredients.RecipeByIngredientsItem>> {
             override fun onResponse(
-                call: Call<RecipeByIngredients>,
-                response: Response<RecipeByIngredients>
+                call: Call<ArrayList<RecipeByIngredients.RecipeByIngredientsItem>>,
+                response: Response<ArrayList<RecipeByIngredients.RecipeByIngredientsItem>>
             ) {
                 val responseBody = response.body()!!
                 recipesListAdapter = RecipeByIngredientsAdapter(baseContext, responseBody)
@@ -59,7 +59,7 @@ class SearchRecipeByIngredient : AppCompatActivity() {
                 recyclerViewRecipes.adapter = recipesListAdapter
             }
 
-            override fun onFailure(call: Call<RecipeByIngredients>, t: Throwable) {
+            override fun onFailure(call: Call<ArrayList<RecipeByIngredients.RecipeByIngredientsItem>>, t: Throwable) {
                 Log.d("MainActivity", "onFailure: $t")
             }
         })

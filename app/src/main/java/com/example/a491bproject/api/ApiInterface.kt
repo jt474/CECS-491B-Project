@@ -15,5 +15,5 @@ interface ApiInterface {
     fun searchRecipes(@Query("query") query: String, @Query("number") number: Int, @Query("apiKey") apiKey: String): Call<Recipes>
 
     @GET("findByIngredients")
-    fun searchRecipesByIngredients(@Query("ingredients") ingredients: String, @Query("number") number: Int, @Query("apiKey") apiKey: String): Call<RecipeByIngredients>
+    fun searchRecipesByIngredients(@Query("ingredients") ingredients: String, @Query("number") number: Int, @Query("apiKey") apiKey: String): Call<ArrayList<RecipeByIngredients.RecipeByIngredientsItem>>
 }

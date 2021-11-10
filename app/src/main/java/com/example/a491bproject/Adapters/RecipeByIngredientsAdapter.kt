@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.a491bproject.R
 import com.example.a491bproject.models.RecipeByIngredients
 
-class RecipeByIngredientsAdapter (val context : Context, val recipeByIngredients: RecipeByIngredients) :
+class RecipeByIngredientsAdapter (val context : Context, val recipeByIngredients: ArrayList<RecipeByIngredients.RecipeByIngredientsItem>) :
     RecyclerView.Adapter<RecipeByIngredientsAdapter.ViewHolder>() {
 
     /**
@@ -24,7 +24,7 @@ class RecipeByIngredientsAdapter (val context : Context, val recipeByIngredients
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         // Create a new view, which defines the UI of the list item
         val view = LayoutInflater.from(context)
-            .inflate(R.layout.row_recipes, viewGroup, false)
+            .inflate(R.layout.row_recipes_ingredients, viewGroup, false)
         return ViewHolder(view)
     }
 
@@ -33,7 +33,7 @@ class RecipeByIngredientsAdapter (val context : Context, val recipeByIngredients
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.tvRecipeIngredient.text = recipeByIngredients[position].title
+        viewHolder.tvRecipeIngredient.text = recipeByIngredients.get(position).title
         // TODO set image by calling the provided URL
     }
 
