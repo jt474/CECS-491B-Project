@@ -1,5 +1,6 @@
 package com.example.a491bproject.DBHandlers
 
+import android.util.Log
 import com.example.a491bproject.models.IngredientModel
 import com.example.a491bproject.models.RecipeFirebaseModel
 import com.example.a491bproject.models.UserRecipesModel
@@ -19,6 +20,7 @@ class FirebaseRecipeDAO(val auth: FirebaseAuth): RecipeDAO {
         val user: FirebaseUser? = auth.currentUser;
         userID = user?.uid;
         dbRef = FirebaseDatabase.getInstance().reference;
+        Log.d("FirebaseDAO Init", "Constructing FirebaseRecipeDAO. Userid: $userID dbRef: $dbRef")
 
     }
 
@@ -27,6 +29,7 @@ class FirebaseRecipeDAO(val auth: FirebaseAuth): RecipeDAO {
         val getUserRecipeQuery = dbRef.child("Recipes")
         getUserRecipeQuery.orderByChild("authorID").equalTo(userID).addChildEventListener(object: ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                Log.d("Datasnapshot", "${snapshot.key} ${snapshot.getValue<UserRecipesModel>()}")
                 if(snapshot.exists()){
                     val model = snapshot.getValue<UserRecipesModel>()
                     if(model != null) list.add(model)
@@ -110,6 +113,9 @@ class FirebaseRecipeDAO(val auth: FirebaseAuth): RecipeDAO {
         }
         )
     }
+
+
+
 
 
 

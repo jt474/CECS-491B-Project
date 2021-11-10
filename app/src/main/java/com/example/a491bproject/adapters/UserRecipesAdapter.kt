@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.a491bproject.R
 import com.example.a491bproject.models.UserRecipesModel
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.core.Context
 import com.google.firebase.ktx.Firebase
 import org.w3c.dom.Text
@@ -57,10 +58,20 @@ class UserRecipesAdapter( val recipes: MutableList<UserRecipesModel>):
         return recipes.size
     }
 
-    fun deleteItem(position:Int){
+    private fun deleteItem(position:Int){
+        val modelRecipeID = recipes[position].recipeID
+        val dbRef = FirebaseDatabase.getInstance().reference
+        val updateMap = mutableMapOf<String, Any?>(
+            "Recipes/${modelRecipeID}" to null,
+            "Instructions/${modelRecipeID}" to null,
+            "Ingredients/${modelRecipeID}" to null
+        )
+        dbRef.updateChildren(updateMap)
+
         recipes.removeAt(position)
         notifyItemRemoved(position)
         notifyItemRangeChanged(position,recipes.size)
         Log.d("DeleteItem", "List now contains $recipes")
     }
+
 }
