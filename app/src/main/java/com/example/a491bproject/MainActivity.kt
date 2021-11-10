@@ -13,6 +13,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val user = FirebaseAuth.getInstance();
+        if(user.currentUser?.isEmailVerified == false){
+            val verifyIntent = Intent(this, VerifyActivity::class.java)
+            verifyIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(verifyIntent)
+
+        }
+
         val emailId = intent.getStringExtra("emailID")
         //Navigate to Search Recipe Menu
         val searchRecipeBtn: Button = findViewById<Button>(R.id.searchRecipeBtn)

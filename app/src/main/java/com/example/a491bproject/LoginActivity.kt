@@ -40,7 +40,6 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        val btnSignIn = findViewById<com.google.android.gms.common.SignInButton>(R.id.sign_in_button)
 
         val loginEmailText =  findViewById<EditText>(R.id.editTextTextEmailAddress)
         val loginPasswordText = findViewById<EditText>(R.id.editTextTextPassword)
@@ -74,20 +73,52 @@ class LoginActivity : AppCompatActivity() {
                         .addOnCompleteListener { task ->
 
                             if (task.isSuccessful) {
+                                val user = auth.currentUser
+                                if (user != null) {
+                                    if(user.isEmailVerified){
+                                        Toast.makeText(
+                                            this@LoginActivity,
+                                            "Successfully Logged in",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        //Navigates account to main and clear previous intents
+                                        val loginIntent = Intent(this@LoginActivity, MainActivity::class.java)
+                                        loginIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                        //loginIntent.putExtra("emailID", email)
+                                        startActivity(loginIntent)
+                                        finish()
+                                    }
+                                    else{
+                                        Toast.makeText(
+                                            this@LoginActivity,
+                                            "Verify Email Address",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        val loginIntent2 = Intent(this@LoginActivity, VerifyActivity::class.java)
+                                        loginIntent2.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                        //loginIntent.putExtra("emailID", email)
+                                        startActivity(loginIntent2)
+                                        FirebaseAuth.getInstance().signOut()
+                                        finish()
 
-                                Toast.makeText(
-                                    this@LoginActivity,
-                                    "Successfully Logged in",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                    }
+                                }
+                                else{
+                                    Toast.makeText(
+                                        this@LoginActivity,
+                                        "Not Valid User",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+
                                 //User is now logged in
 
-                                //Navigates account to main and clear previous intents
+ /*                               //Navigates account to main and clear previous intents
                                 val loginIntent = Intent(this@LoginActivity, MainActivity::class.java)
                                 loginIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                 //loginIntent.putExtra("emailID", email)
                                 startActivity(loginIntent)
-                                finish()
+                                finish()*/
                             }
                             //When Login fails print error
                             else {
@@ -112,6 +143,7 @@ class LoginActivity : AppCompatActivity() {
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
         auth = FirebaseAuth.getInstance()
+        val btnSignIn = findViewById<com.google.android.gms.common.SignInButton>(R.id.signButton)
 
         btnSignIn.setOnClickListener {
             signIn()
