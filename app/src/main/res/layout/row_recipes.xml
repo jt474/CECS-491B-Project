@@ -14,7 +14,8 @@
         app:cardMaxElevation="12dp"
         app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="true"
-        tools:layout_editor_absoluteX="10dp">>
+        tools:layout_editor_absoluteX="10dp"
+        tools:ignore="MissingConstraints">>
 
         <ImageView
             android:id="@+id/img"
