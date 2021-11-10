@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:autofillHints="Quantity (oz)"
+            android:autofillHints="Quantity"
             android:background="@android:color/holo_blue_light"
             android:inputType="number"
             android:minHeight="100dp"
