@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 
@@ -11,6 +12,23 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val user = FirebaseAuth.getInstance();
+        if(user.currentUser?.isEmailVerified == false){
+            val verifyIntent = Intent(this, VerifyActivity::class.java)
+            verifyIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(verifyIntent)
+
+        }
+
+        val emailId = intent.getStringExtra("emailID")
+        //Navigate to Search Recipe Menu
+        val searchRecipeBtn: Button = findViewById<Button>(R.id.searchRecipeBtn)
+        searchRecipeBtn.setOnClickListener() {
+            val searchRecipeIntent = Intent(this, SearchRecipeMenu::class.java)
+            startActivity(searchRecipeIntent)
+
+        }
 
         //Transitions from Main to Ingredients
         val ingredientsListBtn: Button = findViewById<Button>(R.id.ingredientsListBtn)
@@ -20,6 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        //Navigate to Ingredient Information
         val ingredientsInfoBtn: Button = findViewById<Button>(R.id.ingredientsInfoBtn)
         ingredientsInfoBtn.setOnClickListener() {
             val ingredientsInfoIntent = Intent(this, IngredientsInformation::class.java)
@@ -45,6 +64,7 @@ class MainActivity : AppCompatActivity() {
         val settingsBtn: Button = findViewById<Button>(R.id.settingsBtn)
         settingsBtn.setOnClickListener{
             val settingsIntent = Intent(this, SettingActivity::class.java)
+            settingsIntent.putExtra("emailID", emailId)
             startActivity(settingsIntent)
         }
 

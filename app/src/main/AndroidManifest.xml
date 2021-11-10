@@ -20,6 +20,17 @@
         <activity
             android:name=".RecipeFirebaseInfoActivity"
             android:exported="true" />
+            android:name=".ChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".VerifyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ReviewCreateRecipe"
+            android:exported="false" />
+        <activity
+            android:name=".SearchRecipeMenu"
+            android:exported="false" />
         <activity
             android:name=".CreateRecipeSteps"
             android:exported="false" />
@@ -33,14 +44,10 @@
             android:name=".SettingActivity"
             android:exported="false" />
         <activity
-            android:name=".SettingsActivity2"
+            android:name=".IngredientsInformation"
             android:exported="false" />
         <activity
-            android:name=".SettingsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_settings" />
-        <activity
-            android:name=".IngredientsInformation"
+            android:name=".MyIngredientsActivity"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"

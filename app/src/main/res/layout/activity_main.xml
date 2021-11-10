@@ -7,6 +7,16 @@
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/searchRecipeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search Recipe"
+        app:layout_constraintBottom_toBottomOf="@id/ingredientsListBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
         android:id="@+id/ingredientsListBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,8 +24,7 @@
         app:layout_constraintBottom_toBottomOf="@id/ingredientsInfoBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.407" />
+        app:layout_constraintTop_toTopOf="@id/searchRecipeBtn" />
 
     <Button
         android:id="@+id/ingredientsInfoBtn"
@@ -24,10 +33,8 @@
         android:text="Ingredients Info"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.407" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/settingsBtn"
