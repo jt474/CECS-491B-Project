@@ -32,10 +32,10 @@
             android:layout_margin="10dp"
             android:autofillHints="Quantity"
             android:background="@android:color/holo_blue_light"
-            android:inputType="number"
+            android:inputType="text"
             android:minHeight="100dp"
             android:padding="8dp"
-            android:hint="Quantity (oz)"
+            android:hint="Quantity"
             android:textColor="@android:color/background_dark" />
 
         <Button
