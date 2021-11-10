@@ -66,7 +66,7 @@ class UserRecipesAdapter( val recipes: MutableList<UserRecipesModel>):
             "Instructions/${modelRecipeID}" to null,
             "Ingredients/${modelRecipeID}" to null
         )
-        dbRef.updateChildren(updateMap)
+        dbRef.updateChildren(updateMap) //double check if asynchronous
 
         recipes.removeAt(position)
         notifyItemRemoved(position)
