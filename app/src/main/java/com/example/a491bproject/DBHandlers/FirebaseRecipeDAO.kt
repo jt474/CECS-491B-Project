@@ -1,15 +1,13 @@
 package com.example.a491bproject.DBHandlers
 
-import android.widget.Toast
-import com.example.a491bproject.MainActivity
+import android.util.Log
 import com.example.a491bproject.models.IngredientModel
-import com.example.a491bproject.models.RecipeModel
+import com.example.a491bproject.models.RecipeFirebaseModel
+import com.example.a491bproject.models.UserRecipesModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import java.lang.NullPointerException
+import com.google.firebase.database.*
+import com.google.firebase.database.ktx.getValue
 
 
 class FirebaseRecipeDAO(val auth: FirebaseAuth): RecipeDAO {
@@ -22,15 +20,47 @@ class FirebaseRecipeDAO(val auth: FirebaseAuth): RecipeDAO {
         val user: FirebaseUser? = auth.currentUser;
         userID = user?.uid;
         dbRef = FirebaseDatabase.getInstance().reference;
+        Log.d("FirebaseDAO Init", "Constructing FirebaseRecipeDAO. Userid: $userID dbRef: $dbRef")
 
     }
 
+    override fun getUserRecipes(): MutableList<UserRecipesModel> {
+        val list = mutableListOf<UserRecipesModel>()
+        val getUserRecipeQuery = dbRef.child("Recipes")
+        getUserRecipeQuery.orderByChild("authorID").equalTo(userID).addChildEventListener(object: ChildEventListener{
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                Log.d("Datasnapshot", "${snapshot.key} ${snapshot.getValue<UserRecipesModel>()}")
+                if(snapshot.exists()){
+                    val model = snapshot.getValue<UserRecipesModel>()
+                    if(model != null) list.add(model)
+                }
+            }
 
-    override fun insertRecipe(model:RecipeModel): Int {
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+        return list
+    }
+
+    override fun insertRecipe(firebaseModel:RecipeFirebaseModel): Int {
         val recipePush:DatabaseReference = dbRef.child(recipeParentStr).push()
         val recipePushID = recipePush.key!! //is null if the reference was to a root... but that shouldn't happen.
 
-        val recipeMap = buildRecipeMap(model, recipePushID)
+        val recipeMap = buildRecipeMap(firebaseModel, recipePushID)
 
         var recipeNodeMap: HashMap<String, Any> = hashMapOf(
             "$recipeParentStr/$recipePushID" to recipeMap
@@ -40,9 +70,11 @@ class FirebaseRecipeDAO(val auth: FirebaseAuth): RecipeDAO {
         return 1 //Hack. turns out that with so many children being added... i cann't approach this the sql way.
     }
 
-    override fun getRecipe(id: String): RecipeModel {
+    override fun getRecipe(id: String): RecipeFirebaseModel {
         TODO("Not yet implemented")
     }
+
+
 
     override fun updateRecipe(id: String): Int {
         TODO("Not yet implemented")
@@ -52,12 +84,12 @@ class FirebaseRecipeDAO(val auth: FirebaseAuth): RecipeDAO {
         TODO("Not yet implemented")
     }
 
-    fun buildRecipeMap(model:RecipeModel, recipeId:String): Map<String, String>{
+    fun buildRecipeMap(firebaseModel:RecipeFirebaseModel, recipeId:String): Map<String, String>{
 
         val map: HashMap<String, String> = hashMapOf(
             "recipeId" to recipeId,
-            "authorId" to model.authorID,
-            "title" to model.title
+            "authorId" to firebaseModel.authorID,
+            "title" to firebaseModel.title
         )
         return map
     }
@@ -84,8 +116,8 @@ class FirebaseRecipeDAO(val auth: FirebaseAuth): RecipeDAO {
 
 
 
-}
 
-fun main(args: Array<String>) {
+
+
 }
 
