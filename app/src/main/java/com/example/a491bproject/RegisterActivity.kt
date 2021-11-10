@@ -83,6 +83,7 @@ class RegisterActivity : AppCompatActivity() {
                                 registeredIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                 //registeredIntent.putExtra("emailID", email)
                                 startActivity(registeredIntent)
+                                FirebaseAuth.getInstance().signOut()
                                 finish()
                             }
                             //When Register fails print error

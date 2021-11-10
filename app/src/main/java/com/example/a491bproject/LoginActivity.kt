@@ -40,7 +40,6 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        val btnSignIn = findViewById<com.google.android.gms.common.SignInButton>(R.id.sign_in_button)
 
         val loginEmailText =  findViewById<EditText>(R.id.editTextTextEmailAddress)
         val loginPasswordText = findViewById<EditText>(R.id.editTextTextPassword)
@@ -144,6 +143,7 @@ class LoginActivity : AppCompatActivity() {
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
         auth = FirebaseAuth.getInstance()
+        val btnSignIn = findViewById<com.google.android.gms.common.SignInButton>(R.id.signButton)
 
         btnSignIn.setOnClickListener {
             signIn()

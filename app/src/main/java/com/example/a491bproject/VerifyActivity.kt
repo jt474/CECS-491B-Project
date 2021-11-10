@@ -13,7 +13,7 @@ class VerifyActivity : AppCompatActivity() {
 
         val backLoginBtn: Button = findViewById<Button>(R.id.backLogin)
         backLoginBtn.setOnClickListener() {
-            //FirebaseAuth.getInstance().signOut()
+            FirebaseAuth.getInstance().signOut()
             val loginIntent3 = Intent(this, LoginActivity::class.java)
             startActivity(loginIntent3)
         }
