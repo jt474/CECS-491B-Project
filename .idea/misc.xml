@@ -32,12 +32,12 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.4137055837563452" />
         <entry key="app/src/main/res/layout/activity_my_ingredients.xml" value="0.67" />
         <entry key="app/src/main/res/layout/activity_search_recipe_by_ingredient.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/activity_search_recipe_menu.xml" value="0.31354166666666666" />
+        <entry key="app/src/main/res/layout/activity_search_recipe_menu.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_verify.xml" value="0.5333333333333333" />
         <entry key="app/src/main/res/layout/row_ingredients.xml" value="0.6947916666666667" />
         <entry key="app/src/main/res/layout/row_recipe_nutrients.xml" value="0.5333333333333333" />
         <entry key="app/src/main/res/layout/row_recipes.xml" value="0.22864583333333333" />
-        <entry key="app/src/main/res/layout/row_recipes_ingredients.xml" value="0.5333333333333333" />
+        <entry key="app/src/main/res/layout/row_recipes_ingredients.xml" value="0.335" />
       </map>
     </option>
   </component>

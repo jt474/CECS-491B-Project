@@ -26,7 +26,7 @@ class SearchRecipeByIngredient : AppCompatActivity() {
 
         val search = findViewById<Button>(R.id.btn_ingredient_search)
         val userInput = findViewById<EditText>(R.id.et_recipe_ingredient_input)
-        recyclerViewRecipes = findViewById<RecyclerView>(R.id.recycler_view_recipes_ingredients)
+        recyclerViewRecipes = findViewById(R.id.recycler_view_recipes_ingredients)
         recyclerViewRecipes.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(this)
         recyclerViewRecipes.layoutManager = linearLayoutManager
