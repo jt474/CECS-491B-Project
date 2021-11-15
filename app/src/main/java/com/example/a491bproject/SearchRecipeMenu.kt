@@ -34,29 +34,28 @@ class SearchRecipeMenu : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_recipe_menu)
 
-        recipeRecyclerViewRecipes = findViewById(R.id.recycler_view_recipes_ingredients)
-        recipeRecyclerViewRecipes.setHasFixedSize(true)
-        recipeLinearLayoutManager = LinearLayoutManager(this)
-        recipeRecyclerViewRecipes.layoutManager = recipeLinearLayoutManager
-
         val search = findViewById<Button>(R.id.btn_recipe_search)
         val userInput = findViewById<EditText>(R.id.et_recipe_input)
+
         recyclerViewRecipes = findViewById(R.id.recycler_view_recipes)
         recyclerViewRecipes.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(this)
         recyclerViewRecipes.layoutManager = linearLayoutManager
         radioGroup = findViewById(R.id.rg_different_search)
 
-
+        recipeRecyclerViewRecipes = findViewById(R.id.recycler_view_recipes_ingredients)
+        recipeRecyclerViewRecipes.setHasFixedSize(true)
+        recipeLinearLayoutManager = LinearLayoutManager(this)
+        recipeRecyclerViewRecipes.layoutManager = recipeLinearLayoutManager
 
         search.setOnClickListener() {
             val input = userInput.text.toString()
 //            getRecipes(input)
             val checkId = radioGroup.checkedRadioButtonId
-            if (checkId == -1) {
-                //Doesn't Exist
+            if (checkId == R.id.rb_ingredient_search) {
+                getRecipes(input)
             } else {
-                findRadioButton(checkId, input)
+                getRecipesByIngredients(input)
             }
         }
 
@@ -69,13 +68,6 @@ class SearchRecipeMenu : AppCompatActivity() {
 //        }
     }
 
-    private fun findRadioButton(checkId: Int, input: String) {
-        if (checkId == R.id.rb_regular_search) {
-            getRecipes(input)
-        } else {
-            getRecipesByIngredients(input)
-        }
-    }
 
     private fun getRecipes(input: String) {
         val url = "https://api.spoonacular.com/recipes/"
