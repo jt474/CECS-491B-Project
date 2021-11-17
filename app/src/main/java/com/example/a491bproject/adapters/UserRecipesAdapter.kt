@@ -24,10 +24,10 @@ class UserRecipesAdapter( val recipes: MutableList<UserRecipesModel>):
     private val mAuth:FirebaseAuth by lazy{ FirebaseAuth.getInstance()}
 
     inner class UserRecipesViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        val tvRecipeTitle:TextView = view.findViewById<TextView>(R.id.tvUserRecipeTitle)
-        val ivEditUserRecipe:ImageView = view.findViewById<ImageView>(R.id.ivEditUserRecipe)
-        val ivDeleteUserRecipe:ImageView = view.findViewById<ImageView>(R.id.ivDeleteUserRecipe)
-        val context:android.content.Context= view.context
+        val tvRecipeTitle: TextView = view.findViewById<TextView>(R.id.tvUserRecipeTitle)
+        val ivEditUserRecipe: ImageView = view.findViewById<ImageView>(R.id.ivEditUserRecipe)
+        val ivDeleteUserRecipe: ImageView = view.findViewById<ImageView>(R.id.ivDeleteUserRecipe)
+        val context: android.content.Context= view.context
 
 
     }

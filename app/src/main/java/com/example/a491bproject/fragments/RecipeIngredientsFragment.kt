@@ -1,33 +1,37 @@
 package com.example.a491bproject.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.a491bproject.DBHandlers.RecipeDAO
 import com.example.a491bproject.R
+import com.example.a491bproject.fragments.adapters.RecipeIngredientsAdapter
+import com.example.a491bproject.models.IngredientModel
+import com.example.a491bproject.models.UserRecipesModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
+import com.google.firebase.database.ktx.getValue
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
- * A simple [Fragment] subclass.
  * Use the [RecipeIngredientsFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
 class RecipeIngredientsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var auth: FirebaseAuth
+    private lateinit var dbHandler: RecipeDAO
+    private lateinit var ingredientList: MutableList<IngredientModel>
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: RecipeIngredientsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
@@ -35,28 +39,87 @@ class RecipeIngredientsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_recipe_ingredients, container, false)
+        val view = inflater.inflate(R.layout.fragment_recipe_ingredients, container, false)
+        adapter = RecipeIngredientsAdapter()
+        val recipeID = arguments?.getString(getString(R.string.RecipeID))
+
+        initializeRecyclerView(adapter, view)
+        if (recipeID != null){
+            populateRecyclerView(recipeID)
+        }
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RecipeIngredientsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RecipeIngredientsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    private fun initializeRecyclerView(adapter: RecipeIngredientsAdapter, view: View){
+        recyclerView = view.findViewById(R.id.rvRecipeIngredients)
+        recyclerView.layoutManager = LinearLayoutManager(this.context)
+        recyclerView.adapter = adapter
+    }
+    private fun populateRecyclerView(recipeID: String){
+        val dbRef = FirebaseDatabase.getInstance().reference
+        val query = dbRef.child("Ingredients/$recipeID").orderByChild("name")
+        ingredientList = mutableListOf<IngredientModel>()
+        getIngredients(query, ::onAdded, ::onChanged, ::onError)
+    }
+
+    private fun getIngredients(query: Query, onAdded:(snapshot:DataSnapshot)->Unit, onChanged:(snapshot:DataSnapshot)->Unit, onError:(error:DatabaseError) ->Unit ){
+        Log.d("GetIngredients", "Query: ${query.ref.toString()}")
+        query.addChildEventListener(object:ChildEventListener{
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                Log.d("DatasnapshotAdded", "${snapshot.key} ${snapshot.value}")
+                onAdded(snapshot)
             }
 
-        fun newInstance() = RecipeIngredientsFragment()
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                Log.d("DatasnapshotChanged", "${snapshot.key} ${snapshot.getValue<IngredientModel>()}")
+                onChanged(snapshot)
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+            }
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                onError(error)
+            }
+
+        })
     }
+
+    private fun onAdded(snapshot: DataSnapshot){
+        if(snapshot.exists()){
+            val name = snapshot.child("name").getValue<String>()
+            val amount = snapshot.child("amount").getValue<String>()
+            val unit = snapshot.child("unit").getValue<String>()
+            val model = IngredientModel(name!!,amount!!,unit!!)
+            Log.d("onAdded", "$ $model $name $amount $unit")
+            if (model!= null) ingredientList.add(model)
+            adapter.submitIngredients(ingredientList)
+        }
+
+    }
+
+    private fun onChanged(snapshot: DataSnapshot){
+        if(snapshot.exists()){
+            val model = snapshot.getValue<IngredientModel>()
+            if (model!= null) {
+                val oldModel = ingredientList.find{it.name == model.name}
+                if (oldModel != null){
+                    val position = ingredientList.indexOf(oldModel)
+                    ingredientList[position] = model
+                }
+            }
+            adapter.submitIngredients(ingredientList)
+        }
+    }
+
+    private fun onError(error: DatabaseError){
+        Log.d("onCancelled","FirebaseChildListener ran into an error. ${error.toString()}" )
+    }
+
+
+
 }

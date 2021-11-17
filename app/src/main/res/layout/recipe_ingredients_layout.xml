@@ -6,33 +6,34 @@
     android:layout_height="80dp">
 
     <TextView
-        android:id="@+id/tvIngredientName"
+        android:id="@+id/tvRecipeIngredientName"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:elegantTextHeight="true"
-        android:focusable="false"
-        android:gravity="start|top"
+        android:gravity="left"
+        android:minLines="1"
         android:padding="4dp"
         android:text="lorem ipsum Magna dulla 0239928304982342343"
-        app:autoSizeTextType="uniform"
+        android:textSize="28sp"
+        app:autoSizeTextType="none"
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/tvAmount_Unit"
+        app:layout_constraintEnd_toStartOf="@id/tvAmountUnit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvAmount_Unit"
+        android:id="@+id/tvAmountUnit"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:gravity="fill_vertical"
         android:padding="4dp"
         android:text="2 Strawberries"
-        app:autoSizeMaxTextSize="30sp"
+        android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/tvIngredientName"
+        app:layout_constraintStart_toEndOf="@+id/tvRecipeIngredientName"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
