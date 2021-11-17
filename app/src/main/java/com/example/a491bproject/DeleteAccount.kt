@@ -75,7 +75,8 @@ class DeleteAccount : AppCompatActivity() {
                                         }
                                 }
                             }
-                    } else {
+                    }
+                    else {
                         Toast.makeText(
                             this@DeleteAccount,
                             "User Re-Authenticated Failed",
