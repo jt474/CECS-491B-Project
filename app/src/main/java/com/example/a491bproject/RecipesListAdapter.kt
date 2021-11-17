@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a491bproject.models.Recipes
+import com.squareup.picasso.Picasso
 
 class RecipesListAdapter(val context : Context, val recipesList : Recipes) :
     RecyclerView.Adapter<RecipesListAdapter.ViewHolder>() {
@@ -35,7 +36,10 @@ class RecipesListAdapter(val context : Context, val recipesList : Recipes) :
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         viewHolder.tvRecipeName.text = recipesList.results[position].title
-        // TODO set image by calling the provided URL
+        // insert image to be found online into image view
+        // Reference: https://www.raywenderlich.com/3658341-picasso-tutorial-for-android-getting-started
+        val picasso = Picasso.get()
+        picasso.load(recipesList.results[position].image).into(viewHolder.imageRecipe)
     }
 
     // Return the size of your dataset (invoked by the layout manager)
