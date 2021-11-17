@@ -18,7 +18,7 @@ class RecipesListAdapter(val context : Context, val recipesList : Recipes) :
      */
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvRecipeName: TextView = view.findViewById(R.id.tv_recipe_name)
-//        val imageRecipe: ImageView = view.findViewById(R.id.image_recipe)
+        val imageRecipe: ImageView = view.findViewById(R.id.image_recipe)
     }
 
     // Create new views (invoked by the layout manager)
