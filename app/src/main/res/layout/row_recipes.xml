@@ -6,8 +6,10 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cv_recipe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="20dp"
         app:cardElevation="10dp"
@@ -15,7 +17,8 @@
         app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="true"
         tools:layout_editor_absoluteX="10dp"
-        tools:ignore="MissingConstraints">>
+        tools:ignore="MissingConstraints">
+<!--    TODO set-up android on-click listener -->
 
         <ImageView
             android:id="@+id/image_recipe"
