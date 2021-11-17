@@ -2,12 +2,11 @@ package com.example.a491bproject.adapters
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.media.Image
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -25,10 +24,10 @@ class UserRecipesAdapter( val recipes: MutableList<UserRecipesModel>):
     private val mAuth:FirebaseAuth by lazy{ FirebaseAuth.getInstance()}
 
     inner class UserRecipesViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        val tvRecipeTitle = view.findViewById<TextView>(R.id.tvUserRecipeTitle)
-        val ivEditUserRecipe = view.findViewById<ImageView>(R.id.ivEditUserRecipe)
-        val ivDeleteUserRecipe = view.findViewById<ImageView>(R.id.ivDeleteUserRecipe)
-        val context = view.context
+        val tvRecipeTitle:TextView = view.findViewById<TextView>(R.id.tvUserRecipeTitle)
+        val ivEditUserRecipe:ImageView = view.findViewById<ImageView>(R.id.ivEditUserRecipe)
+        val ivDeleteUserRecipe:ImageView = view.findViewById<ImageView>(R.id.ivDeleteUserRecipe)
+        val context:android.content.Context= view.context
 
 
     }
