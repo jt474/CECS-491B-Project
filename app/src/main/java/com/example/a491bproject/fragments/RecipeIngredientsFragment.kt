@@ -22,8 +22,6 @@ import com.google.firebase.database.ktx.getValue
  * create an instance of this fragment.
  */
 class RecipeIngredientsFragment : Fragment() {
-    private lateinit var auth: FirebaseAuth
-    private lateinit var dbHandler: RecipeDAO
     private lateinit var ingredients: MutableList<IngredientModel>
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: RecipeIngredientsAdapter
@@ -91,7 +89,7 @@ class RecipeIngredientsFragment : Fragment() {
     private fun onAdded(snapshot: DataSnapshot){
         if(snapshot.exists()){
             val model = snapshot.getValue<IngredientModel>()
-            Log.d("onAdded", "$model")
+            Log.d("RecipeAboutFragment", "OnAdded: $model")
             if (model!= null) ingredients.add(model)
             adapter.submitIngredients(ingredients)
         }
@@ -101,6 +99,7 @@ class RecipeIngredientsFragment : Fragment() {
     private fun onChanged(snapshot: DataSnapshot){
         if(snapshot.exists()){
             val model = snapshot.getValue<IngredientModel>()
+            Log.d("RecipeAboutFragment", "OnChanged: $model")
             if (model!= null) {
                 val oldModel = ingredients.find{it.name == model.name}
                 if (oldModel != null){

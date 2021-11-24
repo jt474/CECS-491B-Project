@@ -6,18 +6,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.a491bproject.FirstFragment
-import com.example.a491bproject.R
-import com.example.a491bproject.SecondFragment
 import com.example.a491bproject.fragments.RecipeIngredientsFragment
 import com.example.a491bproject.fragments.RecipeInstructionsFragment
-import com.example.a491bproject.fragments.RecipeNutritionFragment
+import com.example.a491bproject.fragments.RecipeAboutFragment
 
 class RecipeInfoFragmentStateAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle): FragmentStateAdapter(fragmentManager, lifecycle) {
 
     private lateinit var recipeKey:String
     private lateinit var recipeID:String
-    private var fragment1 = RecipeNutritionFragment()
+    private var fragment1 = RecipeAboutFragment()
     private var fragment2 = RecipeIngredientsFragment()
     private var fragment3 = RecipeInstructionsFragment()
 
@@ -51,7 +48,7 @@ class RecipeInfoFragmentStateAdapter(fragmentManager: FragmentManager, lifecycle
     private fun nutritionBundle(){
         val bundle = Bundle()
         bundle.putString(recipeKey,recipeID)
-        val frag = RecipeNutritionFragment()
+        val frag = RecipeAboutFragment()
         frag.arguments = bundle
         fragment1 = frag
     }
