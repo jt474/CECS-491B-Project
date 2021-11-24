@@ -1,5 +1,6 @@
 package com.example.a491bproject.fragments.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +24,8 @@ class RecipeInstructionsAdapter():
 
     override fun onBindViewHolder(holder: RecipeInstructionsViewHolder, position: Int) {
         val model = instructions[position]
-        val newStepNumber = "${R.string.StepNumberHeader} ${model.number}"
+        val newStepNumber = "Step: ${model.getNumberPlusOne().toString()}"
+        Log.d("InstructionsFragment", "OnBindViewHolder newStepNumberMsg: $newStepNumber")
         holder.tvStepNumber.text = newStepNumber
         holder.tvInstructionText.text = model.step
     }
@@ -34,6 +36,7 @@ class RecipeInstructionsAdapter():
 
     fun submitInstructions(list:MutableList<InstructionModel>){
         instructions = list
+        Log.d("submitInstructions","$instructions")
         notifyDataSetChanged()
     }
 

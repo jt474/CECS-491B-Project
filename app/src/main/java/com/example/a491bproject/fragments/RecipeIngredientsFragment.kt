@@ -12,7 +12,6 @@ import com.example.a491bproject.DBHandlers.RecipeDAO
 import com.example.a491bproject.R
 import com.example.a491bproject.fragments.adapters.RecipeIngredientsAdapter
 import com.example.a491bproject.models.IngredientModel
-import com.example.a491bproject.models.UserRecipesModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
@@ -25,7 +24,7 @@ import com.google.firebase.database.ktx.getValue
 class RecipeIngredientsFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var dbHandler: RecipeDAO
-    private lateinit var ingredientList: MutableList<IngredientModel>
+    private lateinit var ingredients: MutableList<IngredientModel>
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: RecipeIngredientsAdapter
 
@@ -59,20 +58,20 @@ class RecipeIngredientsFragment : Fragment() {
     private fun populateRecyclerView(recipeID: String){
         val dbRef = FirebaseDatabase.getInstance().reference
         val query = dbRef.child("Ingredients/$recipeID").orderByChild("name")
-        ingredientList = mutableListOf<IngredientModel>()
+        ingredients = mutableListOf<IngredientModel>()
         getIngredients(query, ::onAdded, ::onChanged, ::onError)
     }
 
     private fun getIngredients(query: Query, onAdded:(snapshot:DataSnapshot)->Unit, onChanged:(snapshot:DataSnapshot)->Unit, onError:(error:DatabaseError) ->Unit ){
-        Log.d("GetIngredients", "Query: ${query.ref.toString()}")
+        Log.d("GetIngredients", "Query Reference: ${query.ref.toString()}")
         query.addChildEventListener(object:ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                Log.d("DatasnapshotAdded", "${snapshot.key} ${snapshot.value}")
+                Log.d("GetIngredientsAdded", "${snapshot.key} ${snapshot.value}")
                 onAdded(snapshot)
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                Log.d("DatasnapshotChanged", "${snapshot.key} ${snapshot.getValue<IngredientModel>()}")
+                Log.d("GetIngredientsChanged", "${snapshot.key} ${snapshot.getValue<IngredientModel>()}")
                 onChanged(snapshot)
             }
 
@@ -91,13 +90,10 @@ class RecipeIngredientsFragment : Fragment() {
 
     private fun onAdded(snapshot: DataSnapshot){
         if(snapshot.exists()){
-            val name = snapshot.child("name").getValue<String>()
-            val amount = snapshot.child("amount").getValue<String>()
-            val unit = snapshot.child("unit").getValue<String>()
-            val model = IngredientModel(name!!,amount!!,unit!!)
-            Log.d("onAdded", "$ $model $name $amount $unit")
-            if (model!= null) ingredientList.add(model)
-            adapter.submitIngredients(ingredientList)
+            val model = snapshot.getValue<IngredientModel>()
+            Log.d("onAdded", "$model")
+            if (model!= null) ingredients.add(model)
+            adapter.submitIngredients(ingredients)
         }
 
     }
@@ -106,18 +102,18 @@ class RecipeIngredientsFragment : Fragment() {
         if(snapshot.exists()){
             val model = snapshot.getValue<IngredientModel>()
             if (model!= null) {
-                val oldModel = ingredientList.find{it.name == model.name}
+                val oldModel = ingredients.find{it.name == model.name}
                 if (oldModel != null){
-                    val position = ingredientList.indexOf(oldModel)
-                    ingredientList[position] = model
+                    val position = ingredients.indexOf(oldModel)
+                    ingredients[position] = model
                 }
             }
-            adapter.submitIngredients(ingredientList)
+            adapter.submitIngredients(ingredients)
         }
     }
 
     private fun onError(error: DatabaseError){
-        Log.d("onCancelled","FirebaseChildListener ran into an error. ${error.toString()}" )
+        Log.d("onCancelled","FirebaseChildListener ran into an error in RecipeIngredientsFragment. ${error.toString()}" )
     }
 
 

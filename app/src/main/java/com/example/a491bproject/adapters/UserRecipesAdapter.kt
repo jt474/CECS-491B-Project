@@ -18,7 +18,7 @@ import com.google.firebase.database.core.Context
 import com.google.firebase.ktx.Firebase
 import org.w3c.dom.Text
 
-class UserRecipesAdapter( val recipes: MutableList<UserRecipesModel>):
+class UserRecipesAdapter( val recipes: MutableList<UserRecipesModel>, val listener: (UserRecipesModel)-> Unit):
     RecyclerView.Adapter<UserRecipesAdapter.UserRecipesViewHolder>() {
 
     private val mAuth:FirebaseAuth by lazy{ FirebaseAuth.getInstance()}
@@ -40,6 +40,9 @@ class UserRecipesAdapter( val recipes: MutableList<UserRecipesModel>):
     override fun onBindViewHolder(holder: UserRecipesViewHolder, position: Int) {
         val model = recipes[position]
         holder.tvRecipeTitle.text = model.title
+        holder.itemView.setOnClickListener{
+            listener(model)
+        }
         holder.ivDeleteUserRecipe.setOnClickListener{
             val deletedRecipe = recipes[position]
             val alert = AlertDialog.Builder(holder.context)
@@ -72,5 +75,6 @@ class UserRecipesAdapter( val recipes: MutableList<UserRecipesModel>):
         notifyItemRangeChanged(position,recipes.size)
         Log.d("DeleteItem", "List now contains $recipes")
     }
+
 
 }
