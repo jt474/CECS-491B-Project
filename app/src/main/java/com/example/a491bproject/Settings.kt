@@ -23,5 +23,12 @@ class Settings : AppCompatActivity() {
             val termsIntent = Intent(this, Terms::class.java)
             startActivity(termsIntent)
         }
+
+        //Contact
+        val contactBtn: Button = findViewById<Button>(R.id.contact)
+        contactBtn.setOnClickListener{
+            val contactIntent = Intent(this, Contact::class.java)
+            startActivity(contactIntent)
+        }
     }
 }
