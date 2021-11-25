@@ -26,7 +26,9 @@
     <string name="RecipeID">recipeID</string>
     <string name="RecipeTitle">recipeTitle</string>
     <string name="AuthorStr">Created By</string>
-    <string name="lastUpdatedStr">Lasted updated on:</string>
+    <string name="lastUpdatedStr">Last updated on:</string>
+    <string name="sampleDateStr">11/21/20</string>
+    <string name="descriptionStr">Description</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

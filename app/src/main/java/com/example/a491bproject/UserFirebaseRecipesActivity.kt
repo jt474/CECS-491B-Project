@@ -37,18 +37,9 @@ class UserFirebaseRecipesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_firebase_recipes)
 
-       // binding = ActivityUserFirebaseRecipesBinding.inflate(layoutInflater)
-       // setContentView(binding.root)
-
         auth = FirebaseAuth.getInstance()
         testRecipesList = mutableListOf<UserRecipesModel>()
-        //Log.d("testRecipesList", "$testRecipesList")
-       /*var testRecipesList = mutableListOf<UserRecipesModel>(
-           UserRecipesModel("Apple Pie",false),
-           UserRecipesModel("Misery",false),
-           UserRecipesModel("Llamas",false),
-           UserRecipesModel("Rough",false),
-           UserRecipesModel("Apple Pie",false)) */
+
 
         val adapter = UserRecipesAdapter(testRecipesList){
             val intent = Intent(this, RecipeFirebaseInfoActivity::class.java)

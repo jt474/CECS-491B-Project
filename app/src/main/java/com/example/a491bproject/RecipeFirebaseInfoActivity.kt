@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.a491bproject.adapters.RecipeInfoFragmentStateAdapter
 import com.google.android.material.tabs.TabLayout
@@ -39,7 +40,8 @@ class RecipeFirebaseInfoActivity : AppCompatActivity() {
 
         //Set up Tab
         TabLayoutMediator(tabLayout, viewPager){
-            tab, position -> tab.text = tabTitles[position]
+            tab, position -> tab.text = tabTitles[position];
+
         }.attach()
 
 
