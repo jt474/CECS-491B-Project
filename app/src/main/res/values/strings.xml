@@ -23,6 +23,12 @@
     <string name="Ingredients">Ingredients</string>
     <string name="Instructions">Instructions</string>
     <string name="Nutrition">Nutrition</string>
+    <string name="RecipeID">recipeID</string>
+    <string name="RecipeTitle">recipeTitle</string>
+    <string name="AuthorStr">Created By</string>
+    <string name="lastUpdatedStr">Last updated on:</string>
+    <string name="sampleDateStr">11/21/20</string>
+    <string name="descriptionStr">Description</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -40,4 +46,12 @@
     <!-- Recipe Search Activity -->
     <string name="hint_recipe_input">enter name of a recipe</string>
     <string name="btn_recipe_search">SEARCH</string>
+
+    <string name="StepNumberHeader">Step:</string>
+    <string name="placeHolder_InstructionStepNumber">Step: __</string>
+    <string name="placeholder_loremIpsum">"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
+        since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
+        but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
+        Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
+
 </resources>

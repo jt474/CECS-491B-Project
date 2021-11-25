@@ -97,8 +97,8 @@ class FirebaseRecipeDAO(val auth: FirebaseAuth): RecipeDAO {
     fun buildRecipeIngredients(ingredients: List<IngredientModel>, recipeId:String): Int{
         //"$recipeParentStr/$recipePushID/Ingredients"
         for(ingredient in ingredients){
-            dbRef.child(recipeParentStr).child(recipeId).child("Ingredients").child(ingredient.name).child("amount").setValue(ingredient.amount)
-            dbRef.child(recipeParentStr).child(recipeId).child("Ingredients").child(ingredient.name).child("unit").setValue(ingredient.unit)
+            //dbRef.child(recipeParentStr).child(recipeId).child("Ingredients").child(ingredient.name).child("amount").setValue(ingredient.amount)
+            //dbRef.child(recipeParentStr).child(recipeId).child("Ingredients").child(ingredient.name).child("unit").setValue(ingredient.unit)
         }
         return 1; //Hack
     }

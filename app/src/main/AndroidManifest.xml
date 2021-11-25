@@ -31,7 +31,12 @@
             android:theme="@style/Theme.491BProject.NoActionBar" />
         <activity
             android:name=".RecipeFirebaseInfoActivity"
-            android:exported="true" />
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".ChangePasswordActivity"
+            android:exported="false" />
         <activity
             android:name=".VerifyActivity"
             android:exported="false" />

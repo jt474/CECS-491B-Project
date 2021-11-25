@@ -2,12 +2,11 @@ package com.example.a491bproject.adapters
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.media.Image
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -19,16 +18,16 @@ import com.google.firebase.database.core.Context
 import com.google.firebase.ktx.Firebase
 import org.w3c.dom.Text
 
-class UserRecipesAdapter( val recipes: MutableList<UserRecipesModel>):
+class UserRecipesAdapter( val recipes: MutableList<UserRecipesModel>, val listener: (UserRecipesModel)-> Unit):
     RecyclerView.Adapter<UserRecipesAdapter.UserRecipesViewHolder>() {
 
     private val mAuth:FirebaseAuth by lazy{ FirebaseAuth.getInstance()}
 
     inner class UserRecipesViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        val tvRecipeTitle = view.findViewById<TextView>(R.id.tvUserRecipeTitle)
-        val ivEditUserRecipe = view.findViewById<ImageView>(R.id.ivEditUserRecipe)
-        val ivDeleteUserRecipe = view.findViewById<ImageView>(R.id.ivDeleteUserRecipe)
-        val context = view.context
+        val tvRecipeTitle: TextView = view.findViewById<TextView>(R.id.tvUserRecipeTitle)
+        val ivEditUserRecipe: ImageView = view.findViewById<ImageView>(R.id.ivEditUserRecipe)
+        val ivDeleteUserRecipe: ImageView = view.findViewById<ImageView>(R.id.ivDeleteUserRecipe)
+        val context: android.content.Context= view.context
 
 
     }
@@ -41,6 +40,9 @@ class UserRecipesAdapter( val recipes: MutableList<UserRecipesModel>):
     override fun onBindViewHolder(holder: UserRecipesViewHolder, position: Int) {
         val model = recipes[position]
         holder.tvRecipeTitle.text = model.title
+        holder.itemView.setOnClickListener{
+            listener(model)
+        }
         holder.ivDeleteUserRecipe.setOnClickListener{
             val deletedRecipe = recipes[position]
             val alert = AlertDialog.Builder(holder.context)
@@ -73,5 +75,6 @@ class UserRecipesAdapter( val recipes: MutableList<UserRecipesModel>):
         notifyItemRangeChanged(position,recipes.size)
         Log.d("DeleteItem", "List now contains $recipes")
     }
+
 
 }
