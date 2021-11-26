@@ -10,9 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.491BProject">
         <activity
+            android:name=".RecipeInstructions"
+            android:exported="false" />
+        <activity
             android:name=".SearchRecipeByIngredient"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ChangePasswordActivity"
             android:exported="false" />

@@ -14,8 +14,8 @@
         app:cardMaxElevation="12dp"
         app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="true"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="10dp">>
+        tools:layout_editor_absoluteX="10dp"
+        tools:ignore="MissingConstraints">>
 
         <ImageView
             android:id="@+id/img"
@@ -26,17 +26,26 @@
             android:src="@drawable/spoontacular" />
 
         <LinearLayout
+            android:id="@+id/image_recipe"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="75dp"
             android:gravity="center_vertical"
             android:orientation="vertical">
 
+<!--            <TextView-->
+<!--                android:id="@+id/tv_instruction_number"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Number"-->
+<!--                android:textSize="20sp"-->
+<!--                android:textStyle="bold" />-->
+
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/tv_instruction_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Title"
+                android:text="Instruction"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -44,5 +53,4 @@
 
 
     </androidx.cardview.widget.CardView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

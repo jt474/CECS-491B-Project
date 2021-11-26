@@ -3,7 +3,6 @@ package com.example.a491bproject
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Message
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -43,29 +42,29 @@ class SearchRecipeMenu : AppCompatActivity() {
         recyclerViewRecipes.layoutManager = linearLayoutManager
         radioGroup = findViewById(R.id.rg_different_search)
 
-        recipeRecyclerViewRecipes = findViewById(R.id.recycler_view_recipes_ingredients)
-        recipeRecyclerViewRecipes.setHasFixedSize(true)
-        recipeLinearLayoutManager = LinearLayoutManager(this)
-        recipeRecyclerViewRecipes.layoutManager = recipeLinearLayoutManager
+//        recipeRecyclerViewRecipes = findViewById(R.id.recycler_view_recipes_ingredients)
+//        recipeRecyclerViewRecipes.setHasFixedSize(true)
+//        recipeLinearLayoutManager = LinearLayoutManager(this)
+//        recipeRecyclerViewRecipes.layoutManager = recipeLinearLayoutManager
 
         search.setOnClickListener() {
             val input = userInput.text.toString()
-//            getRecipes(input)
-            val checkId = radioGroup.checkedRadioButtonId
-            if (checkId == R.id.rb_ingredient_search) {
-                getRecipes(input)
-            } else {
-                getRecipesByIngredients(input)
-            }
+            getRecipes(input)
+//            val checkId = radioGroup.checkedRadioButtonId
+//            if (checkId == R.id.rb_ingredient_search) {
+//                getRecipes(input)
+//            } else {
+//                getRecipesByIngredients(input)
+//            }
         }
 
         //Navigate to Search By Ingredient
-//        val searchRecipeBtn: Button = findViewById<Button>(R.id.btn_recipe_ingredient_search)
-//        searchRecipeBtn.setOnClickListener() {
-//            val searchRecipeIntent = Intent(this, SearchRecipeByIngredient::class.java)
-//            startActivity(searchRecipeIntent)
-//
-//        }
+        val searchRecipeBtn: Button = findViewById<Button>(R.id.btn_recipe_ingredient_search)
+        searchRecipeBtn.setOnClickListener() {
+            val searchRecipeIntent = Intent(this, SearchRecipeByIngredient::class.java)
+            startActivity(searchRecipeIntent)
+
+        }
     }
 
 
@@ -98,32 +97,34 @@ class SearchRecipeMenu : AppCompatActivity() {
         })
     }
 
-    private fun getRecipesByIngredients(input: String) {
-        val url = "https://api.spoonacular.com/recipes/"
-        val key = "74e154cbd9f64883b37d580e8f04a74f"
 
-        val retrofitBuilder = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(url)
-            .build()
-            .create(ApiInterface::class.java)
 
-        val retrofitData = retrofitBuilder.searchRecipesByIngredients(input, 20, key)
-
-        retrofitData.enqueue(object : Callback<ArrayList<RecipeByIngredients.RecipeByIngredientsItem>> {
-            override fun onResponse(
-                call: Call<ArrayList<RecipeByIngredients.RecipeByIngredientsItem>>,
-                response: Response<ArrayList<RecipeByIngredients.RecipeByIngredientsItem>>
-            ) {
-                val responseBody = response.body()!!
-                recipesByIngredientsListAdapter = RecipeByIngredientsAdapter(baseContext, responseBody)
-                recipesByIngredientsListAdapter.notifyDataSetChanged()
-                recipeRecyclerViewRecipes.adapter = recipesByIngredientsListAdapter
-            }
-
-            override fun onFailure(call: Call<ArrayList<RecipeByIngredients.RecipeByIngredientsItem>>, t: Throwable) {
-                Log.d("MainActivity", "onFailure: $t")
-            }
-        })
-    }
+//    private fun getRecipesByIngredients(input: String) {
+//        val url = "https://api.spoonacular.com/recipes/"
+//        val key = "74e154cbd9f64883b37d580e8f04a74f"
+//
+//        val retrofitBuilder = Retrofit.Builder()
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .baseUrl(url)
+//            .build()
+//            .create(ApiInterface::class.java)
+//
+//        val retrofitData = retrofitBuilder.searchRecipesByIngredients(input, 20, key)
+//
+//        retrofitData.enqueue(object : Callback<ArrayList<RecipeByIngredients.RecipeByIngredientsItem>> {
+//            override fun onResponse(
+//                call: Call<ArrayList<RecipeByIngredients.RecipeByIngredientsItem>>,
+//                response: Response<ArrayList<RecipeByIngredients.RecipeByIngredientsItem>>
+//            ) {
+//                val responseBody = response.body()!!
+//                recipesByIngredientsListAdapter = RecipeByIngredientsAdapter(baseContext, responseBody)
+//                recipesByIngredientsListAdapter.notifyDataSetChanged()
+//                recipeRecyclerViewRecipes.adapter = recipesByIngredientsListAdapter
+//            }
+//
+//            override fun onFailure(call: Call<ArrayList<RecipeByIngredients.RecipeByIngredientsItem>>, t: Throwable) {
+//                Log.d("MainActivity", "onFailure: $t")
+//            }
+//        })
+//    }
 }

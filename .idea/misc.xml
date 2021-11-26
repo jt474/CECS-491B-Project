@@ -31,13 +31,16 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.33789260385005065" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.4137055837563452" />
         <entry key="app/src/main/res/layout/activity_my_ingredients.xml" value="0.67" />
+        <entry key="app/src/main/res/layout/activity_recipe_instructions.xml" value="0.3016304347826087" />
         <entry key="app/src/main/res/layout/activity_search_recipe_by_ingredient.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_search_recipe_menu.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_verify.xml" value="0.5333333333333333" />
         <entry key="app/src/main/res/layout/row_ingredients.xml" value="0.6947916666666667" />
+        <entry key="app/src/main/res/layout/row_ingredients_info.xml" value="0.33789260385005065" />
         <entry key="app/src/main/res/layout/row_recipe_nutrients.xml" value="0.5333333333333333" />
         <entry key="app/src/main/res/layout/row_recipes.xml" value="0.22864583333333333" />
-        <entry key="app/src/main/res/layout/row_recipes_ingredients.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/row_recipes_ingredients.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/row_recipes_instructions.xml" value="0.3016304347826087" />
       </map>
     </option>
   </component>
