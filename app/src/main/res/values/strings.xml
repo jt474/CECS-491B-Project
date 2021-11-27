@@ -45,6 +45,11 @@
 
     <!-- Recipe Search Activity -->
     <string name="hint_recipe_input">enter name of a recipe</string>
+    <string name="hint_create_instruction">Enter your instruction here</string>
+    <string name="hint_create_ingredients">Enter ingredient name here</string>
+    <string name="hint_create_amount">Enter amount here</string>
+    <string name="hint_create_unit">Units: e.g. grams</string>
+    <string name="create_recipe_header">Create your Recipe</string>
     <string name="btn_recipe_search">SEARCH</string>
 
     <string name="StepNumberHeader">Step:</string>
@@ -53,5 +58,6 @@
         since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
         but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
         Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
+    <string name="title_activity_create_firebase_recipe">CreateFirebaseRecipeActivity</string>
 
 </resources>

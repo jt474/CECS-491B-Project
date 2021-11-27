@@ -7,7 +7,7 @@
     android:background="@drawable/shape_background">
 
     <TextView
-        android:id="@+id/tvRecipeIngredientName"
+        android:id="@+id/tvCreateRecipeIngredientName"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -19,15 +19,14 @@
         app:autoSizeTextType="uniform"
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/tvAmountUnit"
+        app:layout_constraintEnd_toStartOf="@+id/tvCreateRecipeIngredientAmount"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvAmountUnit"
+        android:id="@+id/tvCreateRecipeIngredientAmount"
         android:layout_width="120dp"
         android:layout_height="match_parent"
-        android:autoText="false"
         android:gravity="center"
         android:padding="8dp"
         android:text="2 Strawberries"
@@ -37,8 +36,19 @@
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvRecipeIngredientName"
+        app:layout_constraintEnd_toStartOf="@+id/ivCreateRecipeIngredientDelete"
+        app:layout_constraintStart_toEndOf="@+id/tvCreateRecipeIngredientName"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivCreateRecipeIngredientDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/text_margin"
+        android:background="#E91E63"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_delete"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

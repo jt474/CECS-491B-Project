@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         //Navigate to Create Recipe
         val createRecipeBtn: Button = findViewById<Button>(R.id.createRecipeBtn)
         createRecipeBtn.setOnClickListener{
-            val createRecipeIntent = Intent(this, CreateRecipeActivity::class.java)
+            val createRecipeIntent = Intent(this, CreateFirebaseRecipeActivity::class.java)
             startActivity(createRecipeIntent)
         }
 
