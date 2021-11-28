@@ -58,7 +58,7 @@ class CreateDescriptionFragment : Fragment() {
 
             override fun afterTextChanged(p0: Editable?) {
                 Log.d("CreateDescription","RecipeTitle afterTextChanged: ${p0.toString()}")
-                UpdateViewModelTitle()
+                viewModel.setTitle(etRecipeTitle.text.toString(),"CreateDescriptionFragment.addTextChangedListener")
             }
         })
         
@@ -71,37 +71,14 @@ class CreateDescriptionFragment : Fragment() {
 
             override fun afterTextChanged(p0: Editable?) {
                Log.d("CreateDescription", "RecipeDescription afterTextChanged: ${p0.toString()}")
-                UpdateViewModelDescription()
+                viewModel.setTitle(etRecipeDescription.text.toString(),"CreateDescriptionFragment.addTextChangedListener")
             }
         })
     }
 
-    private fun UpdateViewModelDescription() {
-        val description = etRecipeDescription.text.toString()
-        Log.d("CreateDescription","UpdateViewModelDescription:\n NewDescription: $description, OldDescription: ${viewModel.description}\n")
-        viewModel.description = description
-        Log.d("CreateDescription","ViewModel now has ${viewModel.description}")
-    }
 
-    private fun UpdateViewModelTitle() {
-        val title= etRecipeTitle.text.toString()
-        Log.d("CreateDescription","UpdateViewModelTitle:\n NewTitle: $title, OldTitle: ${viewModel.recipeTitle}\n")
-        viewModel.recipeTitle = title
-        Log.d("CreateDescription","ViewModel now has ${viewModel.recipeTitle}")
-    }
 
-    private fun getCurrentUserUID():String {
-        val authorID = FirebaseAuth.getInstance().currentUser!!.uid
-        Log.d("CreateDescription", "AuthorID set to $authorID")
-        return authorID
-    }
 
-    private fun getCurrentDate(): String{
-        val sdf = SimpleDateFormat("MM/dd/yyyy")
-        val lastUpdatedStr = sdf.format(Date())
-        Log.d("Create Description", "LastUpdated changed to $lastUpdatedStr")
-        return lastUpdatedStr
-    }
 
 
 }

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/text_margin"
     tools:context=".fragments.CreateDescriptionFragment">
 
     <EditText
@@ -12,7 +13,7 @@
         android:layout_height="52dp"
         android:layout_margin="@dimen/text_margin"
         android:ems="10"
-        android:hint="Enter recipe title here"
+        android:hint="@string/hint_create_recipe_title"
         android:inputType="textShortMessage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -25,9 +26,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="@dimen/text_margin"
+        android:background="@drawable/shape_background"
         android:ems="10"
         android:gravity="start|top"
-        android:hint="@string/placeholder_loremIpsum"
+        android:hint="@string/hint_create_description"
         android:inputType="textMultiLine"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"

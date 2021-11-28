@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a491bproject.DBHandlers.RecipeDAO
 import com.example.a491bproject.R
-import com.example.a491bproject.fragments.adapters.RecipeIngredientsAdapter
 import com.example.a491bproject.fragments.adapters.RecipeInstructionsAdapter
 import com.example.a491bproject.models.IngredientModel
 import com.example.a491bproject.models.InstructionModel

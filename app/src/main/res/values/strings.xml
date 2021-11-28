@@ -44,11 +44,13 @@
     <string name="delete_selected_recipes">Delete</string>
 
     <!-- Recipe Search Activity -->
-    <string name="hint_recipe_input">enter name of a recipe</string>
+    <string name="hint_recipe_input">Enter name of a recipe</string>
+    <string name="hint_create_recipe_title">Enter your recipe\'s name here</string>
     <string name="hint_create_instruction">Enter your instruction here</string>
     <string name="hint_create_ingredients">Enter ingredient name here</string>
     <string name="hint_create_amount">Enter amount here</string>
     <string name="hint_create_unit">Units: e.g. grams</string>
+    <string name="hint_create_description">Enter your description here.</string>
     <string name="create_recipe_header">Create your Recipe</string>
     <string name="btn_recipe_search">SEARCH</string>
 

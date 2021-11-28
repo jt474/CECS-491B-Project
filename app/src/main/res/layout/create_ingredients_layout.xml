@@ -19,12 +19,12 @@
         app:autoSizeTextType="uniform"
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tvCreateRecipeIngredientAmount"
+        app:layout_constraintEnd_toStartOf="@+id/tvCreateRecipeIngredientAmountUnit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvCreateRecipeIngredientAmount"
+        android:id="@+id/tvCreateRecipeIngredientAmountUnit"
         android:layout_width="120dp"
         android:layout_height="match_parent"
         android:gravity="center"

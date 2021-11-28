@@ -8,11 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.a491bproject.DBHandlers.RecipeDAO
 import com.example.a491bproject.R
-import com.example.a491bproject.fragments.adapters.RecipeIngredientsAdapter
+import com.example.a491bproject.fragments.adapters.CreateIngredientsAdapter
 import com.example.a491bproject.models.IngredientModel
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
 
@@ -24,7 +22,7 @@ import com.google.firebase.database.ktx.getValue
 class RecipeIngredientsFragment : Fragment() {
     private lateinit var ingredients: MutableList<IngredientModel>
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: RecipeIngredientsAdapter
+    private lateinit var adapter: CreateIngredientsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +35,7 @@ class RecipeIngredientsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_recipe_ingredients, container, false)
-        adapter = RecipeIngredientsAdapter()
+        adapter = CreateIngredientsAdapter()
         val recipeID = arguments?.getString(getString(R.string.RecipeID))
 
         initializeRecyclerView(adapter, view)
@@ -48,7 +46,7 @@ class RecipeIngredientsFragment : Fragment() {
         return view
     }
 
-    private fun initializeRecyclerView(adapter: RecipeIngredientsAdapter, view: View){
+    private fun initializeRecyclerView(adapter: CreateIngredientsAdapter, view: View){
         recyclerView = view.findViewById(R.id.rvRecipeIngredients)
         recyclerView.layoutManager = LinearLayoutManager(this.context)
         recyclerView.adapter = adapter
