@@ -30,6 +30,34 @@
         app:layout_constraintStart_toEndOf="@+id/et_recipe_input"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <RadioGroup
+        android:id="@+id/rg_search_options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/recycler_view_recipes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_recipe_input">
+
+        <RadioButton
+            android:id="@+id/rb_regular_search"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:scaleX=".75"
+            android:scaleY=".75"
+            android:text="Search By Name" />
+
+        <RadioButton
+            android:id="@+id/rb_ingredient_search"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:scaleX=".75"
+            android:scaleY=".75"
+            android:text="Search By Ingredient" />
+
+    </RadioGroup>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_recipes"
         android:layout_width="0dp"
@@ -40,6 +68,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_recipe_input" />
+        app:layout_constraintTop_toBottomOf="@id/rg_search_options" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
