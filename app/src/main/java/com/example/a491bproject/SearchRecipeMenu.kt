@@ -39,6 +39,8 @@ class SearchRecipeMenu : AppCompatActivity() {
             val input = userInput.text.toString()
             getRecipes(input)
         }
+        // This set the default search option to be search recipes by name
+        onRadioButtonClicked(searchOptions.findViewById(R.id.rb_search_recipe_by_name))
     }
 
     fun onRadioButtonClicked(view: View) {
