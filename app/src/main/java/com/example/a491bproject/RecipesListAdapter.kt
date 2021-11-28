@@ -12,7 +12,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a491bproject.models.Recipes
 
-class RecipesListAdapter(val context : Context, val recipesList : Recipes) :
+class RecipesListAdapter(val context: Context, val recipesList: Recipes) :
     RecyclerView.Adapter<RecipesListAdapter.ViewHolder>() {
 
     /**
@@ -34,7 +34,6 @@ class RecipesListAdapter(val context : Context, val recipesList : Recipes) :
 
     // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-
         // Allows us to click on the current card view
         viewHolder.itemView.setOnClickListener {
             // Testing if click listener is working

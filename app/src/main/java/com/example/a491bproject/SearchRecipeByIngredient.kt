@@ -7,7 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.a491bproject.Adapters.RecipeByIngredientsAdapter
+import com.example.a491bproject.adapters.RecipeByIngredientsAdapter
 import com.example.a491bproject.api.ApiInterface
 import com.example.a491bproject.models.RecipeByIngredients
 import retrofit2.*
@@ -37,7 +37,7 @@ class SearchRecipeByIngredient : AppCompatActivity() {
 
     private fun getRecipes(input: String) {
         val url = "https://api.spoonacular.com/recipes/"
-        val key = "74e154cbd9f64883b37d580e8f04a74f"
+        val key = "7f3ed0e0a5844986b862d89b0e2481fc"
 
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
@@ -47,7 +47,8 @@ class SearchRecipeByIngredient : AppCompatActivity() {
 
         val retrofitData = retrofitBuilder.searchRecipesByIngredients(input, 20, key)
 
-        retrofitData.enqueue(object : Callback<ArrayList<RecipeByIngredients.RecipeByIngredientsItem>> {
+        retrofitData.enqueue(object :
+            Callback<ArrayList<RecipeByIngredients.RecipeByIngredientsItem>> {
             override fun onResponse(
                 call: Call<ArrayList<RecipeByIngredients.RecipeByIngredientsItem>>,
                 response: Response<ArrayList<RecipeByIngredients.RecipeByIngredientsItem>>
@@ -58,7 +59,10 @@ class SearchRecipeByIngredient : AppCompatActivity() {
                 recyclerViewRecipes.adapter = recipesListAdapter
             }
 
-            override fun onFailure(call: Call<ArrayList<RecipeByIngredients.RecipeByIngredientsItem>>, t: Throwable) {
+            override fun onFailure(
+                call: Call<ArrayList<RecipeByIngredients.RecipeByIngredientsItem>>,
+                t: Throwable
+            ) {
                 Log.d("MainActivity", "onFailure: $t")
             }
         })

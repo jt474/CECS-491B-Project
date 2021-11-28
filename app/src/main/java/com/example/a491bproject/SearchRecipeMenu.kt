@@ -9,9 +9,8 @@ import android.widget.EditText
 import android.widget.RadioGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.a491bproject.Adapters.RecipeByIngredientsAdapter
+import com.example.a491bproject.adapters.RecipeByIngredientsAdapter
 import com.example.a491bproject.api.ApiInterface
-import com.example.a491bproject.models.RecipeByIngredients
 import com.example.a491bproject.models.Recipes
 import retrofit2.Call
 import retrofit2.Callback
@@ -70,7 +69,7 @@ class SearchRecipeMenu : AppCompatActivity() {
 
     private fun getRecipes(input: String) {
         val url = "https://api.spoonacular.com/recipes/"
-        val key = "74e154cbd9f64883b37d580e8f04a74f"
+        val key = "7f3ed0e0a5844986b862d89b0e2481fc"
 
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
@@ -96,7 +95,6 @@ class SearchRecipeMenu : AppCompatActivity() {
             }
         })
     }
-
 
 
 //    private fun getRecipesByIngredients(input: String) {

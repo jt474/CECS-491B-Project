@@ -1,6 +1,6 @@
 package com.example.a491bproject.models
 
-class Instructions : ArrayList<Instructions.InstructionsItem>(){
+class Instructions : ArrayList<Instructions.InstructionsItem>() {
     data class InstructionsItem(
         val name: String,
         val steps: List<Step>
@@ -18,14 +18,14 @@ class Instructions : ArrayList<Instructions.InstructionsItem>(){
                 val localizedName: String,
                 val name: String
             )
-    
+
             data class Ingredient(
                 val id: Int,
                 val image: String,
                 val localizedName: String,
                 val name: String
             )
-    
+
             data class Length(
                 val number: Int,
                 val unit: String

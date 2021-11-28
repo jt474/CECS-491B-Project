@@ -2,16 +2,15 @@ package com.example.a491bproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.a491bproject.Adapters.IngredientAdapter
+import com.example.a491bproject.adapters.IngredientAdapter
 import com.example.a491bproject.api.ApiInterface
 import com.example.a491bproject.models.IngredientInfo
+import com.example.a491bproject.models.Ingredients
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -33,16 +32,47 @@ class IngredientsInformation : AppCompatActivity() {
         ingredientsLinearLayoutManager = LinearLayoutManager(this)
         ingredientsRecyclerView.layoutManager = ingredientsLinearLayoutManager
 
-        search.setOnClickListener() {
+        search.setOnClickListener {
             val input = userInput.text.toString()
-            getMyIngredientInfo(input)
+            getIngredientId(input)
         }
 
     }
 
+    // Switched from private to public in order to pass recipeId without
+    // having to subscribe to the calls
+    fun getIngredientId(input: String) {
+        val url = "https://api.spoonacular.com/food/ingredients/"
+        val key = "7f3ed0e0a5844986b862d89b0e2481fc"
+
+        val retrofitBuilder = Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(url)
+            .build()
+            .create(ApiInterface::class.java)
+
+        val retrofitData = retrofitBuilder.getIngredientId(input, 1, key)
+
+        retrofitData.enqueue(object : Callback<Ingredients> {
+            override fun onResponse(call: Call<Ingredients>, response: Response<Ingredients>) {
+                val responseBody = response.body()!!
+
+                // Get the id for the recipe
+                val recipeId = responseBody.results[0].id.toString()
+
+                // Pass the recipe id to get the information
+                getMyIngredientInfo(recipeId)
+            }
+
+            override fun onFailure(call: Call<Ingredients>, t: Throwable) {
+                Log.d("MainActivity", "onFailure: $t")
+            }
+        })
+    }
+
     private fun getMyIngredientInfo(input: String) {
         val url = "https://api.spoonacular.com/food/ingredients/$input/"
-        val key = "74e154cbd9f64883b37d580e8f04a74f"
+        val key = "7f3ed0e0a5844986b862d89b0e2481fc"
 
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())

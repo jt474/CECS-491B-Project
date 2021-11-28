@@ -49,22 +49,6 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tv_nutrient_unit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Unit"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tv_nutrient_percent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Percent"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
         </LinearLayout>
 
 

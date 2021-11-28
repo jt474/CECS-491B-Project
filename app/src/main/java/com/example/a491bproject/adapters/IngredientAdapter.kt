@@ -1,4 +1,4 @@
-package com.example.a491bproject.Adapters
+package com.example.a491bproject.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -15,8 +15,6 @@ class IngredientAdapter (val context : Context, val ingredients: IngredientInfo)
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvNutrientName: TextView = view.findViewById(R.id.tv_nutrient_name)
         val tvNutrientAmount: TextView = view.findViewById(R.id.tv_nutrient_amount)
-        val tvNutrientUnit: TextView = view.findViewById(R.id.tv_nutrient_unit)
-        val tvNutrientPercent: TextView = view.findViewById(R.id.tv_nutrient_percent)
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -28,9 +26,7 @@ class IngredientAdapter (val context : Context, val ingredients: IngredientInfo)
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.tvNutrientName.text = ingredients.nutrition.nutrients[position].name
-        viewHolder.tvNutrientAmount.text = ingredients.nutrition.nutrients[position].name.toString()
-        viewHolder.tvNutrientUnit.text = ingredients.nutrition.nutrients[position].name
-        viewHolder.tvNutrientPercent.text = ingredients.nutrition.nutrients[position].name.toString()
+        viewHolder.tvNutrientAmount.text = ingredients.nutrition.nutrients[position].amount.toString() + ingredients.nutrition.nutrients[position].unit
     }
 
     override fun getItemCount() = ingredients.nutrition.nutrients.size
