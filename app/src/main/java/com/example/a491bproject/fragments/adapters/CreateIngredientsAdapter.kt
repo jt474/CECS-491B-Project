@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.a491bproject.Ingredient
 import com.example.a491bproject.R
 import com.example.a491bproject.models.IngredientModel
 
@@ -38,7 +39,7 @@ class CreateIngredientsAdapter ():
             val removed = ingredients[position]
             val alert = AlertDialog.Builder(holder.context)
             alert.setTitle("Delete entry");
-            alert.setMessage("Are you sure you want to delete? If not click anywhere else. \"${model.name}\"?");
+            alert.setMessage("Are you sure you want to delete? If not click anywhere else.\n\"${model.name}\"?");
             alert.setPositiveButton(android.R.string.ok, DialogInterface.OnClickListener() {
                     dialogInterface, i ->  deleteItem(position)
             })
@@ -50,17 +51,17 @@ class CreateIngredientsAdapter ():
         return ingredients.size
     }
 
-    fun submitIngredients(list:MutableList<IngredientModel>){
-        ingredients = list
-        Log.d("submitIngredients", "$ingredients")
+    fun submitIngredient(model:IngredientModel){
+        ingredients.add(model)
+        Log.d("submitIngredient", "$ingredients")
         notifyDataSetChanged()
     }
 
-    private fun deleteItem(position:Int){
+    private fun deleteItem(position:Int, ){
         ingredients.removeAt(position)
         notifyItemRemoved(position)
         notifyItemRangeChanged(position,ingredients.size)
-        Log.d("DeleteItem", "List now contains $ingredients")
+        Log.d("DeleteItem", "CreateIngredients RecyclerViewList now contains $ingredients")
     }
 
     inner class CreateIngredientsViewHolder(view: View):RecyclerView.ViewHolder(view) {

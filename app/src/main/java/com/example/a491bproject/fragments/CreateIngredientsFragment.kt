@@ -25,8 +25,6 @@ class CreateIngredientsFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: CreateIngredientsAdapter
 
-
-    private var ingredients: MutableList<IngredientModel> = mutableListOf<IngredientModel>()
     private var amount:String = ""
     private var unit:String = ""
     private var name:String = ""
@@ -136,10 +134,8 @@ class CreateIngredientsFragment : Fragment() {
         btnAddIngredient.setOnClickListener{
             val ingredient = IngredientModel(name,amount,unit)
             Log.d("OnClickListener","CreateIngredientsFragment: Model contains: ${ingredient.toString()}")
-            ingredients.add(ingredient)
-            adapter.submitIngredients(ingredients)
+            adapter.submitIngredient(ingredient)
             clearEditTexts()
-            viewCreateRecipeIngredients.requestFocus()
         }
     }
 
