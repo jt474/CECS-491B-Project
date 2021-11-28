@@ -22,7 +22,7 @@ class CreateInstructionsFragment : Fragment() {
     private lateinit var btnAddStep:Button
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: CreateInstructionsAdapter
-    
+
     private var stepInstructionEntered:Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,7 +79,7 @@ class CreateInstructionsFragment : Fragment() {
     private fun addOnClickListeners(){
         btnAddStep.setOnClickListener{
             val stepInstruction = etCreateRecipeInstruction.text.toString()
-            Log.d("OnClickListener","CreateInstructionsFragment: Model contains: ${instruction.toString()}")
+            Log.d("OnClickListener","CreateInstructionsFragment: Model contains: ${stepInstruction.toString()}")
             adapter.submitInstruction(stepInstruction)
             clearEditTexts()
         }
