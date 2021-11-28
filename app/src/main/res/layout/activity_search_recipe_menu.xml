@@ -31,30 +31,31 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
-        android:id="@+id/rg_search_options"
+        android:id="@+id/rg_search_recipes_options"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:orientation="horizontal"
+        android:checkedButton="@id/rb_search_recipe_by_name"
         app:layout_constraintBottom_toTopOf="@id/recycler_view_recipes"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_recipe_input">
 
         <RadioButton
-            android:id="@+id/rb_regular_search"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
+            android:id="@+id/rb_search_recipe_by_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:scaleX=".75"
             android:scaleY=".75"
             android:text="Search By Name" />
 
         <RadioButton
-            android:id="@+id/rb_ingredient_search"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
+            android:id="@+id/rb_search_recipe_by_ingredients"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:scaleX=".75"
             android:scaleY=".75"
-            android:text="Search By Ingredient" />
+            android:text="Search By Ingredient(s)" />
 
     </RadioGroup>
 
@@ -63,11 +64,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rg_search_options" />
+        app:layout_constraintTop_toBottomOf="@id/rg_search_recipes_options" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
