@@ -38,6 +38,6 @@
     <string name="delete_selected_recipes">Delete</string>
 
     <!-- Recipe Search Activity -->
-    <string name="hint_recipe_input">enter name of a recipe</string>
+    <string name="hint_recipe_input">rib eyes</string>
     <string name="btn_recipe_search">SEARCH</string>
 </resources>

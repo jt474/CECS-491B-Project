@@ -47,7 +47,8 @@
             android:layout_height="wrap_content"
             android:scaleX=".75"
             android:scaleY=".75"
-            android:text="Search By Name" />
+            android:text="Search By Name"
+            android:onClick="onRadioButtonClicked"/>
 
         <RadioButton
             android:id="@+id/rb_search_recipe_by_ingredients"
@@ -55,7 +56,8 @@
             android:layout_height="wrap_content"
             android:scaleX=".75"
             android:scaleY=".75"
-            android:text="Search By Ingredient(s)" />
+            android:text="Search By Ingredient(s)"
+            android:onClick="onRadioButtonClicked"/>
 
     </RadioGroup>
 
