@@ -14,16 +14,15 @@ class CreateRecipeFragmentStateAdapter(fragmentManager: FragmentManager, lifecyc
     private var fragment3 = CreateInstructionsFragment()
 
     override fun getItemCount(): Int {
-        return 4 //Hardcoded. We have 3 tabtitles
+        return 3 //Hardcoded. We have 3 tabtitles
     }
 
     override fun createFragment(position: Int): Fragment {
         when(position){
-            0-> return CreateDescriptionFragment()
+            0-> return fragment1
             1-> return fragment2
             2-> return fragment3
-            3-> return CreateDescriptionFragment()
         }
-        return CreateDescriptionFragment()
+        return fragment1
     }
 }

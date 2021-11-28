@@ -25,7 +25,8 @@ class RecipeInstructionsAdapter():
 
     override fun onBindViewHolder(holder: RecipeInstructionsViewHolder, position: Int) {
         val model = instructions[position]
-        val newStepNumber = "Step: ${model.getNumberPlusOne().toString()}"
+        val stepNumberPlusOne = model.number!!.toInt() + 1
+        val newStepNumber = "Step: $stepNumberPlusOne"
         Log.d("InstructionsFragment", "OnBindViewHolder newStepNumberMsg: $newStepNumber")
         holder.tvStepNumber.text = newStepNumber
         holder.tvInstructionText.text = model.step

@@ -1,6 +1,7 @@
 package com.example.a491bproject.fragments.adapters
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.DialogInterface
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,15 +9,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a491bproject.R
-import com.example.a491bproject.models.IngredientModel
+import com.example.a491bproject.fragments.interfaces.InstructionsListener
 import com.example.a491bproject.models.InstructionModel
+import com.example.a491bproject.viewmodels.CreateRecipeViewModel
+import com.google.firebase.database.DataSnapshot
+
+//Could have passed context to put data manipulation logic in Fragment
 
 class CreateInstructionsAdapter():
     RecyclerView.Adapter<CreateInstructionsAdapter.CreateInstructionsViewHolder>(){
 
     private var instructions = mutableListOf<InstructionModel>()
+    private lateinit var callback: InstructionsListener
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -28,7 +35,8 @@ class CreateInstructionsAdapter():
 
     override fun onBindViewHolder(holder: CreateInstructionsViewHolder, position: Int) {
         val model = instructions[position]
-        val newStepNumber = "Step: ${model.getNumberPlusOne().toString()}"
+        val stepNumberPlusOne = model.number!!.toInt() + 1
+        val newStepNumber = "Step: $stepNumberPlusOne"
         Log.d("CreateInstructions", "OnBindViewHolder newStepNumberMsg: $newStepNumber")
         holder.tvStepNumber.text = newStepNumber
         holder.tvInstructionText.text = model.step
@@ -49,12 +57,19 @@ class CreateInstructionsAdapter():
         return instructions.size
     }
 
+    fun setInstructionsListener(listener:InstructionsListener){
+        callback = listener
+    }
+
     fun submitInstruction(instructionText:String){
         val stepNumber = instructions.size.toLong()
         val model = InstructionModel(stepNumber, instructionText)
         instructions.add(model)
         Log.d("submitIngredients", "$instructions")
         notifyDataSetChanged()
+        if(callback != null){
+            callback.onInstructionsChanged(this.instructions)
+        }
     }
 
     private fun deleteItem(position:Int){
@@ -62,14 +77,10 @@ class CreateInstructionsAdapter():
         adjustStepNumbers(position)
         notifyItemRemoved(position)
         notifyItemRangeChanged(position,instructions.size)
+        if(callback != null){
+            callback.onInstructionsChanged(this.instructions)
+        }
         Log.d("DeleteItem", "CreateInstructionsList now contains $instructions")
-    }
-
-    inner class CreateInstructionsViewHolder(view: View):RecyclerView.ViewHolder(view) {
-        val tvStepNumber: TextView = view.findViewById(R.id.tvCreateRecipeInstructionStepNumber)
-        val tvInstructionText: TextView = view.findViewById(R.id.tvCreateRecipeInstructionText)
-        val ivInstructionDelete: ImageView = view.findViewById<ImageView>(R.id.ivCreateRecipeInstructionDelete)
-        val context: android.content.Context = view.context
     }
 
     private fun adjustStepNumbers(position:Int){
@@ -82,4 +93,14 @@ class CreateInstructionsAdapter():
             listIterator.set(newModel)
         }
     }
+
+    inner class CreateInstructionsViewHolder(view: View):RecyclerView.ViewHolder(view) {
+        val tvStepNumber: TextView = view.findViewById(R.id.tvCreateRecipeInstructionStepNumber)
+        val tvInstructionText: TextView = view.findViewById(R.id.tvCreateRecipeInstructionText)
+        val ivInstructionDelete: ImageView = view.findViewById<ImageView>(R.id.ivCreateRecipeInstructionDelete)
+        val context: android.content.Context = view.context
+    }
+
+
+
 }

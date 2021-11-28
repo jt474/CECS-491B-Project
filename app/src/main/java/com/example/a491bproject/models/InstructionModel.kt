@@ -7,11 +7,4 @@ data class InstructionModel(val number: Long? = -1, val step: String? = "default
     override fun toString(): String {
         return "Step $number: $step"
     }
-
-    fun getNumberPlusOne(): Int{
-        return when(number){
-            null -> -1
-            else -> number.toInt() + 1
-        }
-    }
 }

@@ -10,13 +10,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.a491bproject.Ingredient
 import com.example.a491bproject.R
 import com.example.a491bproject.fragments.adapters.CreateIngredientsAdapter
+import com.example.a491bproject.fragments.interfaces.IngredientsListener
 import com.example.a491bproject.models.IngredientModel
+import com.example.a491bproject.viewmodels.CreateRecipeViewModel
 
-class CreateIngredientsFragment : Fragment() {
+class CreateIngredientsFragment : Fragment(), IngredientsListener {
     private lateinit var viewCreateRecipeIngredients:View
     private lateinit var etIngredientName: EditText
     private lateinit var etIngredientAmount: EditText
@@ -24,6 +28,8 @@ class CreateIngredientsFragment : Fragment() {
     private lateinit var btnAddIngredient: Button
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: CreateIngredientsAdapter
+
+    private val viewModel: CreateRecipeViewModel by activityViewModels<CreateRecipeViewModel>()
 
     private var amount:String = ""
     private var unit:String = ""
@@ -48,8 +54,8 @@ class CreateIngredientsFragment : Fragment() {
         etIngredientUnit = viewCreateRecipeIngredients.findViewById(R.id.etCreateRecipeIngredientUnit)
         btnAddIngredient = viewCreateRecipeIngredients.findViewById(R.id.btnCreateRecipeAddIngredient)
         btnAddIngredient.isEnabled = false
-        adapter = CreateIngredientsAdapter()
 
+        initializeAdapter()
         initializeRecyclerView(adapter, viewCreateRecipeIngredients)
 
         addTextChangedListeners()
@@ -62,7 +68,10 @@ class CreateIngredientsFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(this.context)
         recyclerView.adapter = adapter
     }
-
+    private fun initializeAdapter(){
+        adapter = CreateIngredientsAdapter()
+        adapter.setIngredientsListener(this)
+    }
     private fun addTextChangedListeners() {
         etIngredientName.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -148,6 +157,10 @@ class CreateIngredientsFragment : Fragment() {
         etIngredientName.text.clear()
         etIngredientUnit.text.clear()
         etIngredientAmount.text.clear()
+    }
+
+    override fun onIngredientsChanged(list: MutableList<IngredientModel>) {
+        viewModel.submitIngredients(list,"CreateIngredientsFragment")
     }
 
 

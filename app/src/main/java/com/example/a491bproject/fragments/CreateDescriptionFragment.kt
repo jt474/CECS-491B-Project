@@ -57,7 +57,7 @@ class CreateDescriptionFragment : Fragment() {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                Log.d("CreateDescription","RecipeTitle afterTextChanged: ${p0.toString()}")
+                Log.d("CreateTitle","RecipeTitle afterTextChanged: ${p0.toString()}")
                 viewModel.setTitle(etRecipeTitle.text.toString(),"CreateDescriptionFragment.addTextChangedListener")
             }
         })
@@ -71,7 +71,7 @@ class CreateDescriptionFragment : Fragment() {
 
             override fun afterTextChanged(p0: Editable?) {
                Log.d("CreateDescription", "RecipeDescription afterTextChanged: ${p0.toString()}")
-                viewModel.setTitle(etRecipeDescription.text.toString(),"CreateDescriptionFragment.addTextChangedListener")
+                viewModel.setDescription(etRecipeDescription.text.toString(),"CreateDescriptionFragment.addTextChangedListener")
             }
         })
     }

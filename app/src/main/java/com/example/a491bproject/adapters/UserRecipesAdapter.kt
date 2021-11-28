@@ -66,7 +66,8 @@ class UserRecipesAdapter( val recipes: MutableList<UserRecipesModel>, val listen
         val updateMap = mutableMapOf<String, Any?>(
             "Recipes/${modelRecipeID}" to null,
             "Instructions/${modelRecipeID}" to null,
-            "Ingredients/${modelRecipeID}" to null
+            "Ingredients/${modelRecipeID}" to null,
+            "AboutRecipe/${modelRecipeID}" to null
         )
         dbRef.updateChildren(updateMap) //double check if asynchronous
 

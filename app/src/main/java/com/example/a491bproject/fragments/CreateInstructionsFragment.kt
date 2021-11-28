@@ -10,19 +10,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a491bproject.R
 import com.example.a491bproject.fragments.adapters.CreateInstructionsAdapter
+import com.example.a491bproject.fragments.interfaces.InstructionsListener
+import com.example.a491bproject.models.IngredientModel
 import com.example.a491bproject.models.InstructionModel
+import com.example.a491bproject.viewmodels.CreateRecipeViewModel
 
-class CreateInstructionsFragment : Fragment() {
+class CreateInstructionsFragment : Fragment(), InstructionsListener{
     private lateinit var viewCreateInstructions:View
     private lateinit var etCreateRecipeInstruction:EditText
     private lateinit var btnAddStep:Button
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: CreateInstructionsAdapter
 
+    private val viewModel: CreateRecipeViewModel by activityViewModels<CreateRecipeViewModel>()
     private var stepInstructionEntered:Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,16 +42,25 @@ class CreateInstructionsFragment : Fragment() {
         viewCreateInstructions =  inflater.inflate(R.layout.fragment_create_instructions, container, false)
         etCreateRecipeInstruction = viewCreateInstructions.findViewById(R.id.etCreateRecipeInstruction)
         btnAddStep = viewCreateInstructions.findViewById(R.id.btnCreateRecipeAddStep)
-        adapter = CreateInstructionsAdapter()
+        btnAddStep.isEnabled = false
+
+        initializeAdapter()
         initializeRecyclerView(adapter, viewCreateInstructions)
+
+        addTextChangedListeners()
+        addOnClickListeners()
 
         return viewCreateInstructions
     }
 
     private fun initializeRecyclerView(adapter: CreateInstructionsAdapter, view: View){
-        recyclerView = view.findViewById(R.id.rvCreateRecipeIngredients)
+        recyclerView = view.findViewById(R.id.rvCreateRecipeInstructions)
         recyclerView.layoutManager = LinearLayoutManager(this.context)
         recyclerView.adapter = adapter
+    }
+    private fun initializeAdapter(){
+        adapter=CreateInstructionsAdapter()
+        adapter.setInstructionsListener(this)
     }
 
     private fun addTextChangedListeners(){
@@ -65,16 +79,12 @@ class CreateInstructionsFragment : Fragment() {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                TODO("Not yet implemented")
+
             }
 
         })
     }
 
-    private fun tryEnableButton(){
-        Log.d("TryEnableButton","$stepInstructionEntered")
-        btnAddStep.isEnabled = stepInstructionEntered
-    }
 
     private fun addOnClickListeners(){
         btnAddStep.setOnClickListener{
@@ -85,8 +95,17 @@ class CreateInstructionsFragment : Fragment() {
         }
     }
 
+    private fun tryEnableButton(){
+        Log.d("TryEnableButton","$stepInstructionEntered")
+        btnAddStep.isEnabled = stepInstructionEntered
+    }
+
     private fun clearEditTexts(){
         etCreateRecipeInstruction.text.clear()
+    }
+
+    override fun onInstructionsChanged(list: MutableList<InstructionModel>) {
+        viewModel.submitInstructions(list, "CreateInstructionFragment")
     }
 
 

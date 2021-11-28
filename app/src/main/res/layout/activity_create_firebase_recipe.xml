@@ -41,10 +41,20 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_below="@id/tab_layout_CreateRecipe"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnCreateRecipe"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tab_layout_CreateRecipe">
 
     </androidx.viewpager2.widget.ViewPager2>
+
+    <Button
+        android:id="@+id/btnCreateRecipe"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/button_red"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

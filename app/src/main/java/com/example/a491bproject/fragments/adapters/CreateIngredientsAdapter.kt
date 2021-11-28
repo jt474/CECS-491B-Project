@@ -8,14 +8,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.a491bproject.Ingredient
 import com.example.a491bproject.R
+import com.example.a491bproject.fragments.interfaces.IngredientsListener
 import com.example.a491bproject.models.IngredientModel
 
+//Could have passed context to put data manipulation logic in Fragment
 class CreateIngredientsAdapter ():
     RecyclerView.Adapter<CreateIngredientsAdapter.CreateIngredientsViewHolder>(){
 
     private var ingredients = mutableListOf<IngredientModel>()
+    private lateinit var callback:IngredientsListener
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -55,6 +57,13 @@ class CreateIngredientsAdapter ():
         ingredients.add(model)
         Log.d("submitIngredient", "$ingredients")
         notifyDataSetChanged()
+        if(callback != null){
+            callback.onIngredientsChanged(this.ingredients)
+        }
+    }
+
+    fun setIngredientsListener(listener:IngredientsListener){
+        this.callback = listener
     }
 
     private fun deleteItem(position:Int, ){
@@ -62,6 +71,9 @@ class CreateIngredientsAdapter ():
         notifyItemRemoved(position)
         notifyItemRangeChanged(position,ingredients.size)
         Log.d("DeleteItem", "CreateIngredients RecyclerViewList now contains $ingredients")
+        if(callback != null){
+            callback.onIngredientsChanged(this.ingredients)
+        }
     }
 
     inner class CreateIngredientsViewHolder(view: View):RecyclerView.ViewHolder(view) {

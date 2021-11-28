@@ -2,70 +2,69 @@ package com.example.a491bproject.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.example.a491bproject.interfaces.CreateRecipeViewModelListener
 import com.example.a491bproject.models.*
 import com.google.firebase.auth.FirebaseAuth
 import java.text.SimpleDateFormat
 import java.util.*
 
 class CreateRecipeViewModel:ViewModel() {
-    private var recipeID: String = "Default RecipeID"
-    private var authorID: String ="Default AuthorID"
-    private var dateUpdated: String = "Default Date"
-    private var recipeTitle: String = "Default Title"
+    private var recipeTitle: String = ""
     private var description: String = ""
-    private var aboutModel: RecipeAboutModel = RecipeAboutModel()
     private var instructions: MutableList<InstructionModel> = mutableListOf<InstructionModel>()
     private var ingredients: MutableList<IngredientModel> = mutableListOf<IngredientModel>()
+    private lateinit var viewModelListener: CreateRecipeViewModelListener
 
-    public fun setAuthorID(calledFrom:String){
-        val newValue = getCurrentUserUID()
-        Log.d("setAuthorID","$calledFrom:\n NewAuthorID: $newValue, OldAuthorID: $authorID\n")
-        this.authorID = newValue
-        Log.d("setAuthorID","ViewModel now has $authorID")
+    fun getRecipeTitle():String{
+        return recipeTitle
     }
 
-    public fun setDate(calledFrom:String){
-        val newValue = getCurrentDate()
-        Log.d("setDate","$calledFrom:\n NewDate: $newValue, OldDate: $dateUpdated\n")
-        this.dateUpdated = newValue
-        Log.d("setDate","ViewModel now has $dateUpdated")
+    fun getDescription():String{
+        return description
     }
 
-    public fun setTitle(newValue:String, calledFrom:String){
+    fun getInstructions():MutableList<InstructionModel>{
+        return instructions
+    }
+
+    fun getIngredients():MutableList<IngredientModel>{
+        return ingredients
+    }
+
+    fun setViewModelListener(listener:CreateRecipeViewModelListener){
+        this.viewModelListener = listener
+    }
+
+    fun setTitle(newValue:String, calledFrom:String){
         Log.d("setTitle","$calledFrom:\n NewTitle: $newValue, OldTitle: $recipeTitle\n")
         this.recipeTitle = newValue
         Log.d("setTitle","ViewModel now has $recipeTitle")
+        viewModelListener.onChanged()
     }
 
-    public fun setDescription(newValue:String, calledFrom:String){
+    fun setDescription(newValue:String, calledFrom:String){
         Log.d("setDescription","$calledFrom:\n NewDescription: $newValue, OldDescription: $description\n")
         this.description = newValue
         Log.d("setDescription","ViewModel now has $description")
+        viewModelListener.onChanged()
     }
 
-    public fun submitInstructions( newValues:MutableList<InstructionModel>, calledFrom:String){
-        Log.d("submitInstructions","$calledFrom:\n NewInstructions: ${newValues.toString()}, OldInstructions: ${instructions.toString()}\n")
+    fun submitInstructions( newValues:MutableList<InstructionModel>, calledFrom:String){
         this.instructions = newValues
-        Log.d("","ViewModel now has ${instructions.toString()}")
+        Log.d("submitInstructions","ViewModel now has $instructions")
+        viewModelListener.onChanged()
     }
 
-    public fun submitIngredients( newValues:MutableList<IngredientModel>, calledFrom:String){
-        Log.d("submitInstructions","$calledFrom:\n NewIngredients: ${newValues.toString()}, OldIngredients: ${ingredients.toString()}\n")
+    fun submitIngredients( newValues:MutableList<IngredientModel>, calledFrom:String){
         this.ingredients = newValues
-        Log.d("","ViewModel now has ${ingredients.toString()}")
+        Log.d("submitIngredients","ViewModel now has $ingredients")
+        viewModelListener.onChanged()
     }
 
-    private fun getCurrentUserUID():String {
-        val authorID = FirebaseAuth.getInstance().currentUser!!.uid
-        Log.d("CreateViewModel", "AuthorID set to $authorID")
-        return authorID
+    fun isNotMissingInfo():Boolean{
+        return recipeTitle.isNotEmpty() && description.isNotEmpty() && instructions.isNotEmpty() && ingredients.isNotEmpty()
     }
 
-    private fun getCurrentDate(): String{
-        val sdf = SimpleDateFormat("MM/dd/yyyy")
-        val lastUpdatedStr = sdf.format(Date())
-        Log.d("getCurrentDate", "ViewModel.dateUpdated changed to $lastUpdatedStr")
-        return lastUpdatedStr
-    }
+
 
 }
