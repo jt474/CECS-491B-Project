@@ -35,16 +35,18 @@ class SearchRecipeMenu : AppCompatActivity() {
         recyclerViewRecipes.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(this)
         recyclerViewRecipes.layoutManager = linearLayoutManager
-        search.setOnClickListener() {
-            val input = userInput.text.toString()
-            getRecipes(input)
-        }
+//        search.setOnClickListener() {
+//            val input = userInput.text.toString()
+//            getRecipes(input)
+//        }
         // This set the default search option to be search recipes by name
         onRadioButtonClicked(searchOptions.findViewById(R.id.rb_search_recipe_by_name))
     }
 
     fun onRadioButtonClicked(view: View) {
         val userInput = findViewById<EditText>(R.id.et_recipe_input)
+        val search = findViewById<Button>(R.id.btn_recipe_search)
+
         if (view is RadioButton) {
             // Is the button now checked?
             val checked = view.isChecked
@@ -53,10 +55,24 @@ class SearchRecipeMenu : AppCompatActivity() {
                 R.id.rb_search_recipe_by_name ->
                     if (checked) {
                         userInput.setHint("clam chowder")
+                        search.setOnClickListener() {
+                            val input = userInput.text.toString()
+                            // TODO remove the line below
+                            getRecipes(input)
+                            // TODO call getRecipesByName(input : String)
+                        }
                     }
                 R.id.rb_search_recipe_by_ingredients ->
                     if (checked) {
                         userInput.setHint("salmon, rice")
+                        search.setOnClickListener() {
+                            val input = userInput.text.toString()
+                            // TODO remove the line below
+                            getRecipes(input)
+                            // TODO tokenize user inputs
+                            // TODO call getRecipesByIngredients(input : List)
+                        }
+
                     }
             }
         }
@@ -73,6 +89,7 @@ class SearchRecipeMenu : AppCompatActivity() {
             .create(ApiInterface::class.java)
 
         val retrofitData = retrofitBuilder.searchRecipes(input, 20, key)
+
 
         retrofitData.enqueue(object : Callback<Recipes> {
             override fun onResponse(

@@ -12,6 +12,8 @@ interface ApiInterface {
     fun getIngredientInfo(): Call<IngredientInfo>
 
     @GET("complexSearch")
-    fun searchRecipes(@Query("query") query: String, @Query("number") number: Int, @Query("apiKey") apiKey: String): Call<Recipes>
+    fun searchRecipes(@Query("query") query: String,
+                      @Query("number") number: Int,
+                      @Query("apiKey") apiKey: String): Call<Recipes>
 
 }
