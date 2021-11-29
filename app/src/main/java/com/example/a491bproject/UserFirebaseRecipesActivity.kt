@@ -1,5 +1,6 @@
 package com.example.a491bproject
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -36,21 +37,16 @@ class UserFirebaseRecipesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_firebase_recipes)
 
-       // binding = ActivityUserFirebaseRecipesBinding.inflate(layoutInflater)
-       // setContentView(binding.root)
-
         auth = FirebaseAuth.getInstance()
-        dbHandler = FirebaseRecipeDAO(auth)
         testRecipesList = mutableListOf<UserRecipesModel>()
-        //Log.d("testRecipesList", "$testRecipesList")
-       /*var testRecipesList = mutableListOf<UserRecipesModel>(
-           UserRecipesModel("Apple Pie",false),
-           UserRecipesModel("Misery",false),
-           UserRecipesModel("Llamas",false),
-           UserRecipesModel("Rough",false),
-           UserRecipesModel("Apple Pie",false)) */
 
-        val adapter = UserRecipesAdapter(testRecipesList)
+
+        val adapter = UserRecipesAdapter(testRecipesList){
+            val intent = Intent(this, RecipeFirebaseInfoActivity::class.java)
+            intent.putExtra(getString(R.string.RecipeID), it.recipeID)
+            intent.putExtra(getString(R.string.RecipeTitle), it.title)
+            startActivity(intent)
+        }
         recyclerView = findViewById<RecyclerView>(R.id.rvUserRecipes)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -96,6 +92,8 @@ class UserFirebaseRecipesActivity : AppCompatActivity() {
             Log.d("onCancelled","FirebaseChildListener ran into an error. ${error.toString()}" )
         }
     }
+
+
 
 
 

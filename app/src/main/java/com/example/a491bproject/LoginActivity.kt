@@ -161,6 +161,13 @@ class LoginActivity : AppCompatActivity() {
 
         }
 
+        //Navigates to Forgot Password Screen
+        val forgot: Button = findViewById<Button>(R.id.forgotBtn)
+        forgot.setOnClickListener(){
+            val forgotIntent = Intent(this,ForgotPassword::class.java)
+            startActivity(forgotIntent)
+        }
+
         //Navigates to Register Screen
         val register: Button = findViewById<Button>(R.id.registerBtn)
         register.setOnClickListener(){

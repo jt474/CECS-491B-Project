@@ -4,8 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.TextView
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
@@ -49,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         //Navigate to Create Recipe
         val createRecipeBtn: Button = findViewById<Button>(R.id.createRecipeBtn)
         createRecipeBtn.setOnClickListener{
-            val createRecipeIntent = Intent(this, CreateRecipeActivity::class.java)
+            val createRecipeIntent = Intent(this, CreateFirebaseRecipeActivity::class.java)
             startActivity(createRecipeIntent)
         }
 
@@ -60,10 +58,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(userRecipesIntent)
         }
 
-        //Navigate to settings
+        //Navigate to profile
         val settingsBtn: Button = findViewById<Button>(R.id.settingsBtn)
         settingsBtn.setOnClickListener{
-            val settingsIntent = Intent(this, SettingActivity::class.java)
+            val settingsIntent = Intent(this, Settings::class.java)
             settingsIntent.putExtra("emailID", emailId)
             startActivity(settingsIntent)
         }
