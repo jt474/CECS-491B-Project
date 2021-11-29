@@ -63,7 +63,7 @@
         android:layout_height="80dp"
         android:layout_margin="@dimen/text_margin"
         android:layout_marginEnd="8dp"
-        android:backgroundTint="@color/button_red"
+        android:backgroundTint="@color/navy"
         android:text="@string/btn_add_ingredient"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
