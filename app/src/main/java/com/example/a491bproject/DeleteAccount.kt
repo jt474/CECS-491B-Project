@@ -28,7 +28,7 @@ class DeleteAccount : AppCompatActivity() {
         val user = auth.currentUser
         val email = user?.email.toString()
 
-        test.setOnClickListener{
+ /*       test.setOnClickListener{
             MaterialAlertDialogBuilder(this)
                 .setTitle("Delete Confirmation")
                 .setMessage("Are you sure you want to delete your account? ALL data will be wiped. DO you wish to continue?")
@@ -46,7 +46,7 @@ class DeleteAccount : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }.show()
-        }
+        }*/
 
 
         confirmDelete.setOnClickListener {
