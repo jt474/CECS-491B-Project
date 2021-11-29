@@ -22,7 +22,7 @@
     <EditText
         android:id="@+id/etCreateRecipeInstruction"
         android:layout_width="0dp"
-        android:layout_height="160dp"
+        android:layout_height="80dp"
         android:layout_margin="@dimen/text_margin"
         android:ems="10"
         android:gravity="start|top"

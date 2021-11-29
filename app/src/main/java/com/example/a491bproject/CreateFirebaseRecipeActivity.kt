@@ -1,5 +1,9 @@
 package com.example.a491bproject
 
+import android.app.AlertDialog
+import android.app.AlertDialog.Builder
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -68,6 +72,14 @@ class CreateFirebaseRecipeActivity : AppCompatActivity(),CreateRecipeViewModelLi
             saveToInstructions(recipeID,db.getReference("Instructions"))
             saveToIngredients(recipeID,db.getReference("Ingredients"))
             saveToAboutRecipe(recipeID,db.getReference("AboutRecipe"))
+            val alert = AlertDialog.Builder(this)
+            alert.setTitle("Recipe Created!");
+            alert.setMessage("Your recipe \"${mViewModel.getRecipeTitle()}\" was created!");
+            alert.setOnDismissListener(DialogInterface.OnDismissListener {
+                val mainActivityIntent = Intent(this, MainActivity::class.java)
+                startActivity(mainActivityIntent)
+            })
+            alert.show()
         }
 
     }

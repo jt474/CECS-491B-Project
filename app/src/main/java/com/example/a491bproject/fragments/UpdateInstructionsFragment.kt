@@ -1,33 +1,46 @@
 package com.example.a491bproject.fragments
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.a491bproject.R
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.example.a491bproject.fragments.adapters.UpdateInstructionsAdapter
+import com.example.a491bproject.fragments.interfaces.InstructionsListener
+import com.example.a491bproject.models.InstructionModel
+import com.example.a491bproject.viewmodels.UpdateRecipeViewModel
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.getValue
 
 /**
  * A simple [Fragment] subclass.
- * Use the [UpdateInstructionsFragment.newInstance] factory method to
- * create an instance of this fragment.
  */
-class UpdateInstructionsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class UpdateInstructionsFragment : Fragment(), InstructionsListener {
+    private lateinit var viewUpdateInstructions:View
+    private lateinit var etUpdateRecipeInstruction:EditText
+    private lateinit var btnAddStep:Button
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: UpdateInstructionsAdapter
+
+    private val viewModel: UpdateRecipeViewModel by activityViewModels()
+    private var stepInstructionEntered:Boolean = false
+    private var instructionsInitialized:Boolean = false
+    private val logTag = "UpdateInstructions"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
@@ -35,26 +48,95 @@ class UpdateInstructionsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_update_instructions, container, false)
+        viewUpdateInstructions =  inflater.inflate(R.layout.fragment_update_instructions, container, false)
+        etUpdateRecipeInstruction = viewUpdateInstructions.findViewById(R.id.etUpdateRecipeInstruction)
+        btnAddStep = viewUpdateInstructions.findViewById(R.id.btnUpdateRecipeAddStep)
+        btnAddStep.isEnabled = false
+
+        initializeAdapter()
+        initializeRecyclerView(adapter, viewUpdateInstructions)
+
+        val recipeID = arguments?.getString(getString(R.string.RecipeID))
+        if (recipeID != null){
+            populateRecyclerView(recipeID)
+        }
+
+        addTextChangedListeners()
+        addOnClickListeners()
+
+        return viewUpdateInstructions
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment UpdateInstructionsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            UpdateInstructionsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onInstructionsChanged(list: MutableList<InstructionModel>) {
+        viewModel.instructions = list
+    }
+
+    /**
+     * Set up functions
+     */
+    private fun initializeAdapter(){
+        adapter= UpdateInstructionsAdapter(this)
+    }
+
+    private fun initializeRecyclerView(adapter:UpdateInstructionsAdapter, view: View){
+        recyclerView = view.findViewById(R.id.rvUpdateRecipeInstructions)
+        recyclerView.layoutManager = LinearLayoutManager(this.context)
+        recyclerView.adapter = adapter
+    }
+
+    private fun populateRecyclerView(recipeID:String){
+        val dbRef = FirebaseDatabase.getInstance().reference
+        val query = dbRef.child("Instructions").child(recipeID).addValueEventListener(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(!instructionsInitialized){//We don't want instructions to be added/reset if someone makes changes from another isntance.
+                    val instructions = mutableListOf<InstructionModel>()
+                    for(postSnapshot in snapshot.children){
+                        val model = postSnapshot.getValue<InstructionModel>()
+                        if(model!=null){
+                            Log.d(logTag, "Reference: ${postSnapshot.ref}")
+                            instructions.add(model)
+                        }
+                    }
+                    adapter.submitInstructions(instructions)
+                    instructionsInitialized = true
                 }
             }
+
+            override fun onCancelled(error: DatabaseError) {
+               Log.d(logTag, "An error occurred while trying to retrieve data about recipeID: $recipeID")
+            }
+
+        })
     }
+
+
+    private fun addTextChangedListeners(){
+        etUpdateRecipeInstruction.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    stepInstructionEntered = p0.toString().trim().isNotEmpty()
+                    tryEnableButton()
+            }
+            override fun afterTextChanged(p0: Editable?) { }
+        })
+    }
+
+    private fun addOnClickListeners(){
+        btnAddStep.setOnClickListener{
+            val stepInstruction = etUpdateRecipeInstruction.text.toString().trim()
+            Log.d(logTag,"addOnClick Model contains: ${stepInstruction.toString()}")
+            adapter.submitInstruction(stepInstruction)
+            clearEditTexts()
+        }
+    }
+
+    private fun clearEditTexts(){
+        etUpdateRecipeInstruction.text.clear()
+    }
+
+    private fun tryEnableButton(){
+        Log.d(logTag,"$stepInstructionEntered")
+        btnAddStep.isEnabled = stepInstructionEntered
+    }
+
 }

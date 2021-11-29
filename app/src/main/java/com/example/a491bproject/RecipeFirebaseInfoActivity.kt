@@ -33,24 +33,16 @@ class RecipeFirebaseInfoActivity : AppCompatActivity() {
         //Set Recipe Title
         tvRecipeTitle.text = recipeTitle
 
-        //Set FragmentStateAdapter for viewPager2
-        val adapter = RecipeInfoFragmentStateAdapter(supportFragmentManager,lifecycle)
-        setUpAdapter(adapter, recipeID)
+        //Set FragmentStateAdapter for ViewPager2
+        val adapter = RecipeInfoFragmentStateAdapter(getString(R.string.RecipeID), recipeID, supportFragmentManager,lifecycle)
         viewPager.adapter = adapter
 
-        //Set up Tab
+        //Set up Tabs
         TabLayoutMediator(tabLayout, viewPager){
             tab, position -> tab.text = tabTitles[position];
 
         }.attach()
 
-
-    }
-
-    private fun setUpAdapter(adapter:RecipeInfoFragmentStateAdapter, id:String){
-        adapter.setRecipeID(id)
-        adapter.setRecipeKey(getString(R.string.RecipeID))
-        adapter.setBundles()
     }
 
     private fun receiveBundle(){

@@ -1,4 +1,4 @@
-package com.example.a491bproject.fragments
+    package com.example.a491bproject.fragments
 
 import android.os.Bundle
 import android.text.Editable
@@ -53,14 +53,15 @@ class CreateInstructionsFragment : Fragment(), InstructionsListener{
         return viewCreateInstructions
     }
 
+    private fun initializeAdapter(){
+        adapter=CreateInstructionsAdapter()
+        adapter.setInstructionsListener(this)
+    }
+
     private fun initializeRecyclerView(adapter: CreateInstructionsAdapter, view: View){
         recyclerView = view.findViewById(R.id.rvCreateRecipeInstructions)
         recyclerView.layoutManager = LinearLayoutManager(this.context)
         recyclerView.adapter = adapter
-    }
-    private fun initializeAdapter(){
-        adapter=CreateInstructionsAdapter()
-        adapter.setInstructionsListener(this)
     }
 
     private fun addTextChangedListeners(){
@@ -85,14 +86,17 @@ class CreateInstructionsFragment : Fragment(), InstructionsListener{
         })
     }
 
-
     private fun addOnClickListeners(){
         btnAddStep.setOnClickListener{
-            val stepInstruction = etCreateRecipeInstruction.text.toString()
+            val stepInstruction = etCreateRecipeInstruction.text.toString().trim()
             Log.d("OnClickListener","CreateInstructionsFragment: Model contains: ${stepInstruction.toString()}")
             adapter.submitInstruction(stepInstruction)
             clearEditTexts()
         }
+    }
+
+    private fun clearEditTexts(){
+        etCreateRecipeInstruction.text.clear()
     }
 
     private fun tryEnableButton(){
@@ -100,13 +104,8 @@ class CreateInstructionsFragment : Fragment(), InstructionsListener{
         btnAddStep.isEnabled = stepInstructionEntered
     }
 
-    private fun clearEditTexts(){
-        etCreateRecipeInstruction.text.clear()
-    }
-
     override fun onInstructionsChanged(list: MutableList<InstructionModel>) {
         viewModel.submitInstructions(list, "CreateInstructionFragment")
     }
-
 
 }

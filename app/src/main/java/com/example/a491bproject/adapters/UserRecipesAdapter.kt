@@ -2,7 +2,7 @@ package com.example.a491bproject.adapters
 
 import android.app.AlertDialog
 import android.content.DialogInterface
-import android.media.Image
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,17 +10,17 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.a491bproject.MainActivity
 import com.example.a491bproject.R
+import com.example.a491bproject.interfaces.onClickUserRecipeListener
 import com.example.a491bproject.models.UserRecipesModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.core.Context
-import com.google.firebase.ktx.Firebase
-import org.w3c.dom.Text
 
-class UserRecipesAdapter( val recipes: MutableList<UserRecipesModel>, val listener: (UserRecipesModel)-> Unit):
+class UserRecipesAdapter(val recipes: MutableList<UserRecipesModel>, onClickListener:onClickUserRecipeListener):
     RecyclerView.Adapter<UserRecipesAdapter.UserRecipesViewHolder>() {
-
+    private val onClickUserRecipeListener = onClickListener
     private val mAuth:FirebaseAuth by lazy{ FirebaseAuth.getInstance()}
 
     inner class UserRecipesViewHolder(view: View) : RecyclerView.ViewHolder(view){
@@ -41,15 +41,17 @@ class UserRecipesAdapter( val recipes: MutableList<UserRecipesModel>, val listen
         val model = recipes[position]
         holder.tvRecipeTitle.text = model.title
         holder.itemView.setOnClickListener{
-            listener(model)
+            onClickUserRecipeListener.onSelectClick(model)
+        }
+        holder.ivEditUserRecipe.setOnClickListener{
+            onClickUserRecipeListener.onEditClick(model)
         }
         holder.ivDeleteUserRecipe.setOnClickListener{
-            val deletedRecipe = recipes[position]
             val alert = AlertDialog.Builder(holder.context)
             alert.setTitle("Delete entry");
-            alert.setMessage("Are you sure you want to delete? If not click anywhere else. \"$model.title\"?");
+            alert.setMessage("Are you sure you want to delete \"${recipes[position].title}\"? If not click anywhere else.");
             alert.setPositiveButton(android.R.string.ok, DialogInterface.OnClickListener() {
-                dialogInterface, i ->  deleteItem(position)
+                    dialogInterface, i ->  deleteItem(position)
             })
             alert.show()
         }

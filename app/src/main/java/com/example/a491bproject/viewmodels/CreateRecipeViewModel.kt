@@ -7,7 +7,7 @@ import com.example.a491bproject.models.*
 import com.google.firebase.auth.FirebaseAuth
 import java.text.SimpleDateFormat
 import java.util.*
-
+//https://kotlinlang.org/docs/coding-conventions.html#names-for-backing-properties for refactoring
 class CreateRecipeViewModel:ViewModel() {
     private var recipeTitle: String = ""
     private var description: String = ""
@@ -38,26 +38,26 @@ class CreateRecipeViewModel:ViewModel() {
     fun setTitle(newValue:String, calledFrom:String){
         Log.d("setTitle","$calledFrom:\n NewTitle: $newValue, OldTitle: $recipeTitle\n")
         this.recipeTitle = newValue
-        Log.d("setTitle","ViewModel now has $recipeTitle")
+        Log.d("setTitle","CreateViewModel now has $recipeTitle")
         viewModelListener.onChanged()
     }
 
     fun setDescription(newValue:String, calledFrom:String){
         Log.d("setDescription","$calledFrom:\n NewDescription: $newValue, OldDescription: $description\n")
         this.description = newValue
-        Log.d("setDescription","ViewModel now has $description")
+        Log.d("setDescription","CreateViewModel now has $description")
         viewModelListener.onChanged()
     }
 
     fun submitInstructions( newValues:MutableList<InstructionModel>, calledFrom:String){
         this.instructions = newValues
-        Log.d("submitInstructions","ViewModel now has $instructions")
+        Log.d("submitInstructions","CreateViewModel now has $instructions")
         viewModelListener.onChanged()
     }
 
     fun submitIngredients( newValues:MutableList<IngredientModel>, calledFrom:String){
         this.ingredients = newValues
-        Log.d("submitIngredients","ViewModel now has $ingredients")
+        Log.d("submitIngredients","CreateViewModel now has $ingredients")
         viewModelListener.onChanged()
     }
 

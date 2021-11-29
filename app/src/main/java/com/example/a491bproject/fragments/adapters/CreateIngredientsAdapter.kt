@@ -41,7 +41,7 @@ class CreateIngredientsAdapter ():
             val removed = ingredients[position]
             val alert = AlertDialog.Builder(holder.context)
             alert.setTitle("Delete entry");
-            alert.setMessage("Are you sure you want to delete? If not click anywhere else.\n\"${model.name}\"?");
+            alert.setMessage("Are you sure you want to delete? If not click anywhere else.\n\"${removed.name}\"?");
             alert.setPositiveButton(android.R.string.ok, DialogInterface.OnClickListener() {
                     dialogInterface, i ->  deleteItem(position)
             })
