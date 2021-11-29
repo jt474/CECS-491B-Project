@@ -16,7 +16,7 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:text="Recipe Information"
-        android:textColor="@android:color/primary_text_light"
+        android:textColor="@android:color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,8 +44,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvRecipeTitle"
         app:tabBackground="@color/material_on_primary_emphasis_high_type"
-        app:tabIndicatorColor="@color/design_default_color_error"
-        app:tabSelectedTextColor="@color/design_default_color_error"
+        app:tabIndicatorColor="@color/navy"
+        app:tabSelectedTextColor="@color/navy"
         tools:ignore="SpeakableTextPresentCheck"></com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager2.widget.ViewPager2

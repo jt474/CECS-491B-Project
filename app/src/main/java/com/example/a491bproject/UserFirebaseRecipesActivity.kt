@@ -53,6 +53,12 @@ class UserFirebaseRecipesActivity : AppCompatActivity(), onClickUserRecipeListen
         val getUserRecipeQuery = dbRef.child("Recipes")
         getUserRecipeQuery.orderByChild("authorID").equalTo(userID).addChildEventListener(UserRecipesFirebaseChildListener())
 
+        val actionBar = supportActionBar
+
+        if (actionBar != null) {
+            actionBar.title = "Verify Email"
+        }
+
     }
 
     private inner class UserRecipesFirebaseChildListener: ChildEventListener {
