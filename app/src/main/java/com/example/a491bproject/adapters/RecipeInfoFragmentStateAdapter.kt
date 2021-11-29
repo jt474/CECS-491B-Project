@@ -9,14 +9,22 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.a491bproject.fragments.RecipeIngredientsFragment
 import com.example.a491bproject.fragments.RecipeInstructionsFragment
 import com.example.a491bproject.fragments.RecipeAboutFragment
+//recipeKey should be acquired from resources.
+class RecipeInfoFragmentStateAdapter(recipeKey:String, recipeID:String, fragmentManager: FragmentManager, lifecycle: Lifecycle): FragmentStateAdapter(fragmentManager, lifecycle) {
 
-class RecipeInfoFragmentStateAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle): FragmentStateAdapter(fragmentManager, lifecycle) {
-
-    private lateinit var recipeKey:String
-    private lateinit var recipeID:String
+    private val recipeKey = recipeKey
+    private val recipeID = recipeID
     private var fragment1 = RecipeAboutFragment()
     private var fragment2 = RecipeIngredientsFragment()
     private var fragment3 = RecipeInstructionsFragment()
+
+    init{
+        val bundle = Bundle()
+        bundle.putString(recipeKey,recipeID)
+        fragment1.arguments = bundle
+        fragment2.arguments = bundle
+        fragment3.arguments = bundle
+    }
 
     override fun getItemCount(): Int {
         return 3 //Hardcoded... we have 3 tab titles
@@ -29,44 +37,6 @@ class RecipeInfoFragmentStateAdapter(fragmentManager: FragmentManager, lifecycle
             2-> return fragment3
         }
         return fragment1
-    }
-
-    fun setRecipeKey(key:String){
-        Log.d("SetRecipeKey","RecipeKey Set")
-        recipeKey= key
-    }
-    fun setRecipeID(id:String){
-        Log.d("SetRecipeID","RecipeIDSet")
-        recipeID = id
-    }
-    fun setBundles(){
-        nutritionBundle()
-        ingredientsBundle()
-        instructionsBundle()
-    }
-
-    private fun nutritionBundle(){
-        val bundle = Bundle()
-        bundle.putString(recipeKey,recipeID)
-        val frag = RecipeAboutFragment()
-        frag.arguments = bundle
-        fragment1 = frag
-    }
-
-    private fun ingredientsBundle(){
-        val bundle = Bundle()
-        bundle.putString(recipeKey,recipeID)
-        val frag = RecipeIngredientsFragment()
-        frag.arguments = bundle
-        fragment2 = frag
-    }
-
-    private fun instructionsBundle(){
-        val bundle = Bundle()
-        bundle.putString(recipeKey,recipeID)
-        val frag = RecipeInstructionsFragment()
-        frag.arguments = bundle
-        fragment3 = frag
     }
 
 }
