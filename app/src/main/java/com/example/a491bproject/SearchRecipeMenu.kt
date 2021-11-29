@@ -41,7 +41,7 @@ class SearchRecipeMenu : AppCompatActivity() {
         recyclerViewRecipes.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(this)
         recyclerViewRecipes.layoutManager = linearLayoutManager
-        radioGroup = findViewById(R.id.rg_different_search)
+//        radioGroup = findViewById(R.id.rg_search_recipes_options)
 
 //        recipeRecyclerViewRecipes = findViewById(R.id.recycler_view_recipes_ingredients)
 //        recipeRecyclerViewRecipes.setHasFixedSize(true)
@@ -60,12 +60,12 @@ class SearchRecipeMenu : AppCompatActivity() {
         }
 
         //Navigate to Search By Ingredient
-        val searchRecipeBtn: Button = findViewById<Button>(R.id.btn_recipe_ingredient_search)
-        searchRecipeBtn.setOnClickListener() {
-            val searchRecipeIntent = Intent(this, SearchRecipeByIngredient::class.java)
-            startActivity(searchRecipeIntent)
-
-        }
+//        val searchRecipeBtn: Button = findViewById<Button>(R.id.btn_recipe_ingredient_search)
+//        searchRecipeBtn.setOnClickListener() {
+//            val searchRecipeIntent = Intent(this, SearchRecipeByIngredient::class.java)
+//            startActivity(searchRecipeIntent)
+//
+//        }
         // the hint "clam chowder" should be the default hint to prompt user to enter recipe name
         onRadioButtonClicked(searchOptions.findViewById(R.id.rb_search_recipe_by_name))
     }
