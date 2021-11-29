@@ -55,7 +55,7 @@ class ProfileActivity : AppCompatActivity() {
         val actionBar = supportActionBar
 
         if(actionBar != null){
-            actionBar.title = "Settings"
+            actionBar.title = "Profile"
         }
     }
 }

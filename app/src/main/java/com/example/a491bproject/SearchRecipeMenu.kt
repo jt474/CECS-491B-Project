@@ -24,6 +24,7 @@ class SearchRecipeMenu : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_recipe_menu)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val search = findViewById<Button>(R.id.btn_recipe_search)
         val userInput = findViewById<EditText>(R.id.et_recipe_input)
@@ -64,5 +65,10 @@ class SearchRecipeMenu : AppCompatActivity() {
                 Log.d("MainActivity", "onFailure: $t")
             }
         })
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
     }
 }

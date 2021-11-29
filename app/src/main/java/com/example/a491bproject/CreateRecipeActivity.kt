@@ -16,6 +16,7 @@ class CreateRecipeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_recipe)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         //Navigate to add Ingredients for recipe
         val createBtn: Button = findViewById<Button>(R.id.create)
@@ -23,5 +24,10 @@ class CreateRecipeActivity : AppCompatActivity() {
             val createIngredientsIntent = Intent(this, CreateRecipeIngredients::class.java)
             startActivity(createIngredientsIntent)
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
     }
 }

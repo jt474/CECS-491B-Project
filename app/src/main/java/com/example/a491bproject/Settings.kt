@@ -9,6 +9,7 @@ class Settings : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         //Navigate to Profile
         val accountBtn: Button = findViewById<Button>(R.id.account)
@@ -30,5 +31,18 @@ class Settings : AppCompatActivity() {
             val contactIntent = Intent(this, Contact::class.java)
             startActivity(contactIntent)
         }
+
+        // Naming for menu
+        val actionBar = supportActionBar
+
+        if(actionBar != null){
+            actionBar.title = "Settings"
+        }
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
+    }
+
 }
