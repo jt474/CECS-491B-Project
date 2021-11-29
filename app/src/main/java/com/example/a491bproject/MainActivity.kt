@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity(), ButtonAdapter.OnClickListener {
         setContentView(R.layout.activity_main)
 
         val user = FirebaseAuth.getInstance();
-        if(user.currentUser?.isEmailVerified == false){
+        if (user.currentUser?.isEmailVerified == false) {
             val verifyIntent = Intent(this, VerifyActivity::class.java)
             verifyIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(verifyIntent)
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity(), ButtonAdapter.OnClickListener {
         // Naming for menu
         val actionBar = supportActionBar
 
-        if(actionBar != null){
+        if (actionBar != null) {
             actionBar.title = "Main Menu"
         }
     }
@@ -106,25 +106,32 @@ class MainActivity : AppCompatActivity(), ButtonAdapter.OnClickListener {
 
     override fun onClickListener(data: Int) {
         val emailId = intent.getStringExtra("emailID")
-        if (data == 0) {
-            val searchRecipeIntent = Intent(this, SearchRecipeMenu::class.java)
-            startActivity(searchRecipeIntent)
-        } else if (data == 1) {
-            val ingredientsIntent = Intent(this, IngredientsActivity::class.java)
-            startActivity(ingredientsIntent)
-        } else if (data == 2) {
-            val createRecipeIntent = Intent(this, CreateFirebaseRecipeActivity::class.java)
-            startActivity(createRecipeIntent)
-        } else if (data == 3) {
-            val ingredientsInfoIntent = Intent(this, IngredientsInformation::class.java)
-            startActivity(ingredientsInfoIntent)
-        } else if (data == 4) {
-            val userRecipesIntent = Intent(this, UserFirebaseRecipesActivity::class.java)
-            startActivity(userRecipesIntent)
-        } else if (data == 5) {
-            val settingsIntent = Intent(this, Settings::class.java)
-            settingsIntent.putExtra("emailID", emailId)
-            startActivity(settingsIntent)
+        when (data) {
+            0 -> {
+                val searchRecipeIntent = Intent(this, SearchRecipeMenu::class.java)
+                startActivity(searchRecipeIntent)
+            }
+            1 -> {
+                val ingredientsIntent = Intent(this, IngredientsActivity::class.java)
+                startActivity(ingredientsIntent)
+            }
+            2 -> {
+                val createRecipeIntent = Intent(this, CreateFirebaseRecipeActivity::class.java)
+                startActivity(createRecipeIntent)
+            }
+            3 -> {
+                val ingredientsInfoIntent = Intent(this, IngredientsInformation::class.java)
+                startActivity(ingredientsInfoIntent)
+            }
+            4 -> {
+                val userRecipesIntent = Intent(this, UserFirebaseRecipesActivity::class.java)
+                startActivity(userRecipesIntent)
+            }
+            5 -> {
+                val settingsIntent = Intent(this, Settings::class.java)
+                settingsIntent.putExtra("emailID", emailId)
+                startActivity(settingsIntent)
+            }
         }
     }
 }
