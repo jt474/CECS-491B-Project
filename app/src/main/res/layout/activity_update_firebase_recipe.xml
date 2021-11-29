@@ -2,18 +2,17 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateFirebaseRecipeActivity">
+    tools:context=".UpdateFirebaseRecipeActivity">
     <TextView
-        android:id="@+id/tvCreateRecipeTitle"
+        android:id="@+id/tvUpdateRecipeTitle"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
         android:background="@drawable/shape_red_background"
         android:gravity="center"
         android:orientation="horizontal"
-        android:text="@string/create_recipe_header"
+        android:text="@string/update_recipe_header"
         android:textColor="@android:color/primary_text_light"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,12 +21,12 @@
     </TextView>
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout_CreateRecipe"
+        android:id="@+id/tab_layout_UpdateRecipe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_tab_background"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCreateRecipeTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvUpdateRecipeTitle"
         app:tabBackground="@color/material_on_primary_emphasis_high_type"
         app:tabIndicatorColor="@color/design_default_color_error"
         app:tabSelectedTextColor="@color/design_default_color_error"
@@ -37,24 +36,25 @@
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/view_pager_CreateRecipe"
+        android:id="@+id/view_pager_UpdateRecipe"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_below="@id/tab_layout_CreateRecipe"
-        app:layout_constraintBottom_toTopOf="@+id/btnCreateRecipe"
+        android:layout_below="@id/tab_layout_UpdateRecipe"
+        app:layout_constraintBottom_toTopOf="@+id/btnUpdateRecipe"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tab_layout_CreateRecipe">
+        app:layout_constraintTop_toBottomOf="@+id/tab_layout_UpdateRecipe">
 
     </androidx.viewpager2.widget.ViewPager2>
 
     <Button
-        android:id="@+id/btnCreateRecipe"
+        android:id="@+id/btnUpdateRecipe"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/button_red"
-        android:text="@string/btn_create_recipe"
+        android:text="@string/btn_update_recipe"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

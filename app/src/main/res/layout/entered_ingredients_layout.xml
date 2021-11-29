@@ -7,7 +7,7 @@
     android:background="@drawable/shape_background">
 
     <TextView
-        android:id="@+id/tvCreateRecipeIngredientName"
+        android:id="@+id/tvEnteredRecipeIngredientName"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -19,12 +19,12 @@
         app:autoSizeTextType="uniform"
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tvCreateRecipeIngredientAmountUnit"
+        app:layout_constraintEnd_toStartOf="@+id/tvEnteredRecipeIngredientAmountUnit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvCreateRecipeIngredientAmountUnit"
+        android:id="@+id/tvEnteredRecipeIngredientAmountUnit"
         android:layout_width="120dp"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -36,12 +36,12 @@
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ivCreateRecipeIngredientDelete"
-        app:layout_constraintStart_toEndOf="@+id/tvCreateRecipeIngredientName"
+        app:layout_constraintEnd_toStartOf="@+id/ivEnteredRecipeIngredientDelete"
+        app:layout_constraintStart_toEndOf="@+id/tvEnteredRecipeIngredientName"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/ivCreateRecipeIngredientDelete"
+        android:id="@+id/ivEnteredRecipeIngredientDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/text_margin"

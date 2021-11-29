@@ -1,7 +1,6 @@
 package com.example.a491bproject.fragments.adapters
 
 import android.app.AlertDialog
-import android.content.Context
 import android.content.DialogInterface
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,13 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a491bproject.R
 import com.example.a491bproject.fragments.interfaces.InstructionsListener
 import com.example.a491bproject.models.InstructionModel
-import com.example.a491bproject.viewmodels.CreateRecipeViewModel
-import com.google.firebase.database.DataSnapshot
 
 //Could have passed context to put data manipulation logic in Fragment
 
@@ -29,7 +25,7 @@ class CreateInstructionsAdapter():
         parent: ViewGroup,
         viewType: Int
     ): CreateInstructionsViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.create_instructions_layout,parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.entered_instructions_layout,parent, false)
         return CreateInstructionsViewHolder(view)
     }
 
@@ -95,9 +91,9 @@ class CreateInstructionsAdapter():
     }
 
     inner class CreateInstructionsViewHolder(view: View):RecyclerView.ViewHolder(view) {
-        val tvStepNumber: TextView = view.findViewById(R.id.tvCreateRecipeInstructionStepNumber)
-        val tvInstructionText: TextView = view.findViewById(R.id.tvCreateRecipeInstructionText)
-        val ivInstructionDelete: ImageView = view.findViewById<ImageView>(R.id.ivCreateRecipeInstructionDelete)
+        val tvStepNumber: TextView = view.findViewById(R.id.tvEnteredRecipeInstructionStepNumber)
+        val tvInstructionText: TextView = view.findViewById(R.id.tvEnteredRecipeInstructionText)
+        val ivInstructionDelete: ImageView = view.findViewById<ImageView>(R.id.ivEnteredRecipeInstructionDelete)
         val context: android.content.Context = view.context
     }
 

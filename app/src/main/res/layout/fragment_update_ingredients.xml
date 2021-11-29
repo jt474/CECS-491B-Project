@@ -4,23 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.CreateIngredientsFragment">
+    tools:context=".fragments.UpdateIngredientsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvCreateRecipeIngredients"
+        android:id="@+id/rvUpdateRecipeIngredients"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="@dimen/text_margin"
         android:layout_marginTop="16dp"
         android:background="@drawable/shape_background"
         android:padding="@dimen/text_margin"
-        app:layout_constraintBottom_toTopOf="@+id/etCreateRecipeIngredientName"
+        app:layout_constraintBottom_toTopOf="@+id/etUpdateRecipeIngredientName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/etCreateRecipeIngredientName"
+        android:id="@+id/etUpdateRecipeIngredientName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
@@ -28,13 +28,13 @@
         android:hint="@string/hint_enter_ingredients"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/etCreateRecipeIngredientAmount"
+        app:layout_constraintBottom_toTopOf="@+id/etUpdateRecipeIngredientAmount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/etCreateRecipeIngredientAmount"
+        android:id="@+id/etUpdateRecipeIngredientAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
@@ -42,11 +42,11 @@
         android:hint="@string/hint_enter_amount"
         android:inputType="numberDecimal"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/etCreateRecipeIngredientUnit"
+        app:layout_constraintBottom_toTopOf="@+id/etUpdateRecipeIngredientUnit"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/etCreateRecipeIngredientUnit"
+        android:id="@+id/etUpdateRecipeIngredientUnit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
@@ -58,7 +58,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnCreateRecipeAddIngredient"
+        android:id="@+id/btnUpdateRecipeAddIngredient"
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_margin="@dimen/text_margin"
@@ -67,6 +67,6 @@
         android:text="@string/btn_add_ingredient"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/etCreateRecipeIngredientUnit"
-        app:layout_constraintTop_toBottomOf="@+id/etCreateRecipeIngredientName" />
+        app:layout_constraintStart_toEndOf="@+id/etUpdateRecipeIngredientUnit"
+        app:layout_constraintTop_toBottomOf="@+id/etUpdateRecipeIngredientName" />
 </androidx.constraintlayout.widget.ConstraintLayout>

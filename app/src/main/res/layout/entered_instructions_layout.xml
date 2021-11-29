@@ -7,7 +7,7 @@
     android:background="@drawable/shape_background">
 
     <TextView
-        android:id="@+id/tvCreateRecipeInstructionStepNumber"
+        android:id="@+id/tvEnteredRecipeInstructionStepNumber"
         android:layout_width="80dp"
         android:layout_height="match_parent"
         android:layout_margin="8dp"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvCreateRecipeInstructionText"
+        android:id="@+id/tvEnteredRecipeInstructionText"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_margin="8dp"
@@ -33,12 +33,12 @@
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ivCreateRecipeInstructionDelete"
-        app:layout_constraintStart_toEndOf="@+id/tvCreateRecipeInstructionStepNumber"
+        app:layout_constraintEnd_toStartOf="@+id/ivEnteredRecipeInstructionDelete"
+        app:layout_constraintStart_toEndOf="@+id/tvEnteredRecipeInstructionStepNumber"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/ivCreateRecipeInstructionDelete"
+        android:id="@+id/ivEnteredRecipeInstructionDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#E91E63"

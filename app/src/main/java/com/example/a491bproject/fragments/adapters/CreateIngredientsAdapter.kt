@@ -23,7 +23,7 @@ class CreateIngredientsAdapter ():
         parent: ViewGroup,
         viewType: Int
     ): CreateIngredientsViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.create_ingredients_layout, parent, false) //attach to root must be false.
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.entered_ingredients_layout, parent, false) //attach to root must be false.
         return CreateIngredientsViewHolder(view)
     }
 
@@ -77,9 +77,9 @@ class CreateIngredientsAdapter ():
     }
 
     inner class CreateIngredientsViewHolder(view: View):RecyclerView.ViewHolder(view) {
-        val tvIngredientName: TextView = view.findViewById(R.id.tvCreateRecipeIngredientName)
-        val tvAmountUnit: TextView = view.findViewById(R.id.tvCreateRecipeIngredientAmountUnit)
-        val ivIngredientDelete: ImageView = view.findViewById<ImageView>(R.id.ivCreateRecipeIngredientDelete)
+        val tvIngredientName: TextView = view.findViewById(R.id.tvEnteredRecipeIngredientName)
+        val tvAmountUnit: TextView = view.findViewById(R.id.tvEnteredRecipeIngredientAmountUnit)
+        val ivIngredientDelete: ImageView = view.findViewById<ImageView>(R.id.ivEnteredRecipeIngredientDelete)
         val context: android.content.Context = view.context
     }
 

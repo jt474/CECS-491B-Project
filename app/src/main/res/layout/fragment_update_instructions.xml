@@ -4,23 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.CreateInstructionsFragment">
+    tools:context=".fragments.UpdateInstructionsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvCreateRecipeInstructions"
+        android:id="@+id/rvUpdateRecipeInstructions"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="@dimen/text_margin"
         android:layout_marginTop="16dp"
         android:background="@drawable/shape_background"
         android:padding="@dimen/text_margin"
-        app:layout_constraintBottom_toTopOf="@+id/etCreateRecipeInstruction"
+        app:layout_constraintBottom_toTopOf="@+id/etUpdateRecipeInstruction"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/etCreateRecipeInstruction"
+        android:id="@+id/etUpdateRecipeInstruction"
         android:layout_width="0dp"
         android:layout_height="160dp"
         android:layout_margin="@dimen/text_margin"
@@ -29,13 +29,13 @@
         android:hint="@string/hint_enter_instruction"
         android:inputType="textMultiLine"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/btnCreateRecipeAddStep"
+        app:layout_constraintBottom_toTopOf="@+id/btnUpdateRecipeAddStep"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnCreateRecipeAddStep"
+        android:id="@+id/btnUpdateRecipeAddStep"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
