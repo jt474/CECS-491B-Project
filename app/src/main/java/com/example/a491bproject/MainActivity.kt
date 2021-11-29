@@ -3,7 +3,6 @@ package com.example.a491bproject
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a491bproject.adapters.ButtonAdapter
@@ -95,12 +94,7 @@ class MainActivity : AppCompatActivity(), ButtonAdapter.OnClickListener {
         list.add(Button(R.drawable.ingredient_info, "Ingredient Information"))
         list.add(Button(R.drawable.create_recipe, "Create Recipe"))
         list.add(Button(R.drawable.settings, "Settings"))
-//        for (i in 0..9) {
-//            val model = Button(
-//                R.drawable.app_logo,
-//                "Title : $i")
-//            list.add(model)
-//        }
+
         return list
     }
 
