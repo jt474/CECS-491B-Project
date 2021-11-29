@@ -19,14 +19,14 @@ class UpdateRecipeViewModel(): ViewModel() {
 
     var recipeTitle: String = ""
         set(value){
-            field = value
+            field = value.trim()
             Log.d("UpdateViewModel","setRecipeTitle: $recipeTitle")
             viewModelListener?.onChanged()
         }
 
     var description: String = ""
         set(value){
-            field = value
+            field = value.trim()
             Log.d("UpdateViewModel","setDescription: $description")
             viewModelListener?.onChanged()
         }

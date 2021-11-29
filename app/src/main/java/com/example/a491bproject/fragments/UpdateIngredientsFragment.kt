@@ -44,7 +44,7 @@ class UpdateIngredientsFragment : Fragment(), IngredientsListener {
     private var amountEntered:Boolean = false
     private var unitEntered:Boolean = false
     private var nameEntered:Boolean = false
-    private var ingredentsInitialized: Boolean = false
+    private var ingredientsInitialized: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,7 +67,7 @@ class UpdateIngredientsFragment : Fragment(), IngredientsListener {
 
         val recipeID = arguments?.getString(getString(R.string.RecipeID))
         if (recipeID != null){
-            populateEditTexts(recipeID)
+            populateRecyclerView(recipeID)
         }
 
         addTextChangedListeners()
@@ -80,7 +80,7 @@ class UpdateIngredientsFragment : Fragment(), IngredientsListener {
     }
 
     /**
-     * Initialization functions to help encapsulate information.
+     * Set up functions to help encapsulate information.
      */
     private fun initializeAdapter() {
         adapter = UpdateIngredientsAdapter(this)
@@ -92,11 +92,11 @@ class UpdateIngredientsFragment : Fragment(), IngredientsListener {
         recyclerView.adapter = adapter
     }
 
-    private fun populateEditTexts(recipeID:String){
+    private fun populateRecyclerView(recipeID:String){
         val dbRef = FirebaseDatabase.getInstance().reference
         val query = dbRef.child("Ingredients").child(recipeID).addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (!ingredentsInitialized){ //We don't want changes to add new ingredients or reset the components if user makes changes from a different device.
+                if (!ingredientsInitialized){ //We don't want changes to add new ingredients or reset the components if user makes changes from a different device.
                     for (postSnapshot in snapshot.children){
                         val model = postSnapshot.getValue<IngredientModel>()
                         if (model != null){
@@ -104,20 +104,17 @@ class UpdateIngredientsFragment : Fragment(), IngredientsListener {
                             adapter.submitIngredient(model)
                         }
                     }
-                    ingredentsInitialized = true
+                    ingredientsInitialized = true
                 }
 
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.e("UpdateIngredients","An error occured when trying to retrieve data from Ingredients")
+                Log.e("UpdateIngredients","An error occurred while trying to retrieve data about recipeID: $recipeID")
             }
 
         })
     }
-
-
-
 
     /**
      * Past this are Functions concerned with the functionality of Edit Views.
@@ -133,7 +130,7 @@ class UpdateIngredientsFragment : Fragment(), IngredientsListener {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                name = p0.toString()
+                name = p0.toString().trim()
             }
 
         })
@@ -148,7 +145,7 @@ class UpdateIngredientsFragment : Fragment(), IngredientsListener {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                amount = p0.toString()
+                amount = p0.toString().trim()
             }
         })
 
@@ -162,7 +159,7 @@ class UpdateIngredientsFragment : Fragment(), IngredientsListener {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                unit = p0.toString()
+                unit = p0.toString().trim()
             }
         })
     }

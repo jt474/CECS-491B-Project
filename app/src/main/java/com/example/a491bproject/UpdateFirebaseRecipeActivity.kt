@@ -1,5 +1,8 @@
 package com.example.a491bproject
 
+import android.app.AlertDialog
+import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,12 +11,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.example.a491bproject.adapters.UpdateRecipeFragmentStateAdapter
 import com.example.a491bproject.interfaces.UpdateRecipeViewModelListener
+import com.example.a491bproject.models.IngredientModel
+import com.example.a491bproject.models.InstructionModel
 import com.example.a491bproject.models.RecipeAboutModel
 import com.example.a491bproject.models.UserRecipesModel
 import com.example.a491bproject.viewmodels.CreateRecipeViewModel
 import com.example.a491bproject.viewmodels.UpdateRecipeViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.text.SimpleDateFormat
 import java.util.*
@@ -36,12 +42,13 @@ class UpdateFirebaseRecipeActivity : AppCompatActivity(), UpdateRecipeViewModelL
         setContentView(R.layout.activity_update_firebase_recipe)
 
         receiveBundle()
+
         //Initialize UI Elements
         viewPager = findViewById(R.id.view_pager_UpdateRecipe)
         tabLayout = findViewById(R.id.tab_layout_UpdateRecipe)
+
         initializeUpdateButton()
         initializeViewModel()
-
 
         //Set FragmentStateAdapter for ViewPager2
         adapter = UpdateRecipeFragmentStateAdapter(getString(R.string.RecipeID), recipeID, supportFragmentManager,lifecycle)
@@ -74,7 +81,15 @@ class UpdateFirebaseRecipeActivity : AppCompatActivity(), UpdateRecipeViewModelL
         btnUpdateRecipe = findViewById(R.id.btnUpdateRecipe)
         btnUpdateRecipe.isEnabled = false
         btnUpdateRecipe.setOnClickListener{
-
+            updateToRealtimeDatabase()
+            val alert = AlertDialog.Builder(this)
+            alert.setTitle("Recipe Updated!");
+            alert.setMessage("Your recipe \"${mViewModel.recipeTitle}\" was updated!");
+            alert.setOnDismissListener(DialogInterface.OnDismissListener {
+                val userRecipesActivityIntent = Intent(this, UserFirebaseRecipesActivity::class.java)
+                startActivity(userRecipesActivityIntent)
+            })
+            alert.show()
         }
     }
 
@@ -94,6 +109,25 @@ class UpdateFirebaseRecipeActivity : AppCompatActivity(), UpdateRecipeViewModelL
             "AboutRecipe/${recipeID}" to aboutModel
         )
         dbRef.updateChildren(updateMap)
+        updateToIngredients(dbRef.child("Ingredients").child(recipeID))
+        updateToInstructions(dbRef.child("Instructions").child(recipeID))
+
+    }
+
+    private fun updateToIngredients(reference:DatabaseReference){
+        var ingredients = hashMapOf<String, IngredientModel>()
+        for(ingredient in mViewModel.ingredients){
+            ingredients[ingredient.name] = ingredient
+        }
+        reference.setValue(ingredients) //We want to overwrite all ingredients.
+    }
+
+    private fun updateToInstructions(reference:DatabaseReference){
+        var instructions = hashMapOf<String, InstructionModel>()
+        for(instruction in mViewModel.instructions){
+            instructions[instruction.number.toString()] = instruction
+        }
+        reference.setValue(instructions) //We want to overwrite all instructions.
     }
 
     private fun getCurrentDate(): String{

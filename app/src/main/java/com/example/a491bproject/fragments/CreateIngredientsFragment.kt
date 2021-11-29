@@ -89,7 +89,7 @@ class CreateIngredientsFragment : Fragment(), IngredientsListener {
             }
             override fun afterTextChanged(p0: Editable?) {
                 Log.d("CreateIngredient","IngredientName afterTextChanged: ${p0.toString()}")
-                name = p0.toString()
+                name = p0.toString().trim()
             }
 
         })
@@ -111,7 +111,7 @@ class CreateIngredientsFragment : Fragment(), IngredientsListener {
 
             override fun afterTextChanged(p0: Editable?) {
                 Log.d("CreateIngredient","IngredientAmount afterTextChanged: ${p0.toString()}")
-                amount = p0.toString()
+                amount = p0.toString().trim()
             }
 
         })
@@ -133,7 +133,7 @@ class CreateIngredientsFragment : Fragment(), IngredientsListener {
 
             override fun afterTextChanged(p0: Editable?) {
                 Log.d("CreateIngredient","IngredientUnit afterTextChanged: ${p0.toString()}")
-                unit = p0.toString()
+                unit = p0.toString().trim()
             }
 
         })
