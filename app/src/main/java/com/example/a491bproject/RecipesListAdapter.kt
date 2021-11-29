@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a491bproject.models.Recipes
 import com.squareup.picasso.Picasso
+import java.lang.StringBuilder
 
 class RecipesListAdapter(val context : Context, val recipesList : Recipes) :
     RecyclerView.Adapter<RecipesListAdapter.ViewHolder>() {
@@ -19,6 +20,7 @@ class RecipesListAdapter(val context : Context, val recipesList : Recipes) :
      */
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvRecipeName: TextView = view.findViewById(R.id.tv_recipe_name)
+        val tvRecipePrice: TextView = view.findViewById(R.id.tv_recipe_price)
         val imageRecipe: ImageView = view.findViewById(R.id.image_recipe)
     }
 
@@ -36,6 +38,8 @@ class RecipesListAdapter(val context : Context, val recipesList : Recipes) :
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         viewHolder.tvRecipeName.text = recipesList.results[position].title
+        viewHolder.tvRecipePrice.text = "Calories: " + recipesList.results[position].nutrition.nutrients[0].amount + " " +
+                recipesList.results[position].nutrition.nutrients[0].unit
         // insert image to be found online into image view
         // Reference: https://www.raywenderlich.com/3658341-picasso-tutorial-for-android-getting-started
         val picasso = Picasso.get()
