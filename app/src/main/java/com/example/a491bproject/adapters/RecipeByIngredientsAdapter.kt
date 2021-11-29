@@ -1,4 +1,4 @@
-package com.example.a491bproject
+package com.example.a491bproject.adapters
 
 import android.content.Context
 import android.content.Intent
@@ -6,32 +6,32 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.a491bproject.models.Recipes
-import com.squareup.picasso.Picasso
-import java.lang.StringBuilder
+import com.example.a491bproject.R
+import com.example.a491bproject.RecipeInstructions
+import com.example.a491bproject.models.RecipeByIngredients
 
-class RecipesListAdapter(val context: Context, val recipesList: Recipes) :
-    RecyclerView.Adapter<RecipesListAdapter.ViewHolder>() {
+class RecipeByIngredientsAdapter(
+    val context: Context,
+    val recipeByIngredients: ArrayList<RecipeByIngredients.RecipeByIngredientsItem>
+) :
+    RecyclerView.Adapter<RecipeByIngredientsAdapter.ViewHolder>() {
 
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val tvRecipeName: TextView = view.findViewById(R.id.tv_recipe_name)
-        val tvRecipePrice: TextView = view.findViewById(R.id.tv_recipe_price)
-        val imageRecipe: ImageView = view.findViewById(R.id.image_recipe)
+        val tvRecipeIngredient: TextView = view.findViewById(R.id.title)
     }
 
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         // Create a new view, which defines the UI of the list item
         val view = LayoutInflater.from(context)
-            .inflate(R.layout.row_recipes, viewGroup, false)
+            .inflate(R.layout.row_recipes_ingredients, viewGroup, false)
         return ViewHolder(view)
     }
 
@@ -43,7 +43,7 @@ class RecipesListAdapter(val context: Context, val recipesList: Recipes) :
             Toast.makeText(context, "Test " + viewHolder.adapterPosition, Toast.LENGTH_SHORT).show()
 
             // Gets the id of the recipe you clicked on
-            val recipeId = recipesList.results[position].id
+            val recipeId = recipeByIngredients[position].id
 
             // Bundle the recipe id to pass onto the next activity
             val toPass = Bundle()
@@ -58,16 +58,11 @@ class RecipesListAdapter(val context: Context, val recipesList: Recipes) :
         }
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.tvRecipeName.text = recipesList.results[position].title
-        viewHolder.tvRecipePrice.text = "Calories: " + recipesList.results[position].nutrition.nutrients[0].amount + " " +
-                recipesList.results[position].nutrition.nutrients[0].unit
-        // insert image to be found online into image view
-        // Reference: https://www.raywenderlich.com/3658341-picasso-tutorial-for-android-getting-started
-        val picasso = Picasso.get()
-        picasso.load(recipesList.results[position].image).into(viewHolder.imageRecipe)
+        viewHolder.tvRecipeIngredient.text = recipeByIngredients[position].title
+        // TODO set image by calling the provided URL
     }
 
     // Return the size of your dataset (invoked by the layout manager)
-    override fun getItemCount() = recipesList.results.size
+    override fun getItemCount() = recipeByIngredients.size
 
 }
