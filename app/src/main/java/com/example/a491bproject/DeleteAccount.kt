@@ -137,24 +137,4 @@ class DeleteAccount : AppCompatActivity() {
             actionBar.title = "Account Deletion"
         }
     }
-
-    fun showAlertDialog(view: View){
-        MaterialAlertDialogBuilder(this)
-            .setTitle("Delete Confirmation")
-            .setMessage("Are you sure you want to delete your account? ALL data will be wiped. DO you wish to continue?")
-            .setNegativeButton("No") {dialog, which ->
-                Toast.makeText(
-                    this@DeleteAccount,
-                    "Cancelled",
-                    Toast.LENGTH_SHORT
-                )
-            }
-            .setPositiveButton("Confirm Delete") {dialog, which ->
-                Toast.makeText(
-                    this@DeleteAccount,
-                    "Account Deleted",
-                    Toast.LENGTH_SHORT
-                )
-            }.show()
-    }
 }
