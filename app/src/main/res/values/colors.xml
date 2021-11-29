@@ -10,4 +10,8 @@
     <color name="button_red">#C62828</color>
     <color name="navy">#000081</color>
     <color name="navy_dark">#000980</color>
+    <color name="light_blue">#339cff</color>
+    <color name="blue">#004dff</color>
+
+
 </resources>
