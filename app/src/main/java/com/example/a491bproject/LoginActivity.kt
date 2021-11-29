@@ -7,6 +7,7 @@ import android.text.TextUtils
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -162,14 +163,14 @@ class LoginActivity : AppCompatActivity() {
         }
 
         //Navigates to Forgot Password Screen
-        val forgot: Button = findViewById<Button>(R.id.forgotBtn)
+        val forgot: TextView = findViewById<TextView>(R.id.ForgotPassword)
         forgot.setOnClickListener(){
             val forgotIntent = Intent(this,ForgotPassword::class.java)
             startActivity(forgotIntent)
         }
 
         //Navigates to Register Screen
-        val register: Button = findViewById<Button>(R.id.registerBtn)
+        val register: TextView = findViewById<TextView>(R.id.Register)
         register.setOnClickListener(){
             val registerIntent = Intent(this,RegisterActivity::class.java)
             startActivity(registerIntent)

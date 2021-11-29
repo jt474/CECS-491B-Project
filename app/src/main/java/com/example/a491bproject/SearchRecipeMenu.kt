@@ -36,6 +36,12 @@ class SearchRecipeMenu : AppCompatActivity() {
             val input = userInput.text.toString()
             getRecipes(input)
         }
+        // Naming for menu
+        val actionBar = supportActionBar
+
+        if (actionBar != null) {
+            actionBar.title = "Search Recipe"
+        }
     }
 
     private fun getRecipes(input: String) {

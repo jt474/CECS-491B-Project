@@ -8,6 +8,7 @@ import android.text.TextUtils
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
@@ -26,7 +27,7 @@ class RegisterActivity : AppCompatActivity() {
         val passwordText = findViewById<EditText>(R.id.editTextPassword)
 
         //Navigates to Login Menu
-        val login: Button = findViewById<Button>(R.id.loginRegisterBtn)
+        val login: TextView = findViewById<TextView>(R.id.loginScreen)
         login.setOnClickListener(){
             val loginIntent = Intent(this,LoginActivity::class.java)
             startActivity(loginIntent)
