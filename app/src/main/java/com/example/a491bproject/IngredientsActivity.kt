@@ -64,6 +64,7 @@ class IngredientsActivity : AppCompatActivity() {
 //                    ingredient.text.toString(),
 //                    quantity.text.toString().toInt()
 //                )
+                db.deleteIngredient(ingredientString)
                 db.addIngredient(ingredientString, quantityString)
                 val contents = "$ingredient , $quantity"
                 Toast.makeText(this, "Adding $contents", Toast.LENGTH_SHORT).show()
