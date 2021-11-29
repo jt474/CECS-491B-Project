@@ -46,6 +46,7 @@
 
     <!-- Recipe Search Activity -->
     <string name="hint_recipe_input">Enter name of a recipe</string>
+    <string name="hint_recipe_ingredient">Enter name of a ingredient</string>
     <string name="hint_create_recipe_title">Enter your recipe\'s name here</string>
     <string name="hint_enter_instruction">Enter your instruction here</string>
     <string name="hint_enter_ingredients">Enter ingredient name here</string>
