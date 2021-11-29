@@ -8,9 +8,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.a491bproject.fragments.*
 //get recipeKey acquired from R.string.RecipeID
 class UpdateRecipeFragmentStateAdapter(recipeKey:String, recipeID:String, fragmentManager: FragmentManager, lifecycle: Lifecycle): FragmentStateAdapter(fragmentManager, lifecycle) {
-
-    private val recipeKey = recipeKey
-    private val recipeID = recipeID
     private var descriptionFragment = UpdateDescriptionFragment()
     private var ingredientsFragment = UpdateIngredientsFragment()
     private var instructionsFragment = UpdateInstructionsFragment()

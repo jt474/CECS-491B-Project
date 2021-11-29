@@ -25,6 +25,7 @@
     <string name="Nutrition">Nutrition</string>
     <string name="RecipeID">recipeID</string>
     <string name="RecipeTitle">recipeTitle</string>
+    <string name="AuthorID">authorID</string>
     <string name="AuthorStr">Created By</string>
     <string name="lastUpdatedStr">Last updated on:</string>
     <string name="sampleDateStr">11/21/20</string>

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.a491bproject.DBHandlers.FirebaseRecipeDAO
 import com.example.a491bproject.DBHandlers.RecipeDAO
 import com.example.a491bproject.databinding.ActivityUserFirebaseRecipesBinding
+import com.example.a491bproject.interfaces.onClickUserRecipeListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.ChildEventListener
@@ -25,7 +26,7 @@ import com.google.firebase.database.ktx.getValue
 import com.example.a491bproject.adapters.UserRecipesAdapter as UserRecipesAdapter
 import com.example.a491bproject.models.UserRecipesModel as UserRecipesModel
 
-class UserFirebaseRecipesActivity : AppCompatActivity() {
+class UserFirebaseRecipesActivity : AppCompatActivity(), onClickUserRecipeListener {
 
 
     private lateinit var auth: FirebaseAuth
@@ -41,12 +42,7 @@ class UserFirebaseRecipesActivity : AppCompatActivity() {
         testRecipesList = mutableListOf<UserRecipesModel>()
 
 
-        val adapter = UserRecipesAdapter(testRecipesList){
-            val intent = Intent(this, RecipeFirebaseInfoActivity::class.java)
-            intent.putExtra(getString(R.string.RecipeID), it.recipeID)
-            intent.putExtra(getString(R.string.RecipeTitle), it.title)
-            startActivity(intent)
-        }
+        val adapter = UserRecipesAdapter(testRecipesList, this)
         recyclerView = findViewById<RecyclerView>(R.id.rvUserRecipes)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -91,6 +87,21 @@ class UserFirebaseRecipesActivity : AppCompatActivity() {
         override fun onCancelled(error: DatabaseError) {
             Log.d("onCancelled","FirebaseChildListener ran into an error. ${error.toString()}" )
         }
+    }
+
+    override fun onEditClick(model: UserRecipesModel) {
+        val intent = Intent(this, UpdateFirebaseRecipeActivity::class.java)
+        intent.putExtra(getString(R.string.RecipeID), model.recipeID)
+        intent.putExtra(getString(R.string.RecipeTitle), model.title)
+        intent.putExtra(getString(R.string.AuthorID), model.authorID)
+        startActivity(intent)
+    }
+
+    override fun onSelectClick(model: UserRecipesModel) {
+        val intent = Intent(this, RecipeFirebaseInfoActivity::class.java)
+        intent.putExtra(getString(R.string.RecipeID), model.recipeID)
+        intent.putExtra(getString(R.string.RecipeTitle), model.title)
+        startActivity(intent)
     }
 
 
