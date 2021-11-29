@@ -110,16 +110,16 @@ class MainActivity : AppCompatActivity(), ButtonAdapter.OnClickListener {
                 startActivity(ingredientsIntent)
             }
             2 -> {
-                val createRecipeIntent = Intent(this, CreateFirebaseRecipeActivity::class.java)
-                startActivity(createRecipeIntent)
+                val userRecipesIntent = Intent(this, UserFirebaseRecipesActivity::class.java)
+                startActivity(userRecipesIntent)
             }
             3 -> {
                 val ingredientsInfoIntent = Intent(this, IngredientsInformation::class.java)
                 startActivity(ingredientsInfoIntent)
             }
             4 -> {
-                val userRecipesIntent = Intent(this, UserFirebaseRecipesActivity::class.java)
-                startActivity(userRecipesIntent)
+                val createRecipeIntent = Intent(this, CreateFirebaseRecipeActivity::class.java)
+                startActivity(createRecipeIntent)
             }
             5 -> {
                 val settingsIntent = Intent(this, Settings::class.java)
