@@ -25,12 +25,12 @@
         android:id="@+id/loginBtn"
         android:layout_width="303dp"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="304dp"
+        android:layout_marginTop="24dp"
+
         android:text="Login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintHorizontal_bias="0.453"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword"
         app:layout_constraintVertical_bias="0.0" />
@@ -42,10 +42,10 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.456"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginBtn"
-        app:layout_constraintVertical_bias="0.614">
+        app:layout_constraintVertical_bias="0.535">
 
         <TextView
             android:id="@+id/Register"
@@ -86,14 +86,14 @@
     <Button
         android:id="@+id/guestBtn"
         android:layout_width="154dp"
-        android:layout_height="53dp"
+        android:layout_height="56dp"
         android:text="Guest Sign In"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.77"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginBtn"
-        app:layout_constraintVertical_bias="0.257" />
+        app:layout_constraintVertical_bias="0.102" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/signButton"
@@ -105,7 +105,7 @@
         app:layout_constraintHorizontal_bias="0.184"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginBtn"
-        app:layout_constraintVertical_bias="0.261" />
+        app:layout_constraintVertical_bias="0.125" />
 
     <EditText
         android:id="@+id/editTextTextPassword"
