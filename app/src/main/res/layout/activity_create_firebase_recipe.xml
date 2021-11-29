@@ -29,8 +29,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvCreateRecipeTitle"
         app:tabBackground="@color/material_on_primary_emphasis_high_type"
-        app:tabIndicatorColor="@color/design_default_color_error"
-        app:tabSelectedTextColor="@color/design_default_color_error"
+        app:tabIndicatorColor="@color/navy"
+        app:tabSelectedTextColor="@color/navy"
         app:tabTextAppearance="@style/createRecipe_TabLayout_Style"
         tools:ignore="SpeakableTextPresentCheck">
 
