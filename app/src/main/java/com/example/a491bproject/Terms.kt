@@ -14,5 +14,12 @@ class Terms : AppCompatActivity() {
         val terms: TextView = findViewById<TextView>(R.id.terms)
 
         terms.movementMethod = ScrollingMovementMethod();
+
+        // Naming for menu
+        val actionBar = supportActionBar
+
+        if (actionBar != null) {
+            actionBar.title = "Terms and Conditions"
+        }
     }
 }

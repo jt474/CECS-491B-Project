@@ -17,5 +17,11 @@ class VerifyActivity : AppCompatActivity() {
             val loginIntent3 = Intent(this, LoginActivity::class.java)
             startActivity(loginIntent3)
         }
+        // Naming for menu
+        val actionBar = supportActionBar
+
+        if (actionBar != null) {
+            actionBar.title = "Verify Email"
+        }
     }
 }

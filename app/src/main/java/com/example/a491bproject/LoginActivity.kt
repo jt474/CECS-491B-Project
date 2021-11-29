@@ -175,6 +175,12 @@ class LoginActivity : AppCompatActivity() {
             val registerIntent = Intent(this,RegisterActivity::class.java)
             startActivity(registerIntent)
         }
+        // Naming for menu
+        val actionBar = supportActionBar
+
+        if (actionBar != null) {
+            actionBar.title = "Login"
+        }
     }
     ///Google sign in button
     private fun signIn() {

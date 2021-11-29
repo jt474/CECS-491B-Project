@@ -50,6 +50,12 @@ class ForgotPassword : AppCompatActivity() {
                 }
             }
         }
+        // Naming for menu
+        val actionBar = supportActionBar
+
+        if (actionBar != null) {
+            actionBar.title = "Forgot Password"
+        }
 
     }
 }
