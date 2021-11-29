@@ -5,7 +5,7 @@
     android:id="@+id/tvRecipeTitle"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-    android:background="#673AB7"
+    android:background="#000980"
     android:padding="16dp">
 
     <TextView
