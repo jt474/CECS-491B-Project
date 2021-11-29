@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateFirebaseRecipeActivity">
+    <TextView
+        android:id="@+id/tvCreateRecipeTitle"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:background="@drawable/shape_red_background"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:text="@string/create_recipe_header"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </TextView>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout_CreateRecipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_tab_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCreateRecipeTitle"
+        app:tabBackground="@color/material_on_primary_emphasis_high_type"
+        app:tabIndicatorColor="@color/navy"
+        app:tabSelectedTextColor="@color/navy"
+        app:tabTextAppearance="@style/createRecipe_TabLayout_Style"
+        tools:ignore="SpeakableTextPresentCheck">
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager_CreateRecipe"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/tab_layout_CreateRecipe"
+        app:layout_constraintBottom_toTopOf="@+id/btnCreateRecipe"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tab_layout_CreateRecipe">
+
+    </androidx.viewpager2.widget.ViewPager2>
+
+    <Button
+        android:id="@+id/btnCreateRecipe"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/navy"
+        android:text="@string/btn_create_recipe"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

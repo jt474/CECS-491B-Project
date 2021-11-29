@@ -12,11 +12,11 @@
         android:id="@+id/tvActivityTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#00BCD4"
+        android:background="@drawable/shape_red_background"
         android:gravity="center"
         android:orientation="horizontal"
         android:text="Recipe Information"
-        android:textColor="#263238"
+        android:textColor="@android:color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +26,9 @@
         android:id="@+id/tvRecipeTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#74716C61"
+        android:background="@drawable/shape_background"
+        android:backgroundTint="#FFFFFF"
+        android:gravity="center"
         android:text="Default Title"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,19 +39,22 @@
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/shape_tab_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvRecipeTitle">
-    </com.google.android.material.tabs.TabLayout>
+        app:layout_constraintTop_toBottomOf="@+id/tvRecipeTitle"
+        app:tabBackground="@color/material_on_primary_emphasis_high_type"
+        app:tabIndicatorColor="@color/navy"
+        app:tabSelectedTextColor="@color/navy"
+        tools:ignore="SpeakableTextPresentCheck"></com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/tab_layout"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tab_layout"
-        android:layout_below="@id/tab_layout">
-
-    </androidx.viewpager2.widget.ViewPager2>
+        app:layout_constraintTop_toBottomOf="@+id/tab_layout"></androidx.viewpager2.widget.ViewPager2>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

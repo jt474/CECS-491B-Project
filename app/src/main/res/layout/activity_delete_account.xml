@@ -12,8 +12,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:text="Delete Account"
+        android:textStyle="bold"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintBottom_toTopOf="@+id/currentPass"
+        app:layout_constraintBottom_toTopOf="@+id/currentPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,7 +25,7 @@
         android:layout_height="48dp"
         android:layout_marginBottom="250dp"
         android:ems="10"
-        android:hint='Current Password'
+        android:hint='Password'
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,10 +37,11 @@
         android:id="@+id/confirmDeleteBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="108dp"
         android:text="Confirm Deleteion"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currentPass" />
+        app:layout_constraintTop_toBottomOf="@+id/currentPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

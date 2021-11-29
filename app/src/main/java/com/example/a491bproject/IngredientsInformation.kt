@@ -23,6 +23,8 @@ class IngredientsInformation : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ingredients_information)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         val search = findViewById<Button>(R.id.search)
         val userInput = findViewById<EditText>(R.id.userInput)
 
@@ -141,5 +143,9 @@ class IngredientsInformation : AppCompatActivity() {
                 Log.d("MainActivity", "onFailure: $t")
             }
         })
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
     }
 }

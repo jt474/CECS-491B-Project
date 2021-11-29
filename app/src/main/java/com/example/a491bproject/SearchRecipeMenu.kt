@@ -33,6 +33,7 @@ class SearchRecipeMenu : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_recipe_menu)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val search = findViewById<Button>(R.id.btn_recipe_search)
         val userInput = findViewById<EditText>(R.id.et_recipe_input)
@@ -87,6 +88,12 @@ class SearchRecipeMenu : AppCompatActivity() {
                     }
             }
         }
+        // Naming for menu
+        val actionBar = supportActionBar
+
+        if (actionBar != null) {
+            actionBar.title = "Search Recipe"
+        }
     }
 
 
@@ -119,34 +126,9 @@ class SearchRecipeMenu : AppCompatActivity() {
             }
         })
     }
-
-
-//    private fun getRecipesByIngredients(input: String) {
-//        val url = "https://api.spoonacular.com/recipes/"
-//        val key = "74e154cbd9f64883b37d580e8f04a74f"
-//
-//        val retrofitBuilder = Retrofit.Builder()
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .baseUrl(url)
-//            .build()
-//            .create(ApiInterface::class.java)
-//
-//        val retrofitData = retrofitBuilder.searchRecipesByIngredients(input, 20, key)
-//
-//        retrofitData.enqueue(object : Callback<ArrayList<RecipeByIngredients.RecipeByIngredientsItem>> {
-//            override fun onResponse(
-//                call: Call<ArrayList<RecipeByIngredients.RecipeByIngredientsItem>>,
-//                response: Response<ArrayList<RecipeByIngredients.RecipeByIngredientsItem>>
-//            ) {
-//                val responseBody = response.body()!!
-//                recipesByIngredientsListAdapter = RecipeByIngredientsAdapter(baseContext, responseBody)
-//                recipesByIngredientsListAdapter.notifyDataSetChanged()
-//                recipeRecyclerViewRecipes.adapter = recipesByIngredientsListAdapter
-//            }
-//
-//            override fun onFailure(call: Call<ArrayList<RecipeByIngredients.RecipeByIngredientsItem>>, t: Throwable) {
-//                Log.d("MainActivity", "onFailure: $t")
-//            }
-//        })
-//    }
+    
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
+    }
 }

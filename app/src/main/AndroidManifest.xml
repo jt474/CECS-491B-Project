@@ -10,6 +10,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.491BProject">
         <activity
+            android:name=".UpdateFirebaseRecipeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".CreateFirebaseRecipeActivity"
+            android:exported="true"
+            android:label="@string/title_activity_create_firebase_recipe" />
+        <activity
+            android:name=".Contact"
+            android:exported="false" />
+        <activity
+            android:name=".Terms"
+            android:exported="false" />
+        <activity
+            android:name=".Settings"
+            android:exported="false" />
+        <activity
+            android:name=".ForgotPassword"
+            android:exported="false" />
+        <activity
             android:name=".DeleteAccount"
             android:exported="false" />
         <activity
@@ -25,11 +44,13 @@
         <activity
             android:name=".UserFirebaseRecipesActivity"
             android:exported="true"
-            android:label="@string/title_activity_user_firebase_recipes"
-            android:theme="@style/Theme.491BProject.NoActionBar"></activity>
+            android:label="@string/title_activity_user_firebase_recipes" />
         <activity
             android:name=".RecipeFirebaseInfoActivity"
             android:exported="true" />
+        <activity
+            android:name=".ChangePasswordActivity"
+            android:exported="false" />
         <activity
             android:name=".VerifyActivity"
             android:exported="false" />
@@ -50,7 +71,7 @@
             android:name=".CreateRecipeActivity"
             android:exported="false" />
         <activity
-            android:name=".SettingActivity"
+            android:name=".ProfileActivity"
             android:exported="false" />
         <activity
             android:name=".IngredientsInformation"
@@ -67,7 +88,7 @@
             android:exported="true" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

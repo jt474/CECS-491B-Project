@@ -1,5 +1,6 @@
 package com.example.a491bproject
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.a491bproject.DBHandlers.FirebaseRecipeDAO
 import com.example.a491bproject.DBHandlers.RecipeDAO
 import com.example.a491bproject.databinding.ActivityUserFirebaseRecipesBinding
+import com.example.a491bproject.interfaces.onClickUserRecipeListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.ChildEventListener
@@ -24,7 +26,7 @@ import com.google.firebase.database.ktx.getValue
 import com.example.a491bproject.adapters.UserRecipesAdapter as UserRecipesAdapter
 import com.example.a491bproject.models.UserRecipesModel as UserRecipesModel
 
-class UserFirebaseRecipesActivity : AppCompatActivity() {
+class UserFirebaseRecipesActivity : AppCompatActivity(), onClickUserRecipeListener {
 
 
     private lateinit var auth: FirebaseAuth
@@ -35,22 +37,12 @@ class UserFirebaseRecipesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_firebase_recipes)
-
-       // binding = ActivityUserFirebaseRecipesBinding.inflate(layoutInflater)
-       // setContentView(binding.root)
-
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         auth = FirebaseAuth.getInstance()
-        dbHandler = FirebaseRecipeDAO(auth)
         testRecipesList = mutableListOf<UserRecipesModel>()
-        //Log.d("testRecipesList", "$testRecipesList")
-       /*var testRecipesList = mutableListOf<UserRecipesModel>(
-           UserRecipesModel("Apple Pie",false),
-           UserRecipesModel("Misery",false),
-           UserRecipesModel("Llamas",false),
-           UserRecipesModel("Rough",false),
-           UserRecipesModel("Apple Pie",false)) */
 
-        val adapter = UserRecipesAdapter(testRecipesList)
+
+        val adapter = UserRecipesAdapter(testRecipesList, this)
         recyclerView = findViewById<RecyclerView>(R.id.rvUserRecipes)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -60,6 +52,12 @@ class UserFirebaseRecipesActivity : AppCompatActivity() {
         val dbRef = FirebaseDatabase.getInstance().reference
         val getUserRecipeQuery = dbRef.child("Recipes")
         getUserRecipeQuery.orderByChild("authorID").equalTo(userID).addChildEventListener(UserRecipesFirebaseChildListener())
+
+        val actionBar = supportActionBar
+
+        if (actionBar != null) {
+            actionBar.title = "Recipes"
+        }
 
     }
 
@@ -95,6 +93,26 @@ class UserFirebaseRecipesActivity : AppCompatActivity() {
         override fun onCancelled(error: DatabaseError) {
             Log.d("onCancelled","FirebaseChildListener ran into an error. ${error.toString()}" )
         }
+    }
+
+    override fun onEditClick(model: UserRecipesModel) {
+        val intent = Intent(this, UpdateFirebaseRecipeActivity::class.java)
+        intent.putExtra(getString(R.string.RecipeID), model.recipeID)
+        intent.putExtra(getString(R.string.RecipeTitle), model.title)
+        intent.putExtra(getString(R.string.AuthorID), model.authorID)
+        startActivity(intent)
+    }
+
+    override fun onSelectClick(model: UserRecipesModel) {
+        val intent = Intent(this, RecipeFirebaseInfoActivity::class.java)
+        intent.putExtra(getString(R.string.RecipeID), model.recipeID)
+        intent.putExtra(getString(R.string.RecipeTitle), model.title)
+        startActivity(intent)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
     }
 
 

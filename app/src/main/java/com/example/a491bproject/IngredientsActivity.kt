@@ -10,12 +10,13 @@ class IngredientsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ingredients)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         //Naming for menu
         val actionBar = supportActionBar
 
         if (actionBar != null) {
-            actionBar.title = "Ingredients Activity"
+            actionBar.title = "Ingredients List"
         }
 
 //        val button = findViewById<TextView>(R.id.buttonAddIngredient)
@@ -64,6 +65,7 @@ class IngredientsActivity : AppCompatActivity() {
 //                    ingredient.text.toString(),
 //                    quantity.text.toString().toInt()
 //                )
+                db.deleteIngredient(ingredientString)
                 db.addIngredient(ingredientString, quantityString)
                 val contents = "$ingredient , $quantity"
                 Toast.makeText(this, "Adding $contents", Toast.LENGTH_SHORT).show()
@@ -156,6 +158,11 @@ class IngredientsActivity : AppCompatActivity() {
         findViewById<EditText>(R.id.editTextQuantity).text.clear()
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
+    }
+
 //    private fun viewIngredients() {
 //        findViewById<Button>(R.id.button_view_ingredients).setOnClickListener {
 ////            Toast.makeText(this, "I hope this work lol", Toast.LENGTH_SHORT).show()
@@ -163,4 +170,5 @@ class IngredientsActivity : AppCompatActivity() {
 //            startActivity(myIngredientsIntent)
 //        }
 //    }
+
 }

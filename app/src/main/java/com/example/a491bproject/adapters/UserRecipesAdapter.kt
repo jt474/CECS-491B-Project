@@ -2,33 +2,32 @@ package com.example.a491bproject.adapters
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.a491bproject.MainActivity
 import com.example.a491bproject.R
+import com.example.a491bproject.interfaces.onClickUserRecipeListener
 import com.example.a491bproject.models.UserRecipesModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.core.Context
-import com.google.firebase.ktx.Firebase
-import org.w3c.dom.Text
 
-class UserRecipesAdapter( val recipes: MutableList<UserRecipesModel>):
+class UserRecipesAdapter(val recipes: MutableList<UserRecipesModel>, onClickListener:onClickUserRecipeListener):
     RecyclerView.Adapter<UserRecipesAdapter.UserRecipesViewHolder>() {
-
+    private val onClickUserRecipeListener = onClickListener
     private val mAuth:FirebaseAuth by lazy{ FirebaseAuth.getInstance()}
 
     inner class UserRecipesViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        val tvRecipeTitle = view.findViewById<TextView>(R.id.tvUserRecipeTitle)
-        val ivEditUserRecipe = view.findViewById<ImageView>(R.id.ivEditUserRecipe)
-        val ivDeleteUserRecipe = view.findViewById<ImageView>(R.id.ivDeleteUserRecipe)
-        val context = view.context
+        val tvRecipeTitle: TextView = view.findViewById<TextView>(R.id.tvUserRecipeTitle)
+        val ivEditUserRecipe: ImageView = view.findViewById<ImageView>(R.id.ivEditUserRecipe)
+        val ivDeleteUserRecipe: ImageView = view.findViewById<ImageView>(R.id.ivDeleteUserRecipe)
+        val context: android.content.Context= view.context
 
 
     }
@@ -41,13 +40,18 @@ class UserRecipesAdapter( val recipes: MutableList<UserRecipesModel>):
     override fun onBindViewHolder(holder: UserRecipesViewHolder, position: Int) {
         val model = recipes[position]
         holder.tvRecipeTitle.text = model.title
+        holder.itemView.setOnClickListener{
+            onClickUserRecipeListener.onSelectClick(model)
+        }
+        holder.ivEditUserRecipe.setOnClickListener{
+            onClickUserRecipeListener.onEditClick(model)
+        }
         holder.ivDeleteUserRecipe.setOnClickListener{
-            val deletedRecipe = recipes[position]
             val alert = AlertDialog.Builder(holder.context)
             alert.setTitle("Delete entry");
-            alert.setMessage("Are you sure you want to delete? If not click anywhere else. \"$model.title\"?");
+            alert.setMessage("Are you sure you want to delete \"${recipes[position].title}\"? If not click anywhere else.");
             alert.setPositiveButton(android.R.string.ok, DialogInterface.OnClickListener() {
-                dialogInterface, i ->  deleteItem(position)
+                    dialogInterface, i ->  deleteItem(position)
             })
             alert.show()
         }
@@ -64,7 +68,8 @@ class UserRecipesAdapter( val recipes: MutableList<UserRecipesModel>):
         val updateMap = mutableMapOf<String, Any?>(
             "Recipes/${modelRecipeID}" to null,
             "Instructions/${modelRecipeID}" to null,
-            "Ingredients/${modelRecipeID}" to null
+            "Ingredients/${modelRecipeID}" to null,
+            "AboutRecipe/${modelRecipeID}" to null
         )
         dbRef.updateChildren(updateMap) //double check if asynchronous
 
@@ -73,5 +78,6 @@ class UserRecipesAdapter( val recipes: MutableList<UserRecipesModel>):
         notifyItemRangeChanged(position,recipes.size)
         Log.d("DeleteItem", "List now contains $recipes")
     }
+
 
 }

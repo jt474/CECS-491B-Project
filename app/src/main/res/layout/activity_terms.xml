@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Terms">
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Terms and Conditions (Terms)
+"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.051" />
+
+    <TextView
+        android:id="@+id/terms"
+        android:layout_width="385dp"
+        android:layout_height="413dp"
+        android:layout_marginTop="76dp"
+        android:gravity="left"
+        android:lineSpacingExtra="10dp"
+        android:text="Please read these Terms and Conditions (Terms, Terms and Conditions) carefully before using the Viridian Recipe mobile application (the Service) operated by Viridian (us, we, or our).
+Your access to and use of the Service is conditioned on your acceptance of and compliance with these
+Terms. These Terms apply to all visitors, users and others who access or use the Service.
+By accessing or using the Service you agree to be bound by these Terms. If you disagree with
+any part of the terms then you may not access the Service.\n\nContent\nOur Service allows you to create an account, create recipes, view recipes, add ingredients and otherwise make available certain information, text, graphics, videos, or other material (Content).
+You are responsible for the all data shared on the application\n\nLinks To Other Websites\nOur Service may contain links to third-party web sites or services that are not owned or controlled by Viridian. Viridian has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third party web sites or services. You further acknowledge and agree that Viridian shall not be responsible or liable,
+directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with use of or reliance on any such content, goods or services available on or through any such web sites or services.\n\n
+Changes\nWe reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material we will try to provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.\n\n
+Contact Us\nIf you have any questions about these Terms, please contact us at ViridianVira@gmail.com.
+
+"
+        android:textAlignment="gravity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+</androidx.constraintlayout.widget.ConstraintLayout>
