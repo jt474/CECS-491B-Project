@@ -22,7 +22,7 @@ class DeleteAccount : AppCompatActivity() {
         var auth: FirebaseAuth = FirebaseAuth.getInstance()
         val currentPass = findViewById<EditText>(R.id.currentPassword)
         val confirmDelete: Button = findViewById<Button>(R.id.confirmDeleteBtn)
-        val test: Button = findViewById<Button>(R.id.test)
+        //val test: Button = findViewById<Button>(R.id.test)
 
         auth = FirebaseAuth.getInstance()
         val user = auth.currentUser
