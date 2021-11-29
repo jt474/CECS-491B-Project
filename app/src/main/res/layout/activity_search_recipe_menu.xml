@@ -71,28 +71,47 @@
         app:layout_constraintTop_toTopOf="@id/et_recipe_input"
         app:layout_constraintVertical_bias="0.200" />
 
+    <RadioGroup
+        android:id="@+id/rg_search_recipes_options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal"
+        android:checkedButton="@id/rb_search_recipe_by_name"
+        app:layout_constraintBottom_toTopOf="@id/recycler_view_recipes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_recipe_input">
+
+        <RadioButton
+            android:id="@+id/rb_search_recipe_by_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX=".75"
+            android:scaleY=".75"
+            android:text="Search By Name"
+            android:onClick="onRadioButtonClicked"/>
+
+        <RadioButton
+            android:id="@+id/rb_search_recipe_by_ingredients"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX=".75"
+            android:scaleY=".75"
+            android:text="Search By Ingredient(s)"
+            android:onClick="onRadioButtonClicked"/>
+
+    </RadioGroup>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_recipes"
         android:layout_width="338dp"
         android:layout_height="334dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_recipe_input" />
+        app:layout_constraintTop_toBottomOf="@id/rg_search_recipes_options" />
 
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/recycler_view_recipes_ingredients"-->
-<!--        android:layout_width="338dp"-->
-<!--        android:layout_height="334dp"-->
-<!--        android:layout_marginStart="16dp"-->
-<!--        android:layout_marginTop="16dp"-->
-<!--        android:layout_marginEnd="16dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/et_recipe_input" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
 

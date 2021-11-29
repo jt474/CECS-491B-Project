@@ -4,8 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,8 +36,8 @@ class SearchRecipeMenu : AppCompatActivity() {
 
         val search = findViewById<Button>(R.id.btn_recipe_search)
         val userInput = findViewById<EditText>(R.id.et_recipe_input)
-
-        recyclerViewRecipes = findViewById(R.id.recycler_view_recipes)
+        val searchOptions = findViewById<RadioGroup>(R.id.rg_search_recipes_options)
+        recyclerViewRecipes = findViewById<RecyclerView>(R.id.recycler_view_recipes)
         recyclerViewRecipes.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(this)
         recyclerViewRecipes.layoutManager = linearLayoutManager
@@ -64,6 +66,27 @@ class SearchRecipeMenu : AppCompatActivity() {
             startActivity(searchRecipeIntent)
 
         }
+        // the hint "clam chowder" should be the default hint to prompt user to enter recipe name
+        onRadioButtonClicked(searchOptions.findViewById(R.id.rb_search_recipe_by_name))
+    }
+
+    fun onRadioButtonClicked(view: View) {
+        val userInput = findViewById<EditText>(R.id.et_recipe_input)
+        if (view is RadioButton) {
+            // Is the button now checked?
+            val checked = view.isChecked
+            // Check which radio button was clicked
+            when (view.getId()) {
+                R.id.rb_search_recipe_by_name ->
+                    if (checked) {
+                        userInput.setHint("clam chowder")
+                    }
+                R.id.rb_search_recipe_by_ingredients ->
+                    if (checked) {
+                        userInput.setHint("salmon, rice")
+                    }
+            }
+        }
     }
 
 
@@ -78,6 +101,7 @@ class SearchRecipeMenu : AppCompatActivity() {
             .create(ApiInterface::class.java)
 
         val retrofitData = retrofitBuilder.searchRecipes(input, 20, key)
+
 
         retrofitData.enqueue(object : Callback<Recipes> {
             override fun onResponse(

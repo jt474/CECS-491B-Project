@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseAuth
 
 class SettingActivity : AppCompatActivity() {
@@ -34,6 +33,13 @@ class SettingActivity : AppCompatActivity() {
             finish()
         }
 
+        //Delete Account
+        val deleteBtn: Button = findViewById<Button>(R.id.deleteBtn)
+        deleteBtn.setOnClickListener{
+            val deleteIntent = Intent(this@SettingActivity, DeleteAccount::class.java)
+            startActivity(deleteIntent)
+            finish()
+        }
 
         //Signout
         val logoutBtn: Button = findViewById<Button>(R.id.logoutBtn)
