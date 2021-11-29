@@ -21,7 +21,7 @@ class RecipeFirebaseInfoActivity : AppCompatActivity() {
         Log.d("RecipeInfoActivity", "Creating RecipeFirebaseInfoActivity}")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipe_firebase_info)
-
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         //Get values from UserFirebaseRecipesActivity
         receiveBundle()
 
@@ -43,6 +43,13 @@ class RecipeFirebaseInfoActivity : AppCompatActivity() {
 
         }.attach()
 
+        // Naming for menu
+        val actionBar = supportActionBar
+
+        if(actionBar != null){
+            actionBar.title = "Recipes"
+        }
+
     }
 
     private fun receiveBundle(){
@@ -53,6 +60,10 @@ class RecipeFirebaseInfoActivity : AppCompatActivity() {
         }
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
+    }
 
 
 

@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity(), ButtonAdapter.OnClickListener {
         val actionBar = supportActionBar
 
         if (actionBar != null) {
-            actionBar.title = "Main Menu"
+            actionBar.title = "Home"
         }
     }
 

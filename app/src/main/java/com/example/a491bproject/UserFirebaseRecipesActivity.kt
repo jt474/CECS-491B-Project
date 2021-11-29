@@ -37,7 +37,7 @@ class UserFirebaseRecipesActivity : AppCompatActivity(), onClickUserRecipeListen
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_firebase_recipes)
-
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         auth = FirebaseAuth.getInstance()
         testRecipesList = mutableListOf<UserRecipesModel>()
 
@@ -56,7 +56,7 @@ class UserFirebaseRecipesActivity : AppCompatActivity(), onClickUserRecipeListen
         val actionBar = supportActionBar
 
         if (actionBar != null) {
-            actionBar.title = "Verify Email"
+            actionBar.title = "Recipes"
         }
 
     }
@@ -110,7 +110,10 @@ class UserFirebaseRecipesActivity : AppCompatActivity(), onClickUserRecipeListen
         startActivity(intent)
     }
 
-
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
+    }
 
 
 

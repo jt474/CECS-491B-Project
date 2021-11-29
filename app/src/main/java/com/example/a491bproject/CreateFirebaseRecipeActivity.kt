@@ -35,7 +35,7 @@ class CreateFirebaseRecipeActivity : AppCompatActivity(),CreateRecipeViewModelLi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_firebase_recipe)
-
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         //Initialize UI Elements
         val viewPager = findViewById<ViewPager2>(R.id.view_pager_CreateRecipe)
         val tabLayout = findViewById<TabLayout>(R.id.tab_layout_CreateRecipe)
@@ -55,6 +55,13 @@ class CreateFirebaseRecipeActivity : AppCompatActivity(),CreateRecipeViewModelLi
                 tab, position -> tab.text = tabTitles[position];
 
         }.attach()
+
+        // Naming for menu
+        val actionBar = supportActionBar
+
+        if(actionBar != null){
+            actionBar.title = "Create Recipe"
+        }
 
     }
 
@@ -127,5 +134,9 @@ class CreateFirebaseRecipeActivity : AppCompatActivity(),CreateRecipeViewModelLi
         return lastUpdatedStr
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
+    }
 
 }

@@ -15,8 +15,7 @@
         <activity
             android:name=".CreateFirebaseRecipeActivity"
             android:exported="true"
-            android:label="@string/title_activity_create_firebase_recipe"
-            android:theme="@style/Theme.491BProject.NoActionBar" />
+            android:label="@string/title_activity_create_firebase_recipe" />
         <activity
             android:name=".Contact"
             android:exported="false" />
@@ -35,8 +34,7 @@
         <activity
             android:name=".UserFirebaseRecipesActivity"
             android:exported="true"
-            android:label="@string/title_activity_user_firebase_recipes"
-            android:theme="@style/Theme.491BProject.NoActionBar" />
+            android:label="@string/title_activity_user_firebase_recipes" />
         <activity
             android:name=".RecipeFirebaseInfoActivity"
             android:exported="true" />
