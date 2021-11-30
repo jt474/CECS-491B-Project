@@ -49,7 +49,7 @@ class Settings : AppCompatActivity(), ButtonAdapter.OnClickListener {
     private fun fetchList(): ArrayList<com.example.a491bproject.models.Button> {
         val list = arrayListOf<com.example.a491bproject.models.Button>()
 
-        list.add(com.example.a491bproject.models.Button(R.drawable.profile_activity, "Profile Activity"))
+        list.add(com.example.a491bproject.models.Button(R.drawable.profile_activity, "Profile"))
         list.add(com.example.a491bproject.models.Button(R.drawable.terms, "Terms"))
         list.add(com.example.a491bproject.models.Button(R.drawable.contact, "Contact"))
 
