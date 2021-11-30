@@ -32,6 +32,16 @@
             android:name=".DeleteAccount"
             android:exported="false" />
         <activity
+            android:name=".RecipeInstructions"
+            android:exported="false" />
+        <activity
+            android:name=".SearchRecipeByIngredient"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ChangePasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".UserFirebaseRecipesActivity"
             android:exported="true"
             android:label="@string/title_activity_user_firebase_recipes" />
@@ -49,7 +59,8 @@
             android:exported="false" />
         <activity
             android:name=".SearchRecipeMenu"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".CreateRecipeSteps"
             android:exported="false" />
@@ -64,7 +75,8 @@
             android:exported="false" />
         <activity
             android:name=".IngredientsInformation"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".MyIngredientsActivity"
             android:exported="false" />

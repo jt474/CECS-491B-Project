@@ -26,33 +26,33 @@ data class EstimatedCost(
     val value: Double
 )
 
-data class Nutrition(
-    val caloricBreakdown: CaloricBreakdown,
-    val nutrients: List<Nutrient>,
-    val properties: List<Property>,
-    val weightPerServing: WeightPerServing
-) {
-    data class CaloricBreakdown(
-        val percentCarbs: Double,
-        val percentFat: Double,
-        val percentProtein: Double
-    )
-
-    data class Nutrient(
-        val amount: Double,
-        val name: String,
-        val percentOfDailyNeeds: Double,
-        val unit: String
-    )
-
-    data class Property(
-        val amount: Double,
-        val name: String,
-        val unit: String
-    )
-
-    data class WeightPerServing(
-        val amount: Int,
-        val unit: String
-    )
-}
+//data class Nutrition(
+//    val caloricBreakdown: CaloricBreakdown,
+//    val nutrients: List<Nutrient>,
+//    val properties: List<Property>,
+//    val weightPerServing: WeightPerServing
+//) {
+//    data class CaloricBreakdown(
+//        val percentCarbs: Double,
+//        val percentFat: Double,
+//        val percentProtein: Double
+//    )
+//
+//    data class Nutrient(
+//        val amount: Double,
+//        val name: String,
+//        val percentOfDailyNeeds: Double,
+//        val unit: String
+//    )
+//
+//    data class Property(
+//        val amount: Double,
+//        val name: String,
+//        val unit: String
+//    )
+//
+//    data class WeightPerServing(
+//        val amount: Int,
+//        val unit: String
+//    )
+//}
