@@ -39,9 +39,6 @@ class RecipesListAdapter(val context: Context, val recipesList: Recipes) :
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         // Allows us to click on the current card view
         viewHolder.itemView.setOnClickListener {
-            // Testing if click listener is working
-            Toast.makeText(context, "Test " + viewHolder.adapterPosition, Toast.LENGTH_SHORT).show()
-
             // Gets the id of the recipe you clicked on
             val recipeId = recipesList.results[position].id
 
