@@ -38,6 +38,12 @@ class Settings : AppCompatActivity(), ButtonAdapter.OnClickListener {
 //            val contactIntent = Intent(this, Contact::class.java)
 //            startActivity(contactIntent)
 //        }
+        // Naming for menu
+        val actionBar = supportActionBar
+
+        if (actionBar != null) {
+            actionBar.title = "Settings"
+        }
     }
 
     private fun fetchList(): ArrayList<com.example.a491bproject.models.Button> {
